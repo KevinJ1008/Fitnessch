@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <!--<group android:checkableBehavior="single">-->
+        <!--<item-->
+            <!--android:id="@+id/nav_collections"-->
+            <!--android:icon="@drawable/drawer_icon_collections"-->
+            <!--android:title="@string/all_collections" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_recommends"-->
+            <!--android:icon="@drawable/drawer_icon_recommends"-->
+            <!--android:title="@string/all_recommends" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_search"-->
+            <!--android:icon="@drawable/drawer_icon_search"-->
+            <!--android:title="@string/all_search" />-->
+    <!--</group>-->
+
+    <!--android:title="@string/all_voyage">-->
+            <item
+                android:id="@+id/nav_main"
+                android:icon="@drawable/nav_mainicon"
+                android:title="@string/all_main" />
+            <item
+                android:id="@+id/nav_calendar"
+                android:icon="@drawable/nav_calendaricon"
+                android:title="@string/all_calendar" />
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/nav_profileicon"
+                android:title="@string/all_profile" />
+</menu>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_main_item_container"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:background="@android:color/transparent">
+    <!--@android:color/transparent-->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/main_article_container"
+        android:layout_width="@dimen/width_main_item"
+        android:layout_height="@dimen/height_main_item"
+        android:layout_gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/main_item_background">
+
+        <ImageView
+            android:id="@+id/main_author_image"
+            android:layout_width="@dimen/size_main_authorimage"
+            android:layout_height="@dimen/size_main_authorimage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            app:srcCompat="@drawable/all_placeholder_avatar" />
+
+        <TextView
+            android:id="@+id/main_author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/main_title"
+            app:layout_constraintLeft_toLeftOf="@+id/main_title"
+            android:layout_marginTop="5dp"
+            android:maxWidth="200dp"
+            android:lines="1"
+            android:ellipsize="end"
+            android:textSize="18sp"
+            android:textColor="@color/main_text_color"
+            tool:text="Wun-Bin Jhou"/>
+
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@+id/article_tag_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:lines="1"
+            android:maxWidth="270dp"
+            android:ellipsize="end"
+            android:textSize="25sp"
+            android:textColor="@color/main_text_color"
+            tool:text="周一胸"/>
+
+        <TextView
+            android:id="@+id/main_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/main_title"
+            app:layout_constraintTop_toBottomOf="@+id/main_create_time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="6dp"
+            android:maxWidth="275dp"
+            android:lines="2"
+            android:ellipsize="end"
+            android:lineSpacingExtra="6sp"
+            android:textSize="14sp"
+            android:textColor="@color/main_text_color"
+            tool:text="今天一個胸爆炸，嘗試了一些不一樣的組合，感受度滿滿滿，有興趣的可以去嘗試看看，有其他意見可以多多交流喔，祝大家早日成為巨巨"/>
+
+        <TextView
+            android:id="@+id/main_create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/main_author_name"
+            app:layout_constraintTop_toBottomOf="@+id/main_author_name"
+            android:layout_marginEnd="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/main_text_color"
+            tool:text="13:23"/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/article_tag"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textColor="@color/main_text_color"-->
+            <!--tool:text="課表"/>-->
+
+        <ImageView
+            android:id="@+id/article_tag_icon"
+            android:layout_width="@dimen/size_main_article_tag_icon"
+            android:layout_height="@dimen/size_main_article_tag_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="13dp"
+            android:layout_marginStart="5dp"
+            app:srcCompat="@drawable/icon_dumbbell"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

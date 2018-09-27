@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_navview_header"
+    android:background="@drawable/drawer_background"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/margin_navview_header_horizontal"
+    android:paddingRight="@dimen/margin_navview_header_horizontal"
+    android:paddingTop="@dimen/margin_navview_header_vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:id="@+id/imageview_drawer_userimage"
+        android:layout_width="@dimen/size_all_authorimage"
+        android:layout_height="@dimen/size_all_authorimage"
+        android:layout_marginTop="50dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/all_placeholder_avatar" />
+
+    <TextView
+        android:id="@+id/imageview_drawer_useremail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="annayang@gmail.com" />
+
+</LinearLayout>

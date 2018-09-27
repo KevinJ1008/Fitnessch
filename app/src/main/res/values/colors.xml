@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--Toolbar Gradient Color-->
+    <color name="fitnessch_blue">#8138F7</color>
+    <color name="fitnessch_red">#F22D4B</color>
+
+    <!-- White Series-->
+    <color name="white">#ffffff</color>
+    <color name="white_fa">#fafafa</color>
+    <color name="white_70_transparent">#32FFFFFF</color>
+
+    <color name="nav_drawer_color">#434043</color>
+
+    <!--Main Item-->
+    <color name="main_text_color">#FFFFFF</color>
+
+    <!--Profile Item-->
+    <color name="profile_text_color">#FFFFFF</color>
+
+</resources>
