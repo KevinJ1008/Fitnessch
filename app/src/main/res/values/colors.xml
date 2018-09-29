@@ -14,11 +14,24 @@
     <color name="white_70_transparent">#32FFFFFF</color>
 
     <color name="nav_drawer_color">#434043</color>
+    <color name="floating_add_btn_color">#cbff006a</color>
+    <color name="floating_add_btn_color_pressed">#cbf74690</color>
+    <color name="floating_add_btn_color_ripple">#e3a30748</color>
 
     <!--Main Item-->
     <color name="main_text_color">#FFFFFF</color>
 
     <!--Profile Item-->
     <color name="profile_text_color">#FFFFFF</color>
+    <color name="profile_tab_indicator_color">#FFFFFF</color>
+    <color name="profile_tab_selected_text_color">#FFFFFF</color>
+    <color name="profile_tab_background">#aa434043</color>
+    <color name="profile_tab_text_color">#C0C0C0</color>
+
+    <!--Schedule Child Item-->
+    <color name="schedule_child_text_color">#FFFFFF</color>
+
+    <!--Meal Child Item-->
+    <color name="meal_child_text_color">#FFFFFF</color>
 
 </resources>

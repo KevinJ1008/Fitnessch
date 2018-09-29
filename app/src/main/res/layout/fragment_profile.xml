@@ -1,14 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:background="@android:color/transparent">
+    <!--@android:color/transparent-->
+    <!--#b36566-->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="@dimen/size_profile_authorimage"
+        android:layout_height="@dimen/size_profile_authorimage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        app:srcCompat="@drawable/all_placeholder_avatar"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_profile"
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="@+id/profile_image"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/profile_text_color"
+        android:textSize="25sp"
+        android:text="WunBin Jhou"/>
+
+    <TextView
+        android:id="@+id/profile_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/profile_name"
+        app:layout_constraintLeft_toLeftOf="@+id/profile_name"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/profile_text_color"
+        android:text="181 CM"/>
+
+    <TextView
+        android:id="@+id/profile_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/profile_height"
+        app:layout_constraintLeft_toRightOf="@+id/profile_height"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/profile_text_color"
+        android:text="75 KG"/>
+
+    <TextView
+        android:id="@+id/profile_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="295dp"
+        android:lineSpacingExtra="4sp"
+        app:layout_constraintTop_toBottomOf="@+id/profile_height"
+        app:layout_constraintLeft_toLeftOf="@+id/profile_name"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/profile_text_color"
+        android:text="嗨嗨大家好，健齡 6 年，健身已成為習慣和興趣，希望有朝一日能變成超級巨！！！加油！"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/profile_tab_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/profile_info"
+        android:layout_marginTop="8dp"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        android:background="@color/profile_tab_background"
+        app:tabIndicatorColor="@color/profile_tab_indicator_color"
+        app:tabSelectedTextColor="@color/profile_tab_selected_text_color"
+        app:tabTextColor="@color/profile_tab_text_color">
 
-    </android.support.v7.widget.RecyclerView>
+    </android.support.design.widget.TabLayout>
 
-</FrameLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/profile_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/profile_tab_container">
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearlayout_profile_container"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@id/profile_tab_container"-->
+            <!--android:orientation="vertical">-->
+
+        <!--</LinearLayout>-->
+
+    </android.support.v4.view.ViewPager>
+
+
+
+</android.support.constraint.ConstraintLayout>

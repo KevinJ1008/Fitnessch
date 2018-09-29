@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.github.clans.fab.FloatingActionButton;
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.FitnesschContract;
 import com.kevinj1008.fitnessch.FitnesschPresenter;
@@ -37,7 +39,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new FitnesschPresenter(this, getFragmentManager());
+        mPresenter = new FitnesschPresenter(this, getSupportFragmentManager());
         init();
 
     }
@@ -45,6 +47,8 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     private void init() {
 
         setContentView(R.layout.activity_main);
+
+        FloatingActionButton floatingActionButton = findViewById(R.id.floating_add_btn);
 
         // Blur background image
 //        ImageView imageView = findViewById(R.id.parent_background);

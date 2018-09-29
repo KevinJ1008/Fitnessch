@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.api.beans.GetArticles;
 import com.kevinj1008.fitnessch.main.MainContract;
@@ -96,7 +97,12 @@ public class MainAdapter extends RecyclerView.Adapter {
     public void updateData(Article bean) {
 //        Log.d(Constants.TAG, "MainAdapter update data");
 //        for (Article article : bean.getArticles()) {
+//        if (mArticles.size() == 1) {
+//            mArticles.add(0, bean);
+//        } else {
             mArticles.add(bean);
+//        }
+
 //        }
 
 //        setNextPaging(bean.getPaging());

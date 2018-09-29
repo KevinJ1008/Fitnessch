@@ -6,6 +6,10 @@
     <string name="all_calendar">歷史課表</string>
     <string name="all_profile">個人檔案</string>
     <string name="all_nav_title">Functions</string>
+    <string name="all_schedule_title">健身課表</string>
+    <string name="all_meal_title">飲食菜單</string>
+    <string name="all_schedule_tag">課表</string>
+    <string name="all_meal_tag">菜單</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

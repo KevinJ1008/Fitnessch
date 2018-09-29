@@ -40,5 +40,14 @@
     <!--Profile items-->
     <dimen name="size_profile_authorimage">55dp</dimen>
 
+    <!--Schedule child items-->
+    <dimen name="height_schedule_child_item_container">170dp</dimen>
+    <dimen name="height_schedule_child_item">155dp</dimen>
+    <dimen name="width_schedule_child_item">330dp</dimen>
+
+    <!--Meal child items-->
+    <dimen name="height_meal_child_item_container">170dp</dimen>
+    <dimen name="height_meal_child_item">155dp</dimen>
+    <dimen name="width_meal_child_item">330dp</dimen>
 
 </resources>
