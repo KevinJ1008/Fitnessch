@@ -18,6 +18,22 @@
     <color name="floating_add_btn_color_pressed">#cbf74690</color>
     <color name="floating_add_btn_color_ripple">#e3a30748</color>
 
+    <!--Login Item-->
+    <color name="login_btn_ripple">#aeaeae</color>
+    <color name="fb_login_btn_background">#4565DC</color>
+    <color name="google_login_btn_background">#FF6763</color>
+    <color name="sign_up_edit_text_background">#4dffffff</color>
+    <color name="sign_up_stroke_color">#bbbbbb</color>
+    <color name="sign_up_text_color">#caffffff</color>
+    <color name="sign_up_btn_text_color">#bd060606</color>
+
+    <!--Calendar Item-->
+    <color name="week_day_text_color">#FFFFFF</color>
+    <color name="date_text_color">#FFFFFF</color>
+    <color name="header_text_color">#FFFFFF</color>
+    <color name="calendar_background_color">#7dffffff</color>
+    <color name="date_selected_color">#8095c7c6</color>
+
     <!--Main Item-->
     <color name="main_text_color">#FFFFFF</color>
 

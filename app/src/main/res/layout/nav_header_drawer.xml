@@ -28,6 +28,6 @@
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/white"
         android:textSize="16sp"
-        tools:text="annayang@gmail.com" />
+        android:text="car4353666@gmail.com" />
 
 </LinearLayout>

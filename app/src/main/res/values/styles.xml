@@ -21,4 +21,16 @@
         <item name="listPreferredItemHeightSmall">@dimen/height_drawer_item</item>
     </style>
 
+    <style name="CustomDateTextAppearance" parent="TextAppearance.MaterialCalendarWidget.Date">
+        <item name="android:textColor">@color/mcv_text_date_dark</item>
+    </style>
+
+    <style name="CustomWeekdayTextAppearance" parent="TextAppearance.MaterialCalendarWidget.Date">
+        <item name="android:textColor">@drawable/calendar_weekday_text_color</item>
+    </style>
+
+    <style name="CustomHeaderTextAppearance" parent="TextAppearance.MaterialCalendarWidget.Date">
+        <item name="android:textColor">@drawable/calendar_header_text_color</item>
+    </style>
+
 </resources>

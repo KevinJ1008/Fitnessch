@@ -4,6 +4,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.annotation.StringDef;
 
+import com.kevinj1008.fitnessch.calendar.CalendarFragment;
+import com.kevinj1008.fitnessch.calendar.CalendarPresenter;
 import com.kevinj1008.fitnessch.main.MainFragment;
 import com.kevinj1008.fitnessch.main.MainPresenter;
 import com.kevinj1008.fitnessch.objects.Article;
@@ -33,9 +35,11 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
     private MainFragment mMainFragment;
     private ProfileFragment mProfileFragment;
+    private CalendarFragment mCalendarFragment;
 
     private MainPresenter mMainPresenter;
     private ProfilePresenter mProfilePresenter;
+    private CalendarPresenter mCalendarPresenter;
 
     public FitnesschPresenter(FitnesschContract.View fitnesschView, FragmentManager fragmentManager) {
         mFitnesschView = checkNotNull(fitnesschView, "fitnesschView cannot be null!");
@@ -62,7 +66,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 //        if (mFragmentManager.findFragmentByTag(DETAIL) != null) mFragmentManager.popBackStack();
 //        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
         if (mMainFragment == null) mMainFragment = MainFragment.newInstance();
-//        if (mDiscoverFragment != null) transaction.hide(mDiscoverFragment);
+        if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
 //        if (mChatFragment != null) transaction.hide(mChatFragment);
         if (!mMainFragment.isAdded()) {
@@ -93,7 +97,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 //        if (mFragmentManager.findFragmentByTag(DETAIL) != null) mFragmentManager.popBackStack();
 //        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
         if (mProfileFragment == null) mProfileFragment = ProfileFragment.newInstance();
-//        if (mDiscoverFragment != null) transaction.hide(mDiscoverFragment);
+        if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
         if (mMainFragment != null) transaction.hide(mMainFragment);
 //        if (mChatFragment != null) transaction.hide(mChatFragment);
         if (!mProfileFragment.isAdded()) {
@@ -123,7 +127,28 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
     @Override
     public void transToCalendar() {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+//        if (mFragmentManager.findFragmentByTag(FRIEND) != null) mFragmentManager.popBackStack();
 
+//        if (mFragmentManager.findFragmentByTag(DETAIL) != null) mFragmentManager.popBackStack();
+//        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
+        if (mCalendarFragment == null) mCalendarFragment = CalendarFragment.newInstance();
+        if (mProfileFragment != null) transaction.hide(mProfileFragment);
+        if (mMainFragment != null) transaction.hide(mMainFragment);
+//        if (mChatFragment != null) transaction.hide(mChatFragment);
+        if (!mCalendarFragment.isAdded()) {
+            transaction.add(R.id.linearlayout_main_container, mCalendarFragment, CALENDAR);
+        } else {
+            transaction.show(mCalendarFragment);
+        }
+
+
+//        if (mCalendarPresenter == null) {
+//            mCalendarPresenter = new CalendarPresenter(mCalendarFragment);
+//        }
+        transaction.commit();
+
+        mFitnesschView.showCalendarUi();
     }
 
 

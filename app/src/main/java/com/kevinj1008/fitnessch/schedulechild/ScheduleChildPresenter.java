@@ -21,8 +21,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class ScheduleChildPresenter implements ScheduleChildContract.Presenter{
 
     private ScheduleChildContract.View mScheduleChildView;
-    private int mlastVisibleItemPosition;
-    private int mfirstVisibleItemPosition;
+    private int mLastVisibleItemPosition;
+    private int mFirstVisibleItemPosition;
 //    private int mPaging = Constants.FIRST_PAGING;
     private boolean mLoading = false;
 
@@ -88,9 +88,9 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter{
     @Override
     public void onScrollStateChanged(int visibleItemCount, int totalItemCount, int newState) {
         if (newState == RecyclerView.SCROLL_STATE_IDLE && visibleItemCount > 0) {
-            if (mlastVisibleItemPosition == totalItemCount - 1) {
+            if (mLastVisibleItemPosition == totalItemCount - 1) {
                 loadArticles();
-            } else if (mfirstVisibleItemPosition == 0) {
+            } else if (mFirstVisibleItemPosition == 0) {
                 // Scroll to top
             }
         }
@@ -100,16 +100,16 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter{
     public void onScrolled(RecyclerView.LayoutManager layoutManager) {
         if (layoutManager instanceof LinearLayoutManager) {
 
-            mlastVisibleItemPosition = ((LinearLayoutManager) layoutManager)
+            mLastVisibleItemPosition = ((LinearLayoutManager) layoutManager)
                     .findLastVisibleItemPosition();
-            mfirstVisibleItemPosition = ((LinearLayoutManager) layoutManager)
+            mFirstVisibleItemPosition = ((LinearLayoutManager) layoutManager)
                     .findFirstVisibleItemPosition();
 
         } else if (layoutManager instanceof GridLayoutManager) {
 
-            mlastVisibleItemPosition = ((GridLayoutManager) layoutManager)
+            mLastVisibleItemPosition = ((GridLayoutManager) layoutManager)
                     .findLastVisibleItemPosition();
-            mfirstVisibleItemPosition = ((GridLayoutManager) layoutManager)
+            mFirstVisibleItemPosition = ((GridLayoutManager) layoutManager)
                     .findFirstVisibleItemPosition();
         }
     }
