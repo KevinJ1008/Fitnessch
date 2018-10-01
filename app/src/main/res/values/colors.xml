@@ -50,4 +50,14 @@
     <!--Meal Child Item-->
     <color name="meal_child_text_color">#FFFFFF</color>
 
+    <!--Add New Item-->
+    <color name="addnew_tab_indicator_color">#FFFFFF</color>
+    <color name="addnew_tab_selected_text_color">#FFFFFF</color>
+    <color name="addnew_tab_background">#aa434043</color>
+    <color name="addnew_tab_text_color">#C0C0C0</color>
+    <color name="addnew_btn_background">#4565DC</color>
+    <color name="addnew_btn_stroke_color">#BBBBBB</color>
+    <color name="addnew_btn_ripple">#aeaeae</color>
+    <color name="addnew_text_color">#FFFFFF</color>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.kevinj1008.fitnessch.addnewmealchild;
+package com.kevinj1008.fitnessch.addnewschedulechild;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import com.kevinj1008.fitnessch.R;
 
-public class AddNewMealChildFragment extends Fragment {
+public class AddNewScheduleChildFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.childfragment_addnewmeal, container, false);
+        View root = inflater.inflate(R.layout.childfragment_addnewschedule, container, false);
         return root;
     }
 }

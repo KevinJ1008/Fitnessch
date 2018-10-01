@@ -24,7 +24,7 @@ public interface FitnesschContract {
 
         void transToMain();
 
-        void transToSchedule();
+        void transToAddNew();
 
         void transToProfile();
 

@@ -1,4 +1,4 @@
 package com.kevinj1008.fitnessch.addnewschedulechild;
 
-public class AddNewSheduleChildFragment {
+public interface AddNewScheduleChildContract {
 }

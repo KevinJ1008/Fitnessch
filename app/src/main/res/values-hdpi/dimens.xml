@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Add new items-->
+    <dimen name="addnew_btn_shadow_radius">8</dimen>
+    <dimen name="addnew_btn_shadow_dy">8</dimen>
+</resources>

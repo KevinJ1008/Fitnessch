@@ -28,7 +28,7 @@ import jp.wasabeef.picasso.transformations.BlurTransformation;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class FitnesschActivity extends BaseActivity implements FitnesschContract.View, NavigationView.OnNavigationItemSelectedListener {
+public class FitnesschActivity extends BaseActivity implements FitnesschContract.View, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private FitnesschContract.Presenter mPresenter;
     private DrawerLayout mDrawerLayout;
@@ -49,6 +49,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         setContentView(R.layout.activity_main);
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floating_add_btn);
+        floatingActionButton.setOnClickListener(this);
 
         // Blur background image
 //        ImageView imageView = findViewById(R.id.parent_background);
@@ -200,5 +201,10 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
             default:
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        mPresenter.transToAddNew();
     }
 }
