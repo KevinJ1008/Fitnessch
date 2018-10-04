@@ -6,16 +6,20 @@ import android.support.annotation.StringDef;
 
 import com.kevinj1008.fitnessch.addnew.AddNewFragment;
 import com.kevinj1008.fitnessch.addnew.AddNewPresenter;
+import com.kevinj1008.fitnessch.addnewarticle.AddNewArticleFragment;
+import com.kevinj1008.fitnessch.addnewarticle.AddNewArticlePresenter;
 import com.kevinj1008.fitnessch.calendar.CalendarFragment;
 import com.kevinj1008.fitnessch.calendar.CalendarPresenter;
 import com.kevinj1008.fitnessch.main.MainFragment;
 import com.kevinj1008.fitnessch.main.MainPresenter;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.profile.ProfileFragment;
 import com.kevinj1008.fitnessch.profile.ProfilePresenter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -34,16 +38,19 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     public static final String PROFILE  = "PROFILE";
     public static final String DETAIL  = "DETAIL";
     public static final String CALENDAR = "CALENDAR";
+    public static final String ADDNEW_ARTICLE = "ADDNEWARTICLE";
 
     private MainFragment mMainFragment;
     private ProfileFragment mProfileFragment;
     private CalendarFragment mCalendarFragment;
     private AddNewFragment mAddNewFragment;
+    private AddNewArticleFragment mAddNewArticleFragment;
 
     private MainPresenter mMainPresenter;
     private ProfilePresenter mProfilePresenter;
     private CalendarPresenter mCalendarPresenter;
     private AddNewPresenter mAddNewPresenter;
+    private AddNewArticlePresenter mAddNewArticlePresenter;
 
     public FitnesschPresenter(FitnesschContract.View fitnesschView, FragmentManager fragmentManager) {
         mFitnesschView = checkNotNull(fitnesschView, "fitnesschView cannot be null!");
@@ -65,7 +72,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     @Override
     public void transToMain() {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-//        if (mFragmentManager.findFragmentByTag(FRIEND) != null) mFragmentManager.popBackStack();
+//        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
 
 //        if (mFragmentManager.findFragmentByTag(DETAIL) != null) mFragmentManager.popBackStack();
 //        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
@@ -73,6 +80,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
+        if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
         if (!mMainFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mMainFragment, MAIN);
         } else {
@@ -90,11 +98,34 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
     @Override
     public void transToAddNew() {
+//        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
+//        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+//
+//        if (mMainFragment != null && !mMainFragment.isHidden()) {
+//            transaction.hide(mMainFragment);
+//            transaction.addToBackStack(MAIN);
+//        }
+//        if (mProfileFragment != null && !mProfileFragment.isHidden()) {
+//            transaction.hide(mProfileFragment);
+//            transaction.addToBackStack(PROFILE);
+//        }
+//        if (mCalendarFragment != null && !mCalendarFragment.isHidden()) {
+//            transaction.hide(mCalendarFragment);
+//            transaction.addToBackStack(CALENDAR);
+//        }
+//        AddNewFragment addNewFragment = AddNewFragment.newInstance();
+//        transaction.add(R.id.linearlayout_main_container, addNewFragment, ADDNEW);
+//
+//        mAddNewPresenter = new AddNewPresenter(addNewFragment, addNewFragment.getFragmentManager());
+//
+//        transaction.commit();
+
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         if (mAddNewFragment == null) mAddNewFragment = AddNewFragment.newInstance();
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
+        if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
         if (!mAddNewFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mAddNewFragment, ADDNEW);
         } else {
@@ -107,13 +138,13 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         }
         transaction.commit();
 
-        mFitnesschView.showProfileUi();
+        mFitnesschView.showAddNewUi();
     }
 
     @Override
     public void transToProfile() {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-//        if (mFragmentManager.findFragmentByTag(FRIEND) != null) mFragmentManager.popBackStack();
+//        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
 
 //        if (mFragmentManager.findFragmentByTag(DETAIL) != null) mFragmentManager.popBackStack();
 //        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
@@ -121,6 +152,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
+        if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
         if (!mProfileFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mProfileFragment, PROFILE);
         } else {
@@ -149,7 +181,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     @Override
     public void transToCalendar() {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-//        if (mFragmentManager.findFragmentByTag(FRIEND) != null) mFragmentManager.popBackStack();
+//        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
 
 //        if (mFragmentManager.findFragmentByTag(DETAIL) != null) mFragmentManager.popBackStack();
 //        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
@@ -157,6 +189,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
+        if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
         if (!mCalendarFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mCalendarFragment, CALENDAR);
         } else {
@@ -164,12 +197,35 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         }
 
 
-//        if (mCalendarPresenter == null) {
-//            mCalendarPresenter = new CalendarPresenter(mCalendarFragment);
-//        }
+        if (mCalendarPresenter == null) {
+            mCalendarPresenter = new CalendarPresenter(mCalendarFragment);
+        }
         transaction.commit();
 
         mFitnesschView.showCalendarUi();
+    }
+
+    @Override
+    public void transToAddNewArticle(List<Schedule> schedules) {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+
+        if (mAddNewArticleFragment == null) mAddNewArticleFragment = AddNewArticleFragment.newInstance();
+        if (mProfileFragment != null) transaction.hide(mProfileFragment);
+        if (mMainFragment != null) transaction.hide(mMainFragment);
+        if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
+        if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
+
+        if (!mAddNewArticleFragment.isAdded()) {
+            transaction.add(R.id.linearlayout_main_container, mAddNewArticleFragment, ADDNEW_ARTICLE);
+        } else {
+            transaction.show(mAddNewArticleFragment);
+        }
+
+
+        if (mAddNewArticlePresenter == null) {
+            mAddNewArticlePresenter = new AddNewArticlePresenter(mAddNewArticleFragment, schedules);
+        }
+        transaction.commit();
     }
 
 

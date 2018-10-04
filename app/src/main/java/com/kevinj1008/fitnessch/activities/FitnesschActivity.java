@@ -1,30 +1,27 @@
 package com.kevinj1008.fitnessch.activities;
 
-import android.content.Context;
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-
 import com.github.clans.fab.FloatingActionButton;
-import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.FitnesschContract;
 import com.kevinj1008.fitnessch.FitnesschPresenter;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.objects.Article;
-import com.squareup.picasso.Picasso;
+import com.kevinj1008.fitnessch.objects.Schedule;
 
-import jp.wasabeef.picasso.transformations.BlurTransformation;
+
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -34,6 +31,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
     private TextView mToolbarTitle;
+    private FloatingActionButton mFloatingActionButton;
 //    private ImageView mBackground;
 
     @Override
@@ -48,8 +46,8 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton floatingActionButton = findViewById(R.id.floating_add_btn);
-        floatingActionButton.setOnClickListener(this);
+        mFloatingActionButton = findViewById(R.id.floating_add_btn);
+        mFloatingActionButton.setOnClickListener(this);
 
         // Blur background image
 //        ImageView imageView = findViewById(R.id.parent_background);
@@ -148,22 +146,22 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
     @Override
     public void showMainUi() {
-
+        mFloatingActionButton.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showScheduleUi() {
-
+    public void showAddNewUi() {
+        mFloatingActionButton.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showCalendarUi() {
-
+        mFloatingActionButton.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showProfileUi() {
-
+        mFloatingActionButton.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -178,6 +176,10 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
     public void transToDetail(Article article) {
         mPresenter.transToDetail(article);
+    }
+
+    public void transToAddNewArticle(List<Schedule> schedules) {
+        mPresenter.transToAddNewArticle(schedules);
     }
 
     @Override
@@ -206,5 +208,34 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     @Override
     public void onClick(View view) {
         mPresenter.transToAddNew();
+    }
+
+    @Override
+    public void onBackPressed() {
+        backButtonHandler();
+        return;
+    }
+
+    public void backButtonHandler() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(FitnesschActivity.this);
+        alertDialog.setTitle("確定離開 Fitnessch？");
+        alertDialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        alertDialog.show();
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(FitnesschActivity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

@@ -69,7 +69,7 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mArticles.size();
+        return (mArticles.isEmpty()) ? 0 : mArticles.size();
     }
 
     private class MainItemViewHolder extends RecyclerView.ViewHolder {

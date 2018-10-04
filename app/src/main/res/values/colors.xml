@@ -59,5 +59,9 @@
     <color name="addnew_btn_stroke_color">#BBBBBB</color>
     <color name="addnew_btn_ripple">#aeaeae</color>
     <color name="addnew_text_color">#FFFFFF</color>
+    <color name="addnew_btn_shadow_color">#5a000000</color>
+
+    <!--Add New Schedule Article Item-->
+    <color name="new_schedule_article_title_edit_color">#9dffffff</color>
 
 </resources>

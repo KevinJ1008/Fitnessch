@@ -50,7 +50,7 @@ public class MealChildAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mArticles.size();
+        return (mArticles.isEmpty()) ? 0 : mArticles.size();
     }
 
     private class MealItemViewHolder extends RecyclerView.ViewHolder {

@@ -9,14 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kevinj1008.fitnessch.R;
+import com.kevinj1008.fitnessch.objects.Article;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.Calendar;
 
-public class CalendarFragment extends Fragment {
+import static com.google.common.base.Preconditions.checkNotNull;
 
-//    private CalendarContract.Presenter mPresenter;
+public class CalendarFragment extends Fragment implements CalendarContract.View {
+
+    private CalendarContract.Presenter mPresenter;
 
     public CalendarFragment() {
         // Requires empty public constructor
@@ -24,6 +27,11 @@ public class CalendarFragment extends Fragment {
 
     public static CalendarFragment newInstance() {
         return new CalendarFragment();
+    }
+
+    @Override
+    public void setPresenter(CalendarContract.Presenter presenter) {
+        mPresenter = checkNotNull(presenter);
     }
 
     @Override
@@ -41,4 +49,21 @@ public class CalendarFragment extends Fragment {
         calendarView.setDateSelected(calendar, true);
         return root;
     }
+
+    @Override
+    public void showArticles(Article bean) {
+
+    }
+
+    @Override
+    public void showDetailUi(Article article) {
+
+    }
+
+    @Override
+    public void refreshUi() {
+
+    }
+
+
 }

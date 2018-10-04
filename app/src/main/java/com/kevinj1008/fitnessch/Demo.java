@@ -1,6 +1,8 @@
 package com.kevinj1008.fitnessch;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Demo {
 
@@ -29,6 +31,25 @@ public class Demo {
         // 牛頓逼近開根求解
         DecimalFormat formatter = new DecimalFormat("#.#");
         System.out.print(formatter.format(sqrt(8)) + "\n");
+
+        Map<Integer, String> HOSTING = new HashMap<>();
+        HOSTING.put(1, "linode.com");
+        HOSTING.put(2, "heroku.com");
+        HOSTING.put(3, "digitalocean.com");
+        HOSTING.put(4, "aws.amazon.com");
+
+        // Before Java 8
+        String result = "";
+        for (Map.Entry<Integer, String> entry : HOSTING.entrySet()) {
+            if ("aws.amazon.com".equals(entry.getValue())) {
+                result = entry.getValue();
+            }
+        }
+        System.out.println("Before Java 8 : " + result);
+
+
+
+
     }
     //遞迴解法
     private static int sum(int n) {

@@ -11,6 +11,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
         android:paddingTop="15dp"
         android:paddingStart="10dp"
         android:paddingEnd="2dp"
@@ -27,22 +28,33 @@
         app:layout_constraintLeft_toRightOf="@+id/addnew_schedule_title"
         app:layout_constraintRight_toLeftOf="@id/addnew_schedule_btn"
         app:layout_constraintBottom_toBottomOf="@id/addnew_schedule_title"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/addnew_text_color"
+        android:inputType="text"
         android:background="@drawable/addnew_edittext_background"/>
 
     <Button
         android:id="@+id/addnew_schedule_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/addnew_btn_width"
         android:layout_height="@dimen/addnew_btn_height"
         app:layout_constraintTop_toTopOf="@+id/addnew_schedule_title"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/addnew_schedule_edittext"
         app:layout_constraintBottom_toBottomOf="@id/addnew_schedule_title"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginStart="10dp"
         android:shadowRadius="8"
         android:shadowDy="8"
+        android:shadowDx="3"
+        android:shadowColor="@color/addnew_btn_shadow_color"
+        android:elevation="@dimen/addnew_btn_elevation"
+        android:translationZ="@dimen/addnew_btn_translationz"
         android:background="@drawable/addnew_btn_ripple"
-        android:textColor="@color/white"
+        android:textColor="@color/addnew_text_color"
+        android:textSize="14sp"
         android:text="新增"/>
 
     <TextView
@@ -68,7 +80,25 @@
         app:layout_constraintLeft_toRightOf="@id/addnew_schedule_weight"
         app:layout_constraintRight_toRightOf="@id/addnew_start_btn"
         app:layout_constraintBottom_toBottomOf="@+id/addnew_schedule_weight"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:inputType="number"
+        android:textColor="@color/addnew_text_color"
         android:background="@drawable/addnew_edittext_background"/>
+
+    <TextView
+        android:id="@+id/addnew_schedule_weight_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/addnew_weight_edittext"
+        app:layout_constraintTop_toTopOf="@+id/addnew_weight_edittext"
+        app:layout_constraintBottom_toBottomOf="@+id/addnew_weight_edittext"
+        android:layout_marginStart="3dp"
+        android:textSize="12sp"
+        android:textColor="@color/addnew_text_color"
+        android:text="(KG)"/>
 
     <TextView
         android:id="@+id/addnew_schedule_reps"
@@ -92,33 +122,134 @@
         app:layout_constraintLeft_toLeftOf="@id/addnew_schedule_btn"
         app:layout_constraintTop_toTopOf="@+id/addnew_schedule_reps"
         app:layout_constraintBottom_toBottomOf="@id/addnew_schedule_reps"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:inputType="number"
+        android:textColor="@color/addnew_text_color"
         android:background="@drawable/addnew_edittext_background"/>
 
-    <Button
+    <!--<Button-->
+        <!--android:id="@+id/addnew_start_btn"-->
+        <!--android:layout_width="@dimen/addnew_btn_width"-->
+        <!--android:layout_height="@dimen/addnew_btn_height"-->
+        <!--app:layout_constraintLeft_toRightOf="@id/addnew_schedule_weight"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/addnew_schedule_weight"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:shadowRadius="8"-->
+        <!--android:shadowDy="8"-->
+        <!--android:shadowDx="3"-->
+        <!--android:shadowColor="@color/addnew_btn_shadow_color"-->
+        <!--android:elevation="@dimen/addnew_btn_elevation"-->
+        <!--android:translationZ="@dimen/addnew_btn_translationz"-->
+        <!--android:background="@drawable/addnew_btn_ripple"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:text="開始"/>-->
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/addnew_start_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/addnew_btn_width"
         android:layout_height="@dimen/addnew_btn_height"
         app:layout_constraintLeft_toRightOf="@id/addnew_schedule_weight"
         app:layout_constraintTop_toBottomOf="@id/addnew_schedule_weight"
         android:layout_marginTop="10dp"
-        android:shadowRadius="8"
-        android:shadowDy="8"
-        android:background="@drawable/addnew_btn_ripple"
-        android:textColor="@color/white"
-        android:text="開始"/>
+        android:elevation="@dimen/addnew_btn_elevation"
+        android:translationZ="@dimen/addnew_btn_translationz"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/addnew_btn_ripple">
 
-    <Button
+        <TextView
+            android:id="@+id/addnew_start_btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowRadius="8"
+            android:shadowDy="8"
+            android:shadowDx="3"
+            android:shadowColor="@color/addnew_btn_shadow_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/addnew_text_color"
+            android:textSize="14sp"
+            android:text="開始"/>
+
+        <Chronometer
+            android:id="@+id/addnew_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/addnew_text_color"
+            android:textSize="14sp"
+            android:visibility="invisible"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <!--<Button-->
+        <!--android:id="@+id/addnew_rest_btn"-->
+        <!--android:layout_width="@dimen/addnew_btn_width"-->
+        <!--android:layout_height="@dimen/addnew_btn_height"-->
+        <!--app:layout_constraintLeft_toRightOf="@id/addnew_schedule_reps"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/addnew_schedule_reps"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:shadowRadius="8"-->
+        <!--android:shadowDy="8"-->
+        <!--android:shadowDx="3"-->
+        <!--android:shadowColor="@color/addnew_btn_shadow_color"-->
+        <!--android:elevation="@dimen/addnew_btn_elevation"-->
+        <!--android:translationZ="@dimen/addnew_btn_translationz"-->
+        <!--android:background="@drawable/addnew_btn_ripple"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="14sp"-->
+        <!--android:text="休息"/>-->
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/addnew_rest_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/addnew_btn_width"
         android:layout_height="@dimen/addnew_btn_height"
         app:layout_constraintLeft_toRightOf="@id/addnew_schedule_reps"
         app:layout_constraintTop_toBottomOf="@id/addnew_schedule_reps"
         android:layout_marginTop="10dp"
-        android:shadowRadius="8"
-        android:shadowDy="8"
-        android:background="@drawable/addnew_btn_ripple"
-        android:textColor="@color/white"
-        android:text="開始"/>
+        android:elevation="@dimen/addnew_btn_elevation"
+        android:translationZ="@dimen/addnew_btn_translationz"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/addnew_btn_ripple">
+
+        <TextView
+            android:id="@+id/addnew_rest_btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowRadius="8"
+            android:shadowDy="8"
+            android:shadowDx="3"
+            android:shadowColor="@color/addnew_btn_shadow_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/addnew_text_color"
+            android:textSize="14sp"
+            android:text="休息"/>
+
+        <Chronometer
+            android:id="@+id/addnew_rest_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/addnew_text_color"
+            android:textSize="14sp"
+            android:visibility="invisible"/>
+
+    </android.support.constraint.ConstraintLayout>
 
     <View
         android:id="@+id/addnew_schedule_separator"
@@ -137,5 +268,23 @@
         app:layout_constraintTop_toBottomOf="@+id/addnew_schedule_separator"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="15dp"/>
+
+    <Button
+        android:id="@+id/addnew_schedule_complete_btn"
+        android:layout_width="@dimen/addnew_complete_btn_width"
+        android:layout_height="@dimen/addnew_complete_btn_height"
+        app:layout_constraintRight_toRightOf="@+id/addnew_rest_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        android:shadowRadius="8"
+        android:shadowDy="8"
+        android:shadowDx="3"
+        android:shadowColor="@color/addnew_btn_shadow_color"
+        android:elevation="@dimen/addnew_btn_elevation"
+        android:translationZ="@dimen/addnew_btn_translationz"
+        android:background="@drawable/addnew_btn_ripple"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:text="完成"/>
 
 </android.support.constraint.ConstraintLayout>

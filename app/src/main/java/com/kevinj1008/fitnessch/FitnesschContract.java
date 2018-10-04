@@ -1,6 +1,9 @@
 package com.kevinj1008.fitnessch;
 
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.objects.Schedule;
+
+import java.util.List;
 
 public interface FitnesschContract {
 
@@ -8,7 +11,7 @@ public interface FitnesschContract {
 
         void showMainUi();
 
-        void showScheduleUi();
+        void showAddNewUi();
 
         void showCalendarUi();
 
@@ -33,6 +36,8 @@ public interface FitnesschContract {
         void refreshLiked();
 
         void transToCalendar();
+
+        void transToAddNewArticle(List<Schedule> schedules);
 
 //        void transToChatRoom(Message message, User user);
 
