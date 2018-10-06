@@ -24,7 +24,7 @@ public interface AddNewArticleContract {
 
         void result(int requestCode, int resultCode);
 
-        void sendSchedule();
+        void sendSchedule(String title, String content);
 
         void showSchedules(List<Schedule> schedules);
 

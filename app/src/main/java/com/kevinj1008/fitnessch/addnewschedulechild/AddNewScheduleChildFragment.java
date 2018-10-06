@@ -82,6 +82,8 @@ public class AddNewScheduleChildFragment extends Fragment {
         mScheduleWeight = root.findViewById(R.id.addnew_weight_edittext);
         mScheduleReps = root.findViewById(R.id.addnew_reps_edittext);
         mScheduleCompleteBtn = root.findViewById(R.id.addnew_schedule_complete_btn);
+        ConstraintLayout constraintLayout = root.findViewById(R.id.childfragment_addnewschedule);
+
 
         InputFilter typeFilter = new InputFilter() {
             @Override
@@ -101,9 +103,11 @@ public class AddNewScheduleChildFragment extends Fragment {
         mScheduleWeight.setOnFocusChangeListener(focusChangeListener);
         mScheduleReps.setOnFocusChangeListener(focusChangeListener);
 
+
 //        mScheduleWeight.addTextChangedListener(textWatcher);
 //        mScheduleReps.addTextChangedListener(textWatcher);
 
+        constraintLayout.setOnClickListener(clickListener);
         mStartBtn.setOnClickListener(clickListener);
         mStartBtn.setOnLongClickListener(longClickListener);
         mRestBtn.setOnClickListener(clickListener);
@@ -177,10 +181,19 @@ public class AddNewScheduleChildFragment extends Fragment {
                 mScheduleReps.clearFocus();
             } else if (view.getId() == R.id.addnew_schedule_complete_btn) {
                 if (mAddNewScheduleChildAdapter.getScheduleList().size() > 0) {
+
+                    //TODO: Available clean data
+
                     ((FitnesschActivity) getActivity()).transToAddNewArticle(mAddNewScheduleChildAdapter.getScheduleList());
                 } else {
                     Toast.makeText(getContext(), "請輸入課表。", Toast.LENGTH_SHORT).show();
                 }
+            } else if (view.getId() == R.id.childfragment_addnewschedule) {
+                InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                input.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                mScheduleTitle.clearFocus();
+                mScheduleWeight.clearFocus();
+                mScheduleReps.clearFocus();
             }
 
         }

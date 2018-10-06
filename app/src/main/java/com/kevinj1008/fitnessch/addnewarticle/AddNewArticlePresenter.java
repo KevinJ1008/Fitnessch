@@ -1,12 +1,26 @@
 package com.kevinj1008.fitnessch.addnewarticle;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.objects.Schedule;
+import com.kevinj1008.fitnessch.util.Constants;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -35,8 +49,48 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
     }
 
     @Override
-    public void sendSchedule() {
+    public void sendSchedule(String title, String content) {
+        //TODO: Change author name hard code to user
+        String author = "Wun-Bin Jhou";
+        //
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        Map<String, Object> article = new HashMap<>();
+        article.put("article_tag", "課表");
+        article.put("author", author);
+
+        //TODO: Add author ID
+
+        article.put("title", title);
+        article.put("content", content);
+        article.put("create_time", FieldValue.serverTimestamp());
+
+        //TODO: Change "article" to "articles"
+
+        db.collection("article").add(article).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(Constants.TAG, "Successfully written! " + documentReference.toString());
+                Map<String, Object> schedule = new HashMap<>();
+                for (int i = 0; i < mSchedules.size(); i++) {
+                    schedule.put("schedule_title", mSchedules.get(i).getScheduleTitle());
+                    schedule.put("schedule_type", mSchedules.get(i).getType());
+                    schedule.put("schedule_weight", mSchedules.get(i).getScheduleWeight());
+                    schedule.put("schedule_reps", mSchedules.get(i).getScheduleReps());
+
+                    documentReference.collection("schedule").add(schedule);
+                }
+
+                //TODO: Available clean data
+//                mAddNewArticleView.refreshUi();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(Constants.TAG, "Error writing document " + e.toString());
+                Toast.makeText(Fitnessch.getAppContext(), "新增課表失敗，請檢查網路連線。", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -69,7 +123,7 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
 
     @Override
     public void refresh() {
-
+        mAddNewArticleView.refreshUi();
     }
 
 

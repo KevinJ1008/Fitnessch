@@ -2,6 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_addnewarticle"
+    android:clickable="true"
+    android:focusable="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -33,6 +36,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:inputType="text"
+        android:maxLines="1"
         android:textColor="@color/addnew_text_color"
         android:background="@drawable/addnew_edittext_background"/>
 
@@ -48,7 +52,7 @@
         android:paddingEnd="10dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:inputType="text"
+        android:inputType="text|textMultiLine"
         android:hint="說點甚麼 ~"
         android:textColorHint="@color/new_schedule_article_title_edit_color"
         android:textColor="@color/addnew_text_color"
@@ -69,18 +73,20 @@
 
     <View
         android:id="@+id/add_new_article_separator"
-        android:layout_width="330dp"
+        android:layout_width="@dimen/width_all_separator"
         android:layout_height="1dp"
         app:layout_constraintTop_toBottomOf="@id/add_new_article_btn"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:background="@color/white_70_transparent"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_add_new_article"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/add_new_article_separator"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="10dp"/>
 
 </android.support.constraint.ConstraintLayout>

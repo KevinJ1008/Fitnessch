@@ -111,5 +111,6 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     public void initData() {
         mArticles.clear();
+        notifyDataSetChanged();
     }
 }

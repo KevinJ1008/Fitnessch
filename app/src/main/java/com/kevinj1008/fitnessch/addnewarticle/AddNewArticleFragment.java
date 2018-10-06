@@ -1,20 +1,25 @@
 package com.kevinj1008.fitnessch.addnewarticle;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
+import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.adapters.AddNewArticleAdapter;
 import com.kevinj1008.fitnessch.objects.Schedule;
 
@@ -71,8 +76,13 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
         Button sendBtn = root.findViewById(R.id.add_new_article_btn);
         mTitleEditText = root.findViewById(R.id.add_new_article_title_edittext);
         mContentEditText = root.findViewById(R.id.add_new_article_content_edittext);
+        ConstraintLayout constraintLayout = root.findViewById(R.id.fragment_addnewarticle);
 
         sendBtn.setOnClickListener(clickListener);
+        constraintLayout.setOnClickListener(clickListener);
+
+        mTitleEditText.setOnFocusChangeListener(focusChangeListener);
+        mContentEditText.setOnFocusChangeListener(focusChangeListener);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(Fitnessch.getAppContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -116,8 +126,40 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mPresenter.sendSchedule();
-            refreshUi();
+            if (view.getId() == R.id.add_new_article_btn) {
+
+                //TODO: Add typing input limitation
+
+                String title = mTitleEditText.getText().toString();
+                String content = mContentEditText.getText().toString();
+
+                InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                input.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+                if (!title.equals("") && !content.equals("")) {
+                    mPresenter.sendSchedule(title, content);
+                    mTitleEditText.getText().clear();
+                    mContentEditText.getText().clear();
+                } else {
+                    Toast.makeText(getContext(), "請輸入標題和內容。", Toast.LENGTH_SHORT).show();
+                    mTitleEditText.clearFocus();
+                    mContentEditText.clearFocus();
+                }
+            } else if (view.getId() == R.id.fragment_addnewarticle) {
+                InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                input.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+            mTitleEditText.clearFocus();
+            mContentEditText.clearFocus();
+        }
+    };
+
+    private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View view, boolean hasFocus) {
+            if (!hasFocus) {
+                ((FitnesschActivity) getActivity()).hideKeyboard(view);
+            }
         }
     };
 

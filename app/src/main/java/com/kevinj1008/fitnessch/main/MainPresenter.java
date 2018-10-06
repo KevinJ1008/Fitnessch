@@ -16,6 +16,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kevinj1008.fitnessch.api.beans.GetArticles;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.util.Constants;
 
 import java.util.ArrayList;
@@ -67,14 +68,35 @@ public class MainPresenter implements MainContract.Presenter {
                         Log.d(Constants.TAG, "Get Articles " + documentChange.toString());
                         String id = documentChange.getDocument().getId();
                         String author = documentChange.getDocument().getData().get("author").toString();
+
+                        //TODO: Add author ID
+
                         String title = documentChange.getDocument().getData().get("title").toString();
                         String content = documentChange.getDocument().getData().get("content").toString();
                         String time = String.valueOf(documentChange.getDocument().getTimestamp("create_time").getSeconds());
                         int createTime = Integer.parseInt(time);
                         String tag = documentChange.getDocument().getData().get("article_tag").toString();
                         Article articles = new Article(id, author, title, content, createTime, tag);
+
+//                        documentChange.getDocument().getReference().collection("schedule").addSnapshotListener(new EventListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+//                                for (DocumentChange scheduleChange : queryDocumentSnapshots.getDocumentChanges()) {
+//                                    String scheduleTitle = scheduleChange.getDocument().getData().get("schedule_title").toString();
+//                                    String scheduleWeight = scheduleChange.getDocument().getData().get("schedule_weight").toString();
+//                                    String scheduleReps = scheduleChange.getDocument().getData().get("schedule_reps").toString();
+//                                    String scheduleType = scheduleChange.getDocument().getData().get("schedule_type").toString();
+//
+//                                    Schedule schedules = new Schedule(scheduleTitle, scheduleWeight, scheduleReps);
+//                                    schedules.setType(scheduleType);
+//
+//                                }
+//                            }
+//                        });
+
                         mMainView.showArticles(articles);
                     }
+                    //TODO: GET Schedule
                 }
             });
         }

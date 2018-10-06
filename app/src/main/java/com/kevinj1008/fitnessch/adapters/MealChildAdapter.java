@@ -75,5 +75,6 @@ public class MealChildAdapter extends RecyclerView.Adapter {
 
     public void initData() {
         mArticles.clear();
+        notifyDataSetChanged();
     }
 }

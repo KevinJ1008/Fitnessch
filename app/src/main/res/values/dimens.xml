@@ -30,6 +30,7 @@
     <dimen name="size_all_createdtime">14dp</dimen>
     <dimen name="size_all_interestedin">20dp</dimen>
     <dimen name="size_all_place">14dp</dimen>
+    <dimen name="width_all_separator">224dp</dimen>
 
     <!-- Main items-->
     <dimen name="space_main_item">1dp</dimen>

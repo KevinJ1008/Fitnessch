@@ -100,5 +100,6 @@ public class AddNewArticleAdapter extends RecyclerView.Adapter {
 
     public void clearData() {
         mSchedules.clear();
+        notifyDataSetChanged();
     }
 }
