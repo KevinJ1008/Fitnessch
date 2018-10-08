@@ -125,29 +125,29 @@
         app:itemIconTint="@drawable/drawer_item_selector"
         app:theme="@style/DrawerMenuItem">
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/linearlayout_drawer_logoutbutton"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="@dimen/size_profile_logouticon"-->
-            <!--android:layout_gravity="bottom|start"-->
-            <!--android:layout_marginBottom="20dp"-->
-            <!--android:layout_marginStart="16dp"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
+        <LinearLayout
+            android:id="@+id/linearlayout_drawer_logoutbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_logout_btn"
+            android:layout_gravity="bottom|start"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="22dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <!--<ImageView-->
-                <!--android:layout_width="@dimen/size_profile_logouticon"-->
-                <!--android:layout_height="@dimen/size_profile_logouticon"-->
-                <!--android:background="@drawable/profile_logouticon_selector" />-->
+            <ImageView
+                android:layout_width="@dimen/size_logout_btn"
+                android:layout_height="@dimen/size_logout_btn"
+                android:background="@drawable/logout_icon_selector" />
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="10dp"-->
-                <!--android:text="@string/all_logout"-->
-                <!--android:textColor="@drawable/profile_logouttext_selector"-->
-                <!--android:textSize="17sp" />-->
-        <!--</LinearLayout>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:text="@string/all_logout"
+                android:textColor="@drawable/drawer_item_selector"
+                android:textSize="16sp" />
+        </LinearLayout>
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

@@ -12,10 +12,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +26,7 @@ import com.kevinj1008.fitnessch.FitnesschPresenter;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.objects.Schedule;
+import com.kevinj1008.fitnessch.util.Constants;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 import com.squareup.picasso.Picasso;
 
@@ -127,22 +130,15 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
                 .setText(mSharedPreferencesManager.getUserEmail());
 
         // logout button
-//        ((LinearLayout) findViewById(R.id.linearlayout_drawer_logoutbutton))
-//                .setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Log.d(Constants.TAG, "Drawer, Logout.onClick");
+        ((LinearLayout) findViewById(R.id.linearlayout_drawer_logoutbutton))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d(Constants.TAG, "Drawer, Logout.onClick");
 
-//                        UserManager.getInstance().logoutVoyage(new LogoutCallback() {
-//                            @Override
-//                            public void onCompleted() {
-//                                Log.d(Constants.TAG, "logoutVoyage.onCompleted");
-//
-//                                popLogin();
-//                            }
-//                        });
-//                    }
-//                });
+                        signOut();
+                    }
+                });
 
     }
 
