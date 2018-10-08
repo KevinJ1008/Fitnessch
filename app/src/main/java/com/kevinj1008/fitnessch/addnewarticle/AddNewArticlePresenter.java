@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.util.Constants;
+import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
 
     private AddNewArticleContract.View mAddNewArticleView;
     private List<Schedule> mSchedules;
+    private SharedPreferencesManager mSharedPreferencesManager;
     private int mlastVisibleItemPosition;
     private int mfirstVisibleItemPosition;
 
@@ -35,6 +37,7 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
         mAddNewArticleView = checkNotNull(addNewArticleView, "addNewArticleView cannot be null!");
         mAddNewArticleView.setPresenter(this);
         mSchedules = schedules;
+        mSharedPreferencesManager = new SharedPreferencesManager(Fitnessch.getAppContext());
     }
 
 
@@ -51,7 +54,7 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
     @Override
     public void sendSchedule(String title, String content) {
         //TODO: Change author name hard code to user
-        String author = "Wun-Bin Jhou";
+        String author = mSharedPreferencesManager.getUserName();
         //
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

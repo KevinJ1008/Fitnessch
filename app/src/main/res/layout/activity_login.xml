@@ -20,47 +20,170 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/login_logo_white" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/fb_login_btn"
-        android:layout_width="@dimen/fb_login_btn_width"
-        android:layout_height="@dimen/fb_login_btn_height"
-        app:layout_constraintTop_toBottomOf="@id/login_logo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/google_login_btn"
-        android:layout_marginTop="45dp"
-        android:background="@drawable/fb_login_btn_ripple">
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/fb_login_btn"-->
+        <!--android:layout_width="@dimen/fb_login_btn_width"-->
+        <!--android:layout_height="@dimen/fb_login_btn_height"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/login_logo"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toLeftOf="@id/google_login_btn"-->
+        <!--android:layout_marginTop="45dp"-->
+        <!--android:background="@drawable/fb_login_btn_ripple">-->
 
-        <ImageView
-            android:id="@+id/fb_logo"
-            android:layout_width="@dimen/login_btn_logo_size"
-            android:layout_height="@dimen/login_btn_logo_size"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginStart="15dp"
-            app:srcCompat="@drawable/fb_logo"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/fb_logo"-->
+            <!--android:layout_width="@dimen/login_btn_logo_size"-->
+            <!--android:layout_height="@dimen/login_btn_logo_size"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--app:srcCompat="@drawable/fb_logo"/>-->
 
-        <TextView
-            android:id="@+id/fb_login_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@+id/fb_logo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="32dp"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:text="@string/all_login_text"/>
+        <!--<TextView-->
+            <!--android:id="@+id/fb_login_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintLeft_toRightOf="@+id/fb_logo"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginStart="32dp"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:text="@string/all_login_text"/>-->
 
-    </android.support.constraint.ConstraintLayout>
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/google_login_btn"-->
+        <!--android:layout_width="@dimen/google_login_btn_width"-->
+        <!--android:layout_height="@dimen/google_login_btn_height"-->
+        <!--app:layout_constraintTop_toTopOf="@id/fb_login_btn"-->
+        <!--app:layout_constraintLeft_toRightOf="@id/fb_login_btn"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--android:background="@drawable/google_login_btn_ripple">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/google_logo"-->
+            <!--android:layout_width="@dimen/login_btn_logo_size"-->
+            <!--android:layout_height="@dimen/login_btn_logo_size"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--app:srcCompat="@drawable/google_logo"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/google_login_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintLeft_toRightOf="@+id/google_logo"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginStart="32dp"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:text="@string/all_login_text"/>-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/user_email"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/sign_up_height"-->
+        <!--app:layout_constraintLeft_toLeftOf="@+id/fb_login_btn"-->
+        <!--app:layout_constraintRight_toRightOf="@+id/google_login_btn"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/google_login_btn"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:background="@drawable/sign_up_email_background">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/email_icon"-->
+            <!--android:layout_width="@dimen/sign_up_icon_size"-->
+            <!--android:layout_height="@dimen/sign_up_icon_size"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginStart="20dp"-->
+            <!--app:srcCompat="@drawable/user_icon"/>-->
+
+
+        <!--<EditText-->
+            <!--android:id="@+id/user_email_edit_text"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:paddingStart="15dp"-->
+            <!--android:paddingEnd="10dp"-->
+            <!--app:layout_constraintLeft_toRightOf="@+id/email_icon"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:hint="@string/all_sign_up_email"-->
+            <!--android:textColorHint="@color/sign_up_text_color"-->
+            <!--android:backgroundTint="@android:color/transparent"-->
+            <!--android:singleLine="true"-->
+            <!--android:inputType="textEmailAddress"/>-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/user_password"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/sign_up_height"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/user_email"-->
+        <!--app:layout_constraintLeft_toLeftOf="@+id/fb_login_btn"-->
+        <!--app:layout_constraintRight_toRightOf="@+id/google_login_btn"-->
+        <!--android:layout_marginTop="1dp"-->
+        <!--android:background="@drawable/sign_up_password_background">-->
+        <!---->
+        <!--<ImageView-->
+            <!--android:id="@+id/password_icon"-->
+            <!--android:layout_width="@dimen/sign_up_icon_size"-->
+            <!--android:layout_height="@dimen/sign_up_icon_size"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginStart="20dp"-->
+            <!--app:srcCompat="@drawable/password_icon"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/user_password_edit_text"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:paddingStart="15dp"-->
+            <!--android:paddingEnd="10dp"-->
+            <!--app:layout_constraintLeft_toRightOf="@+id/password_icon"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:hint="@string/all_sign_up_password"-->
+            <!--android:textColorHint="@color/sign_up_text_color"-->
+            <!--android:backgroundTint="@android:color/transparent"-->
+            <!--android:singleLine="true"-->
+            <!--android:inputType="textPassword"/>-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+    <!---->
+    <!--<Button-->
+        <!--android:id="@+id/sign_up_btn"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/sign_up_btn_height"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/user_password"-->
+        <!--app:layout_constraintLeft_toLeftOf="@+id/fb_login_btn"-->
+        <!--app:layout_constraintRight_toRightOf="@id/google_login_btn"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:text="@string/all_sign_up"-->
+        <!--android:textSize="16sp"-->
+        <!--android:textColor="@color/sign_up_btn_text_color"-->
+        <!--android:background="@drawable/sign_up_btn"/>-->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/google_login_btn"
-        android:layout_width="@dimen/google_login_btn_width"
+        android:layout_width="280dp"
         android:layout_height="@dimen/google_login_btn_height"
-        app:layout_constraintTop_toTopOf="@id/fb_login_btn"
-        app:layout_constraintLeft_toRightOf="@id/fb_login_btn"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/login_logo"
+        app:layout_constraintRight_toRightOf="@id/login_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/google_login_btn_ripple">
 
         <ImageView
@@ -77,103 +200,15 @@
             android:id="@+id/google_login_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@+id/google_logo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="32dp"
-            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/google_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/google_logo"
+            android:layout_marginStart="20dp"
+            android:textSize="18sp"
             android:textColor="@color/white"
-            android:text="@string/all_login_text"/>
+            android:text="Google 登入"/>
 
     </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/user_email"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/sign_up_height"
-        app:layout_constraintLeft_toLeftOf="@+id/fb_login_btn"
-        app:layout_constraintRight_toRightOf="@+id/google_login_btn"
-        app:layout_constraintTop_toBottomOf="@id/google_login_btn"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/sign_up_email_background">
-
-        <ImageView
-            android:id="@+id/email_icon"
-            android:layout_width="@dimen/sign_up_icon_size"
-            android:layout_height="@dimen/sign_up_icon_size"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="20dp"
-            app:srcCompat="@drawable/user_icon"/>
-
-
-        <EditText
-            android:id="@+id/user_email_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintLeft_toRightOf="@+id/email_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:hint="@string/all_sign_up_email"
-            android:textColorHint="@color/sign_up_text_color"
-            android:backgroundTint="@android:color/transparent"
-            android:singleLine="true"
-            android:inputType="textEmailAddress"/>
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/user_password"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/sign_up_height"
-        app:layout_constraintTop_toBottomOf="@+id/user_email"
-        app:layout_constraintLeft_toLeftOf="@+id/fb_login_btn"
-        app:layout_constraintRight_toRightOf="@+id/google_login_btn"
-        android:layout_marginTop="1dp"
-        android:background="@drawable/sign_up_password_background">
-        
-        <ImageView
-            android:id="@+id/password_icon"
-            android:layout_width="@dimen/sign_up_icon_size"
-            android:layout_height="@dimen/sign_up_icon_size"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="20dp"
-            app:srcCompat="@drawable/password_icon"/>
-
-        <EditText
-            android:id="@+id/user_password_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintLeft_toRightOf="@+id/password_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:hint="@string/all_sign_up_password"
-            android:textColorHint="@color/sign_up_text_color"
-            android:backgroundTint="@android:color/transparent"
-            android:singleLine="true"
-            android:inputType="textPassword"/>
-
-    </android.support.constraint.ConstraintLayout>
-    
-    <Button
-        android:id="@+id/sign_up_btn"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/sign_up_btn_height"
-        app:layout_constraintTop_toBottomOf="@+id/user_password"
-        app:layout_constraintLeft_toLeftOf="@+id/fb_login_btn"
-        app:layout_constraintRight_toRightOf="@id/google_login_btn"
-        android:layout_marginTop="20dp"
-        android:text="@string/all_sign_up"
-        android:textSize="16sp"
-        android:textColor="@color/sign_up_btn_text_color"
-        android:background="@drawable/sign_up_btn"/>
 
 </android.support.constraint.ConstraintLayout>

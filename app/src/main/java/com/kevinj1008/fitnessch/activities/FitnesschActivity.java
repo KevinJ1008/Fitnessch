@@ -1,8 +1,11 @@
 package com.kevinj1008.fitnessch.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,26 +15,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.github.clans.fab.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.kevinj1008.fitnessch.FitnesschContract;
 import com.kevinj1008.fitnessch.FitnesschPresenter;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.objects.Schedule;
+import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class FitnesschActivity extends BaseActivity implements FitnesschContract.View, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class FitnesschActivity extends BaseActivity implements FitnesschContract.View,
+        NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private FitnesschContract.Presenter mPresenter;
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
     private TextView mToolbarTitle;
     private FloatingActionButton mFloatingActionButton;
+    private SharedPreferencesManager mSharedPreferencesManager;
 //    private ImageView mBackground;
 
     @Override
@@ -48,6 +59,8 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
         mFloatingActionButton = findViewById(R.id.floating_add_btn);
         mFloatingActionButton.setOnClickListener(this);
+
+        mSharedPreferencesManager = new SharedPreferencesManager(mContext);
 
         // Blur background image
 //        ImageView imageView = findViewById(R.id.parent_background);
@@ -99,16 +112,19 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         NavigationView navigationView = (NavigationView) findViewById(R.id.navview_drawer);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // navview header
-//        ImageView userImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageview_drawer_userimage);
-//
-//        userImage.setOutlineProvider(new AuthorOutlineProvider());
-//
-//        userImage.setTag(UserManager.getInstance().getUserImage());
-//        new ImageFromLruCache().set(userImage, UserManager.getInstance().getUserImage());
-//
-//        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.imageview_drawer_useremail))
-//                .setText(UserManager.getInstance().getUserEmail());
+//        navview header
+        ImageView userImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageview_drawer_userimage);
+        String userImageUri = mSharedPreferencesManager.getUserPhoto();
+        Uri photoUri = Uri.parse(userImageUri);
+
+        Picasso.get()
+                .load(photoUri)
+                .transform(new CropCircleTransformation())
+                .fit()
+                .into(userImage);
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.imageview_drawer_useremail))
+                .setText(mSharedPreferencesManager.getUserEmail());
 
         // logout button
 //        ((LinearLayout) findViewById(R.id.linearlayout_drawer_logoutbutton))
@@ -212,8 +228,17 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
     @Override
     public void onBackPressed() {
-        backButtonHandler();
-        return;
+        ConstraintLayout calendarPage = findViewById(R.id.calendar_page);
+        ConstraintLayout profilePage = findViewById(R.id.profile_page);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else if (profilePage != null && profilePage.getVisibility() == View.VISIBLE) {
+            mPresenter.transToMain();
+        } else if (calendarPage != null && calendarPage.getVisibility() == View.VISIBLE) {
+            mPresenter.transToMain();
+        } else {
+            backButtonHandler();
+        }
     }
 
     public void backButtonHandler() {
@@ -238,4 +263,13 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(FitnesschActivity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+    private void signOut() {
+        mSharedPreferencesManager.clearSharedPreferences();
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(FitnesschActivity.this, FitnesschLoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

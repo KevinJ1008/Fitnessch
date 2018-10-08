@@ -4,6 +4,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.annotation.StringDef;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.kevinj1008.fitnessch.addnew.AddNewFragment;
 import com.kevinj1008.fitnessch.addnew.AddNewPresenter;
 import com.kevinj1008.fitnessch.addnewarticle.AddNewArticleFragment;
@@ -16,6 +19,7 @@ import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.profile.ProfileFragment;
 import com.kevinj1008.fitnessch.profile.ProfilePresenter;
+import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -227,6 +231,5 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         }
         transaction.commit();
     }
-
 
 }

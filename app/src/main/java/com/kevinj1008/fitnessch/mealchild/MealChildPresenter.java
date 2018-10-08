@@ -11,9 +11,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.util.Constants;
+import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 
 import javax.annotation.Nullable;
 
@@ -24,12 +26,14 @@ public class MealChildPresenter implements MealChildContract.Presenter {
     private MealChildContract.View mMealChildView;
     private int mLastVisibleItemPosition;
     private int mFirstVisibleItemPosition;
+    private SharedPreferencesManager mSharedPreferencesManager;
     //    private int mPaging = Constants.FIRST_PAGING;
     private boolean mLoading = false;
 
     public MealChildPresenter(MealChildContract.View mealChildView) {
         mMealChildView = checkNotNull(mealChildView, "mealChildView cannot be null!");
         mMealChildView.setPresenter(this);
+        mSharedPreferencesManager = new SharedPreferencesManager(Fitnessch.getAppContext());
     }
 
     @Override
@@ -47,14 +51,14 @@ public class MealChildPresenter implements MealChildContract.Presenter {
         if (!isLoading()) {
 
             //TODO: Make author to user ID
-            String author = "Wun-Bin Jhou";
+            String author = mSharedPreferencesManager.getUserDbUid();
             //
 
             setLoading(true);
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("articles")
                     .orderBy("create_time", Query.Direction.DESCENDING)
-                    .whereEqualTo("author", author)
+                    .whereEqualTo("user_id", author)
                     .whereEqualTo("article_tag", "菜單")
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override

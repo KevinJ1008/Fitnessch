@@ -1,6 +1,7 @@
 package com.kevinj1008.fitnessch.profile;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,12 +11,19 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.mealchild.MealChildFragment;
 import com.kevinj1008.fitnessch.mealchild.MealChildPresenter;
 import com.kevinj1008.fitnessch.schedulechild.ScheduleChildFragment;
 import com.kevinj1008.fitnessch.schedulechild.ScheduleChildPresenter;
 import com.kevinj1008.fitnessch.adapters.ProfileViewPagerAdapter;
+import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
+import com.squareup.picasso.Picasso;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -24,6 +32,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private ProfileViewPagerAdapter mViewPagerAdapter;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private SharedPreferencesManager mSharedPreferencesManager;
 
     private ScheduleChildFragment mScheduleChildFragment;
     private ScheduleChildPresenter mScheduleChildPresenter;
@@ -44,6 +53,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSharedPreferencesManager = new SharedPreferencesManager(getContext());
 
         if (mScheduleChildFragment == null) mScheduleChildFragment = ScheduleChildFragment.newInstance();
         if (mScheduleChildPresenter == null) {
@@ -76,6 +87,18 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        ImageView userImage = root.findViewById(R.id.profile_image);
+        String photoUri = mSharedPreferencesManager.getUserPhoto();
+        Uri userPhoto = Uri.parse(photoUri);
+        Picasso.get()
+                .load(userPhoto)
+                .transform(new CropCircleTransformation())
+                .fit()
+                .into(userImage);
+
+        TextView userName = root.findViewById(R.id.profile_name);
+        userName.setText(mSharedPreferencesManager.getUserName());
 
         mViewPager = root.findViewById(R.id.profile_view_pager);
         setupViewPager(mViewPager);

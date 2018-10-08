@@ -11,8 +11,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.util.Constants;
+import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 
 import javax.annotation.Nullable;
 
@@ -23,12 +25,14 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter{
     private ScheduleChildContract.View mScheduleChildView;
     private int mLastVisibleItemPosition;
     private int mFirstVisibleItemPosition;
+    private SharedPreferencesManager mSharedPreferencesManager;
 //    private int mPaging = Constants.FIRST_PAGING;
     private boolean mLoading = false;
 
     public ScheduleChildPresenter(ScheduleChildContract.View scheduleChildView) {
         mScheduleChildView = checkNotNull(scheduleChildView, "scheduleChildView cannot be null!");
         mScheduleChildView.setPresenter(this);
+        mSharedPreferencesManager = new SharedPreferencesManager(Fitnessch.getAppContext());
     }
 
     @Override
@@ -46,14 +50,14 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter{
         if (!isLoading()) {
 
             //TODO: Make author to user ID
-            String author = "Wun-Bin Jhou";
+            String author = mSharedPreferencesManager.getUserDbUid();
             //
 
             setLoading(true);
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("articles")
                     .orderBy("create_time", Query.Direction.DESCENDING)
-                    .whereEqualTo("author", author)
+                    .whereEqualTo("user_id", author)
                     .whereEqualTo("article_tag", "課表")
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
