@@ -194,6 +194,10 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         mPresenter.transToAddNewArticle(schedules);
     }
 
+    public void transToMain() {
+        mPresenter.transToMain();
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -226,32 +230,54 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     public void onBackPressed() {
         ConstraintLayout calendarPage = findViewById(R.id.calendar_page);
         ConstraintLayout profilePage = findViewById(R.id.profile_page);
+        ConstraintLayout addNewArticlePage = findViewById(R.id.fragment_addnewarticle);
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else if (profilePage != null && profilePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToMain();
         } else if (calendarPage != null && calendarPage.getVisibility() == View.VISIBLE) {
             mPresenter.transToMain();
+        } else if (addNewArticlePage != null && addNewArticlePage.getVisibility() == View.VISIBLE) {
+            mPresenter.transToAddNew();
         } else {
             backButtonHandler();
         }
     }
 
     public void backButtonHandler() {
+        ConstraintLayout addNewPage = findViewById(R.id.addnew_page);
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(FitnesschActivity.this);
-        alertDialog.setTitle("確定離開 Fitnessch？");
-        alertDialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
-            }
-        });
-        alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
+        if (addNewPage != null && addNewPage.getVisibility() == View.VISIBLE) {
+            alertDialog.setTitle("確定要離開此頁面？");
+            alertDialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //TODO: clear data
+                    mPresenter.transToMain();
+                }
+            });
+            alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+        } else {
+            alertDialog.setTitle("確定離開 Fitnessch？");
+            alertDialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+            alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+        }
         alertDialog.show();
     }
 

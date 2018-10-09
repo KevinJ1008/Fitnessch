@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddNewScheduleChildFragment extends Fragment {
+public class AddNewScheduleChildFragment extends Fragment implements AddNewScheduleChildContract.View {
 
     private Chronometer mStartChronometer;
     private Chronometer mRestChronometer;
@@ -59,11 +59,21 @@ public class AddNewScheduleChildFragment extends Fragment {
 
     private AddNewScheduleChildAdapter mAddNewScheduleChildAdapter;
 
+    public static AddNewScheduleChildFragment newInstance() {
+        return new AddNewScheduleChildFragment();
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mSchedules = new ArrayList<>();
         mAddNewScheduleChildAdapter = new AddNewScheduleChildAdapter(mSchedules);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mAddNewScheduleChildAdapter.clearData();
     }
 
     @Nullable
@@ -181,9 +191,6 @@ public class AddNewScheduleChildFragment extends Fragment {
                 mScheduleReps.clearFocus();
             } else if (view.getId() == R.id.addnew_schedule_complete_btn) {
                 if (mAddNewScheduleChildAdapter.getScheduleList().size() > 0) {
-
-                    //TODO: Available clean data
-
                     ((FitnesschActivity) getActivity()).transToAddNewArticle(mAddNewScheduleChildAdapter.getScheduleList());
                 } else {
                     Toast.makeText(getContext(), "請輸入課表。", Toast.LENGTH_SHORT).show();
@@ -231,6 +238,21 @@ public class AddNewScheduleChildFragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void showScheduleItem(int position) {
+
+    }
+
+    @Override
+    public void refreshUi() {
+        mAddNewScheduleChildAdapter.clearData();
+    }
+
+    @Override
+    public void setPresenter(AddNewScheduleChildContract.Presenter presenter) {
+
+    }
 
 //    private TextWatcher textWatcher = new TextWatcher() {
 //        @Override

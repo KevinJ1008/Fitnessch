@@ -133,7 +133,7 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
 //        int size = mSchedules.size();
         mSchedules.clear();
 //        notifyItemRangeRemoved(0, size);
-        notifyDataSetChanged();
+        notifyItemRangeRemoved(0, mSchedules.size());
     }
 
 }

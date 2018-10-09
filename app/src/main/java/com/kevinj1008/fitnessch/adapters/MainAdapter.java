@@ -100,7 +100,7 @@ public class MainAdapter extends RecyclerView.Adapter {
 //        if (mArticles.size() == 1) {
 //            mArticles.add(0, bean);
 //        } else {
-            mArticles.add(bean);
+            mArticles.add(0, bean);
 //        }
 
 //        }

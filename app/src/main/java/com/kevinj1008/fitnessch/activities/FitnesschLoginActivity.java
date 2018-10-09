@@ -3,15 +3,18 @@ package com.kevinj1008.fitnessch.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -71,6 +74,19 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //TODO: make background image could show in android 6.0
+
+        ImageView loginBackground = findViewById(R.id.login_background);
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        Picasso.get()
+                .load(R.drawable.login_background)
+                .centerCrop()
+                .resize(width, height)
+                .into(loginBackground);
+
 //        ImageView loginBackground = findViewById(R.id.login_background);
 //        Picasso.get()
 //                .load(R.drawable.login_background)

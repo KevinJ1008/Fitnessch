@@ -4,7 +4,16 @@ import com.kevinj1008.fitnessch.objects.Schedule;
 
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class AddNewScheduleChildPresenter implements AddNewScheduleChildContract.Presenter {
+
+    private AddNewScheduleChildContract.View mAddNewScheduleChildView;
+
+    public AddNewScheduleChildPresenter(AddNewScheduleChildContract.View addNewScheduleChildView) {
+        mAddNewScheduleChildView = checkNotNull(addNewScheduleChildView, "addNewScheduleChildView cannot be null!");
+        mAddNewScheduleChildView.setPresenter(this);
+    }
 
 
     @Override

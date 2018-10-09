@@ -11,6 +11,8 @@ public class Article {
     private int mCreatedTime;
     private String mTag;
     private String mName;
+    private String mAuthorId;
+    private String mAuthorImage;
 //    private int mInterests;
 //    private boolean mInterestedIn;
 
@@ -22,6 +24,8 @@ public class Article {
         mContent = content;
         mCreatedTime = createdTime;
         mTag = tag;
+        mAuthorId = "";
+        mAuthorImage = "";
     }
 
     public String getId() {
@@ -78,5 +82,21 @@ public class Article {
 
     public void setName(String name) {
         mName = name;
+    }
+
+    public String getAuthorId() {
+        return mAuthorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        mAuthorId = authorId;
+    }
+
+    public String getAuthorImage() {
+        return mAuthorImage;
+    }
+
+    public void setAuthorImage(String authorImage) {
+        mAuthorImage = authorImage;
     }
 }

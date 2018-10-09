@@ -12,6 +12,8 @@ public interface AddNewContract {
 
         void showAddNewMealChildUi();
 
+        void refreshSchedule();
+
     }
 
     interface Presenter extends BasePresenter {

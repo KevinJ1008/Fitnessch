@@ -11,6 +11,7 @@ import com.kevinj1008.fitnessch.addnew.AddNewFragment;
 import com.kevinj1008.fitnessch.addnew.AddNewPresenter;
 import com.kevinj1008.fitnessch.addnewarticle.AddNewArticleFragment;
 import com.kevinj1008.fitnessch.addnewarticle.AddNewArticlePresenter;
+import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildFragment;
 import com.kevinj1008.fitnessch.calendar.CalendarFragment;
 import com.kevinj1008.fitnessch.calendar.CalendarPresenter;
 import com.kevinj1008.fitnessch.main.MainFragment;
@@ -49,6 +50,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     private CalendarFragment mCalendarFragment;
     private AddNewFragment mAddNewFragment;
     private AddNewArticleFragment mAddNewArticleFragment;
+    private AddNewScheduleChildFragment mAddNewScheduleChildFragment;
 
     private MainPresenter mMainPresenter;
     private ProfilePresenter mProfilePresenter;
@@ -88,6 +90,10 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (!mMainFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mMainFragment, MAIN);
         } else {
+            if (mAddNewFragment != null) {
+                mAddNewFragment.refreshSchedule();
+                transaction.show(mMainFragment);
+            }
             transaction.show(mMainFragment);
         }
 
@@ -227,7 +233,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
 
         if (mAddNewArticlePresenter == null) {
-            mAddNewArticlePresenter = new AddNewArticlePresenter(mAddNewArticleFragment, schedules);
+            mAddNewArticlePresenter = new AddNewArticlePresenter(mAddNewArticleFragment, mAddNewFragment, schedules);
         }
         transaction.commit();
     }

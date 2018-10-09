@@ -140,6 +140,7 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
                     mPresenter.sendSchedule(title, content);
                     mTitleEditText.getText().clear();
                     mContentEditText.getText().clear();
+                    ((FitnesschActivity)getActivity()).transToMain();
                 } else {
                     Toast.makeText(getContext(), "請輸入標題和內容。", Toast.LENGTH_SHORT).show();
                     mTitleEditText.clearFocus();

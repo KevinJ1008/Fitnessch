@@ -56,7 +56,7 @@ public class MainPresenter implements MainContract.Presenter {
             setLoading(true);
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("articles")
-                    .orderBy("create_time", Query.Direction.DESCENDING)
+                    .orderBy("create_time", Query.Direction.ASCENDING)
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
@@ -64,19 +64,30 @@ public class MainPresenter implements MainContract.Presenter {
                         Log.d(Constants.TAG, "Articles listen failed.", e);
                         return;
                     }
-                    for (DocumentChange documentChange  : snapshot.getDocumentChanges()) {
-                        Log.d(Constants.TAG, "Get Articles " + documentChange.toString());
-                        String id = documentChange.getDocument().getId();
-                        String author = documentChange.getDocument().getData().get("author").toString();
+                    String source = snapshot != null && snapshot.getMetadata().hasPendingWrites() ? "Local" : "Server";
+                    if (source.equals("Server")) {
+                        for (DocumentChange documentChange  : snapshot.getDocumentChanges()) {
+                            Log.d(Constants.TAG, "Get Articles " + documentChange.toString());
+                            String id = documentChange.getDocument().getId();
+                            String author = documentChange.getDocument().getData().get("author").toString();
+                            String authorId = documentChange.getDocument().getData().get("user_id").toString();
 
-                        //TODO: Add author ID
+                            //TODO: Add author photo
+                            String authorPhoto = documentChange.getDocument().getData().get("author_photo").toString();
 
-                        String title = documentChange.getDocument().getData().get("title").toString();
-                        String content = documentChange.getDocument().getData().get("content").toString();
-                        String time = String.valueOf(documentChange.getDocument().getTimestamp("create_time").getSeconds());
-                        int createTime = Integer.parseInt(time);
-                        String tag = documentChange.getDocument().getData().get("article_tag").toString();
-                        Article articles = new Article(id, author, title, content, createTime, tag);
+                            String title = documentChange.getDocument().getData().get("title").toString();
+                            String content = documentChange.getDocument().getData().get("content").toString();
+
+                            String time = String.valueOf(documentChange.getDocument().getTimestamp("create_time").getSeconds());
+
+                            int createTime = Integer.parseInt(time);
+                            String tag = documentChange.getDocument().getData().get("article_tag").toString();
+
+                            Article articles = new Article(id, author, title, content, createTime, tag);
+
+                            //TODO: Add author ID and photo to object
+                            articles.setAuthorId(authorId);
+                            articles.setAuthorImage(authorPhoto);
 
 //                        documentChange.getDocument().getReference().collection("schedule").addSnapshotListener(new EventListener<QuerySnapshot>() {
 //                            @Override
@@ -94,9 +105,10 @@ public class MainPresenter implements MainContract.Presenter {
 //                            }
 //                        });
 
-                        mMainView.showArticles(articles);
+                            mMainView.showArticles(articles);
+                        }
+                        //TODO: GET Schedule
                     }
-                    //TODO: GET Schedule
                 }
             });
         }

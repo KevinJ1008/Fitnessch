@@ -13,6 +13,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.kevinj1008.fitnessch.Fitnessch;
+import com.kevinj1008.fitnessch.addnew.AddNewContract;
+import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildContract;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.util.Constants;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
@@ -28,13 +30,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
 
     private AddNewArticleContract.View mAddNewArticleView;
+    private AddNewScheduleChildContract.View mAddNewScheduleChildView;
+    private AddNewContract.View mAddNewView;
     private List<Schedule> mSchedules;
     private SharedPreferencesManager mSharedPreferencesManager;
     private int mlastVisibleItemPosition;
     private int mfirstVisibleItemPosition;
 
-    public AddNewArticlePresenter(AddNewArticleContract.View addNewArticleView, List<Schedule> schedules) {
+    public AddNewArticlePresenter(AddNewArticleContract.View addNewArticleView, AddNewContract.View addNewView, List<Schedule> schedules) {
         mAddNewArticleView = checkNotNull(addNewArticleView, "addNewArticleView cannot be null!");
+        mAddNewView = checkNotNull(addNewView, "addNewView cannot be null!");
         mAddNewArticleView.setPresenter(this);
         mSchedules = schedules;
         mSharedPreferencesManager = new SharedPreferencesManager(Fitnessch.getAppContext());
@@ -55,6 +60,8 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
     public void sendSchedule(String title, String content) {
         //TODO: Change author name hard code to user
         String author = mSharedPreferencesManager.getUserName();
+        String authorId = mSharedPreferencesManager.getUserDbUid();
+        String authorPhoto = mSharedPreferencesManager.getUserPhoto();
         //
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -63,6 +70,10 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
         article.put("author", author);
 
         //TODO: Add author ID
+        article.put("user_id", authorId);
+        //TODO:Add author photo
+        article.put("author_photo", authorPhoto);
+
 
         article.put("title", title);
         article.put("content", content);
@@ -70,7 +81,7 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
 
         //TODO: Change "article" to "articles"
 
-        db.collection("article").add(article).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("articles").add(article).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(Constants.TAG, "Successfully written! " + documentReference.toString());
@@ -81,11 +92,13 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
                     schedule.put("schedule_weight", mSchedules.get(i).getScheduleWeight());
                     schedule.put("schedule_reps", mSchedules.get(i).getScheduleReps());
 
-                    documentReference.collection("schedule").add(schedule);
+                    String documentKey = String.valueOf(i);
+
+                    documentReference.collection("schedule").document(documentKey).set(schedule);
                 }
 
                 //TODO: Available clean data
-//                mAddNewArticleView.refreshUi();
+                refresh();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -126,6 +139,7 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
 
     @Override
     public void refresh() {
+        mAddNewView.refreshSchedule();
         mAddNewArticleView.refreshUi();
     }
 

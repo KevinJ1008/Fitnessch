@@ -70,12 +70,23 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter{
                                 Log.d(Constants.TAG, "Get Articles " + documentChange.toString());
                                 String id = documentChange.getDocument().getId();
                                 String author = documentChange.getDocument().getData().get("author").toString();
+                                String authorId = documentChange.getDocument().getData().get("user_id").toString();
+
+                                //TODO: Add author photo
+                                String authorPhoto = documentChange.getDocument().getData().get("author_photo").toString();
+
                                 String title = documentChange.getDocument().getData().get("title").toString();
                                 String content = documentChange.getDocument().getData().get("content").toString();
                                 String time = String.valueOf(documentChange.getDocument().getTimestamp("create_time").getSeconds());
                                 int createTime = Integer.parseInt(time);
                                 String tag = documentChange.getDocument().getData().get("article_tag").toString();
+
                                 Article articles = new Article(id, author, title, content, createTime, tag);
+
+                                //TODO: Add author ID and photo to object
+                                articles.setAuthorId(authorId);
+                                articles.setAuthorImage(authorPhoto);
+
                                 mScheduleChildView.showArticles(articles);
                             }
 

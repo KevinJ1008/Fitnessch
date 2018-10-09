@@ -43,10 +43,10 @@ public class AddNewFragment extends Fragment implements AddNewContract.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if (mAddNewScheduleChildFragment == null) mAddNewScheduleChildFragment = AddNewScheduleChildFragment.newInstance();
-//        if (mAddNewScheduleChildPresenter == null) {
-//            mAddNewScheduleChildPresenter = new AddNewScheduleChildPresenter(mAddNewScheduleChildFragment);
-//        }
+        if (mAddNewScheduleChildFragment == null) mAddNewScheduleChildFragment = AddNewScheduleChildFragment.newInstance();
+        if (mAddNewScheduleChildPresenter == null) {
+            mAddNewScheduleChildPresenter = new AddNewScheduleChildPresenter(mAddNewScheduleChildFragment);
+        }
 
 //        if (mAddNewMealChildFragment == null) mAddNewMealChildFragment = AddNewMealChildFragment.newInstance();
 //        if (mAddNewMealChildPresenter == null) {
@@ -86,7 +86,7 @@ public class AddNewFragment extends Fragment implements AddNewContract.View {
 
     private void setupViewPager(ViewPager viewPager) {
         mViewPagerAdapter = new AddNewViewPagerAdapter(getFragmentManager());
-        mViewPagerAdapter.addFragment(new AddNewScheduleChildFragment(), getString(R.string.all_schedule_title));
+        mViewPagerAdapter.addFragment(mAddNewScheduleChildFragment, getString(R.string.all_schedule_title));
         mViewPagerAdapter.addFragment(new AddNewMealChildFragment(), getString(R.string.all_meal_title));
         viewPager.setAdapter(mViewPagerAdapter);
     }
@@ -99,6 +99,11 @@ public class AddNewFragment extends Fragment implements AddNewContract.View {
     @Override
     public void showAddNewMealChildUi() {
 
+    }
+
+    @Override
+    public void refreshSchedule() {
+        mAddNewScheduleChildFragment.refreshUi();
     }
 
 
