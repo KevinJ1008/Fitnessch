@@ -69,7 +69,7 @@ public class MealChildAdapter extends RecyclerView.Adapter {
     }
 
     public void updateData(Article bean) {
-        mArticles.add(bean);
+        mArticles.add(0, bean);
         notifyDataSetChanged();
     }
 

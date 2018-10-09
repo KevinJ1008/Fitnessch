@@ -45,12 +45,11 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-//        Picasso.get()
-//                .load(mArticles.get(position).getAuthor().getImage())
-//                .placeholder(R.drawable.all_placeholder_avatar)
-//                .transform(new CropCircleTransformation())
-//                .fit()
-//                .into(((MainItemViewHolder) holder).mAuthorImage);
+        Picasso.get()
+                .load(mArticles.get(position).getAuthorImage())
+                .placeholder(R.drawable.all_placeholder_avatar)
+                .transform(new CropCircleTransformation())
+                .into(((MainItemViewHolder) holder).mAuthorImage);
 
         //
         ((MainItemViewHolder) holder).mAuthorName.setText(mArticles.get(position).getName());

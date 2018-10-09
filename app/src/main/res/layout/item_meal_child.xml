@@ -32,7 +32,7 @@
             android:ellipsize="end"
             android:textSize="25sp"
             android:textColor="@color/meal_child_text_color"
-            android:text="吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃"/>
+            tool:text="吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃"/>
 
         <TextView
             android:id="@+id/meal_child_create_time"
@@ -43,11 +43,11 @@
             android:layout_marginEnd="15dp"
             android:textSize="14sp"
             android:textColor="@color/meal_child_text_color"
-            android:text="13:23"/>
+            tool:text="13:23"/>
 
         <TextView
             android:id="@+id/meal_child_content"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="@+id/meal_child_title"
             app:layout_constraintTop_toBottomOf="@+id/meal_child_title"
@@ -60,7 +60,7 @@
             android:lineSpacingExtra="6sp"
             android:textSize="14sp"
             android:textColor="@color/meal_child_text_color"
-            android:text="要變壯就是要吃！！！！除此之外別無他法，但對東西，以下介紹我最近在嘗試的菜單，三分練七分吃，祝大家早日成為巨巨~~~~~~~~~~~~~~~~~~~~~~~~~"/>
+            tool:text="要變壯就是要吃！！！！除此之外別無他法，但對東西，以下介紹我最近在嘗試的菜單，三分練七分吃，祝大家早日成為巨巨~~~~~~~~~~~~~~~~~~~~~~~~~"/>
 
 
     </android.support.constraint.ConstraintLayout>

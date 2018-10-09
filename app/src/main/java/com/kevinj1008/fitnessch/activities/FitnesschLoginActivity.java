@@ -87,13 +87,6 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                 .resize(width, height)
                 .into(loginBackground);
 
-//        ImageView loginBackground = findViewById(R.id.login_background);
-//        Picasso.get()
-//                .load(R.drawable.login_background)
-//                .centerCrop()
-//                .fit()
-//                .into(loginBackground);
-
         mGoogleLogInBtn = findViewById(R.id.google_login_btn);
         mGoogleLogInBtn.setOnClickListener(clickListener);
 

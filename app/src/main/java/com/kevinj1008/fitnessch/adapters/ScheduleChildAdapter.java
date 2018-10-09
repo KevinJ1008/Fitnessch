@@ -72,7 +72,7 @@ public class ScheduleChildAdapter extends RecyclerView.Adapter {
 
 //        for (Article article : bean.getArticles()) {
 
-            mArticles.add(bean);
+            mArticles.add(0, bean);
 //        }
         notifyDataSetChanged();
     }
