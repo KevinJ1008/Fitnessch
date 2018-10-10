@@ -90,10 +90,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (!mMainFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mMainFragment, MAIN);
         } else {
-            if (mAddNewFragment != null) {
-                mAddNewFragment.refreshSchedule();
-                transaction.show(mMainFragment);
-            }
+
             transaction.show(mMainFragment);
         }
 
@@ -236,6 +233,11 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mAddNewArticlePresenter = new AddNewArticlePresenter(mAddNewArticleFragment, mAddNewFragment, schedules);
         }
         transaction.commit();
+    }
+
+    @Override
+    public void refreshAddNewUi() {
+        mAddNewFragment.refreshSchedule();
     }
 
 }

@@ -255,6 +255,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
                 public void onClick(DialogInterface dialogInterface, int i) {
                     //TODO: clear data
                     mPresenter.transToMain();
+                    mPresenter.refreshAddNewUi();
                 }
             });
             alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {

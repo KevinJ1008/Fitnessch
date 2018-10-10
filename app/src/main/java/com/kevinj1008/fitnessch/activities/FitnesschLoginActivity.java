@@ -90,6 +90,10 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         mGoogleLogInBtn = findViewById(R.id.google_login_btn);
         mGoogleLogInBtn.setOnClickListener(clickListener);
 
+        configureGoogleSignIn();
+
+        mFirebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
+
         if (isUserTokenExist()) {
             if (isNetworkAvailable()) {
                 new Handler().postDelayed(new Runnable() {
@@ -106,10 +110,6 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         } else {
             mGoogleLogInBtn.setVisibility(View.VISIBLE);
         }
-
-        configureGoogleSignIn();
-
-        mFirebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -174,6 +174,9 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                     user.put("id_token", mGoogleIdToken);
                     user.put("joined_time", FieldValue.serverTimestamp());
                     user.put("db_uid", uid);
+                    user.put("height", "0 CM");
+                    user.put("weight", "0 KG");
+                    user.put("info", "...");
 
                     db.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

@@ -2,6 +2,7 @@ package com.kevinj1008.fitnessch.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,6 +122,7 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
                 mSchedules.add(mStringListMap.get(key).get(i));
             }
         }
+        Log.d(Constants.TAG, "Check Schedule size " + mSchedules.size());
         notifyDataSetChanged();
     }
 
@@ -132,8 +134,9 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
     public void clearData() {
 //        int size = mSchedules.size();
         mSchedules.clear();
+        mStringListMap.clear();
 //        notifyItemRangeRemoved(0, size);
-        notifyItemRangeRemoved(0, mSchedules.size());
+        notifyDataSetChanged();
     }
 
 }

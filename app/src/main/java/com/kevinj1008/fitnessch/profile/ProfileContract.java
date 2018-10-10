@@ -2,6 +2,7 @@ package com.kevinj1008.fitnessch.profile;
 
 import com.kevinj1008.fitnessch.BasePresenter;
 import com.kevinj1008.fitnessch.BaseView;
+import com.kevinj1008.fitnessch.objects.User;
 import com.kevinj1008.fitnessch.schedulechild.ScheduleChildFragment;
 import com.kevinj1008.fitnessch.schedulechild.ScheduleChildPresenter;
 
@@ -12,6 +13,8 @@ public interface ProfileContract {
         void showScheduleChildUi();
 
         void showMealChildUi();
+
+        void showProfileInfo(User user);
 
     }
 
@@ -24,6 +27,10 @@ public interface ProfileContract {
         void transToMealChild();
 
         void refreshLikedArticles();
+
+        void sendProfileInfo(User user);
+
+        void loadProfileInfo();
 
         void setupPresenter(ScheduleChildFragment fragment, ScheduleChildPresenter presenter);
     }

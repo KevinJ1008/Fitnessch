@@ -27,7 +27,7 @@
         android:layout_marginStart="10dp"
         android:textColor="@color/profile_text_color"
         android:textSize="25sp"
-        android:text="WunBin Jhou"/>
+        tool:text="WunBin Jhou"/>
 
     <TextView
         android:id="@+id/profile_height"
@@ -37,7 +37,24 @@
         app:layout_constraintLeft_toLeftOf="@+id/profile_name"
         android:layout_marginTop="5dp"
         android:textColor="@color/profile_text_color"
-        android:text="181 CM"/>
+        tool:text="181 CM"/>
+
+    <EditText
+        android:id="@+id/profile_height_edittext"
+        android:layout_width="55dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="@id/profile_height"
+        app:layout_constraintTop_toTopOf="@id/profile_height"
+        app:layout_constraintBottom_toBottomOf="@id/profile_height"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:visibility="invisible"
+        android:inputType="number"
+        android:hint="身高"
+        android:textSize="14sp"
+        android:textColor="@color/addnew_text_color"
+        android:textColorHint="@color/new_schedule_article_title_edit_color"
+        android:background="@color/white_70_transparent"/>
 
     <TextView
         android:id="@+id/profile_weight"
@@ -47,7 +64,25 @@
         app:layout_constraintLeft_toRightOf="@+id/profile_height"
         android:layout_marginStart="15dp"
         android:textColor="@color/profile_text_color"
-        android:text="75 KG"/>
+        tool:text="75 KG"/>
+
+    <EditText
+        android:id="@+id/profile_weight_edittext"
+        android:layout_width="55dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/profile_height_edittext"
+        app:layout_constraintTop_toTopOf="@id/profile_weight"
+        app:layout_constraintBottom_toBottomOf="@id/profile_weight"
+        android:layout_marginStart="15dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:visibility="invisible"
+        android:inputType="number"
+        android:hint="體重"
+        android:textSize="14sp"
+        android:textColor="@color/addnew_text_color"
+        android:textColorHint="@color/new_schedule_article_title_edit_color"
+        android:background="@color/white_70_transparent"/>
 
     <TextView
         android:id="@+id/profile_info"
@@ -57,9 +92,50 @@
         android:lineSpacingExtra="4sp"
         app:layout_constraintTop_toBottomOf="@+id/profile_height"
         app:layout_constraintLeft_toLeftOf="@+id/profile_name"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/profile_text_color"
-        android:text="嗨嗨大家好，健齡 6 年，健身已成為習慣和興趣，希望有朝一日能變成超級巨！！！加油！"/>
+        tool:text="嗨嗨大家好，健齡 6 年，健身已成為習慣和興趣，希望有朝一日能變成超級巨！！！加油！"/>
+
+    <EditText
+        android:id="@+id/profile_info_edittext"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:maxWidth="260dp"
+        android:lineSpacingExtra="4sp"
+        app:layout_constraintTop_toTopOf="@id/profile_info"
+        app:layout_constraintLeft_toLeftOf="@id/profile_info"
+        app:layout_constraintBottom_toBottomOf="@id/profile_info"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:visibility="invisible"
+        android:hint="個人簡介"
+        android:textSize="14sp"
+        android:textColor="@color/addnew_text_color"
+        android:textColorHint="@color/new_schedule_article_title_edit_color"
+        android:background="@color/white_70_transparent"/>
+
+    <ImageView
+        android:id="@+id/profile_edit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/profile_name"
+        app:layout_constraintBottom_toBottomOf="@id/profile_name"
+        app:layout_constraintTop_toTopOf="@id/profile_name"
+        android:layout_marginStart="5dp"
+        app:srcCompat="@drawable/profile_edit_btn"/>
+
+    <ImageView
+        android:id="@+id/profile_confirm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/profile_name"
+        app:layout_constraintBottom_toBottomOf="@id/profile_name"
+        app:layout_constraintTop_toTopOf="@id/profile_name"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/profile_confirm_btn"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/profile_tab_container"
