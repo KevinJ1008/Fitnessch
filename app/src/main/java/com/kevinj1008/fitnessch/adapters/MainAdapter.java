@@ -1,6 +1,7 @@
 package com.kevinj1008.fitnessch.adapters;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,8 +91,18 @@ public class MainAdapter extends RecyclerView.Adapter {
             mArticleContent = itemView.findViewById(R.id.main_content);
 //            mArticleTag = itemView.findViewById(R.id.article_tag);
             mArticleTagIcon = itemView.findViewById(R.id.article_tag_icon);
+
+            ((ConstraintLayout) itemView.findViewById(R.id.main_article_container)).setOnClickListener(clickListener);
         }
+
+        private View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.openDetail(mArticles.get(getAdapterPosition()));
+            }
+        };
     }
+
 
     public void updateData(Article bean) {
 //        Log.d(Constants.TAG, "MainAdapter update data");

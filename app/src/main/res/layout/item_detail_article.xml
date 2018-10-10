@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/detail_article_author_image"
+        android:layout_width="@dimen/detail_author_image_size"
+        android:layout_height="@dimen/detail_author_image_size"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/all_placeholder_avatar"/>
+
+    <TextView
+        android:id="@+id/detail_article_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/detail_article_author_image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="22sp"
+        android:text="周一練胸日"/>
+
+    <TextView
+        android:id="@+id/detail_article_create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_article_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:text="2018 年 10 月 10 日 19 : 00"/>
+
+    <TextView
+        android:id="@+id/detail_article_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_article_create_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:maxWidth="320dp"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="4sp"
+        android:textSize="16sp"
+        android:text="最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!"/>
+
+    <View
+        android:id="@+id/detail_article_separator"
+        android:layout_width="320dp"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/detail_article_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="15dp"
+        android:background="@color/white_70_transparent"/>
+
+</android.support.constraint.ConstraintLayout>

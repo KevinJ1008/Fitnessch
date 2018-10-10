@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -114,9 +115,11 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         mProfileHeight = root.findViewById(R.id.profile_height);
         mProfileWeight = root.findViewById(R.id.profile_weight);
         mProfileInfo = root.findViewById(R.id.profile_info);
+        ConstraintLayout profileLayout = root.findViewById(R.id.profile_page);
 
         mProfileEditBtn.setOnClickListener(clickListener);
         mProfileConfirmBtn.setOnClickListener(clickListener);
+        profileLayout.setOnClickListener(clickListener);
 
         mProfileEditInfo.setOnFocusChangeListener(focusChangeListener);
         mProfileEditWeight.setOnFocusChangeListener(focusChangeListener);
@@ -193,7 +196,14 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
             } else if (view.getId() == R.id.profile_confirm_btn) {
                 String height = mProfileEditHeight.getText().toString();
+                if (height.contains("[cm|CM]")) {
+                    height = height.replace("[cm|CM]", "");
+                }
+
                 String weight = mProfileEditWeight.getText().toString();
+                if (weight.contains("[kg|KG]")) {
+                    weight = weight.replace("[kg|KG]", "");
+                }
                 String info = mProfileEditInfo.getText().toString();
 
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -227,18 +237,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
             } else if (view.getId() == R.id.profile_page) {
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-            mProfileEditHeight.clearFocus();
-            mProfileEditWeight.clearFocus();
-            mProfileEditInfo.clearFocus();
-        }
-    };
-
-    private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View view, boolean hasFocus) {
-            if (!hasFocus) {
-                ((FitnesschActivity) getActivity()).hideKeyboard(view);
 
                 mProfileEditInfo.getText().clear();
                 mProfileEditWeight.getText().clear();
@@ -257,6 +255,19 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 mProfileEditHeight.clearFocus();
                 mProfileEditWeight.clearFocus();
                 mProfileEditInfo.clearFocus();
+            }
+            mProfileEditHeight.clearFocus();
+            mProfileEditWeight.clearFocus();
+            mProfileEditInfo.clearFocus();
+        }
+    };
+
+    private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View view, boolean hasFocus) {
+            if (!hasFocus) {
+                ((FitnesschActivity) getActivity()).hideKeyboard(view);
+
             }
         }
     };

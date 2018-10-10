@@ -76,16 +76,18 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         //TODO: make background image could show in android 6.0
 
         ImageView loginBackground = findViewById(R.id.login_background);
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        Picasso.get()
-                .load(R.drawable.login_background)
-                .centerCrop()
-                .resize(width, height)
-                .into(loginBackground);
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+            int height = size.y;
+            Picasso.get()
+                    .load(R.drawable.login_background)
+                    .centerCrop()
+                    .resize(width, height)
+                    .into(loginBackground);
+        }
 
         mGoogleLogInBtn = findViewById(R.id.google_login_btn);
         mGoogleLogInBtn.setOnClickListener(clickListener);
@@ -103,7 +105,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                         startActivity(intent);
                         finish();
                     }
-                }, 500);
+                }, 1000);
             } else {
                 Toast.makeText(FitnesschLoginActivity.this, "登入失敗，請檢查網路連線。", Toast.LENGTH_SHORT).show();
             }

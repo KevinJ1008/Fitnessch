@@ -14,6 +14,8 @@ import com.kevinj1008.fitnessch.addnewarticle.AddNewArticlePresenter;
 import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildFragment;
 import com.kevinj1008.fitnessch.calendar.CalendarFragment;
 import com.kevinj1008.fitnessch.calendar.CalendarPresenter;
+import com.kevinj1008.fitnessch.detail.DetailFragment;
+import com.kevinj1008.fitnessch.detail.DetailPresenter;
 import com.kevinj1008.fitnessch.main.MainFragment;
 import com.kevinj1008.fitnessch.main.MainPresenter;
 import com.kevinj1008.fitnessch.objects.Article;
@@ -57,6 +59,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     private CalendarPresenter mCalendarPresenter;
     private AddNewPresenter mAddNewPresenter;
     private AddNewArticlePresenter mAddNewArticlePresenter;
+    private DetailPresenter mDetailPresenter;
 
     public FitnesschPresenter(FitnesschContract.View fitnesschView, FragmentManager fragmentManager) {
         mFitnesschView = checkNotNull(fitnesschView, "fitnesschView cannot be null!");
@@ -177,7 +180,20 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
     @Override
     public void transToDetail(Article article) {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
 
+        if (mMainFragment != null && !mMainFragment.isHidden()) {
+            transaction.hide(mMainFragment);
+            transaction.addToBackStack(MAIN);
+        }
+        if (mProfileFragment != null && !mProfileFragment.isHidden()) {
+            transaction.hide(mProfileFragment);
+            transaction.addToBackStack(PROFILE);
+        }
+        DetailFragment detailFragment = DetailFragment.newInstance();
+        transaction.add(R.id.linearlayout_main_container, detailFragment, DETAIL);
+
+        mDetailPresenter = new DetailPresenter(detailFragment, article);
     }
 
     @Override

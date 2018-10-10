@@ -17,13 +17,13 @@ public class Article {
 //    private boolean mInterestedIn;
 
 
-    public Article(String id, String author, String title, String content, int createdTime, String tag) {
-        mId = id;
-        mName = author;
-        mTitle = title;
-        mContent = content;
-        mCreatedTime = createdTime;
-        mTag = tag;
+    public Article() {
+        mId = "";
+        mName = "";
+        mTitle = "";
+        mContent = "";
+        mCreatedTime = -1;
+        mTag = "";
         mAuthorId = "";
         mAuthorImage = "";
     }

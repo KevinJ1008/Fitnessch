@@ -73,4 +73,9 @@
     <dimen name="addnew_complete_btn_width">70dp</dimen>
     <dimen name="addnew_complete_btn_height">30dp</dimen>
 
+    <!--Detail Item-->
+    <dimen name="detail_author_image_size">110dp</dimen>
+
+
+
 </resources>

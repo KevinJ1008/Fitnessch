@@ -68,25 +68,74 @@ public class MainPresenter implements MainContract.Presenter {
                     if (source.equals("Server")) {
                         for (DocumentChange documentChange  : snapshot.getDocumentChanges()) {
                             Log.d(Constants.TAG, "Get Articles " + documentChange.toString());
-                            String id = documentChange.getDocument().getId();
-                            String author = documentChange.getDocument().getData().get("author").toString();
-                            String authorId = documentChange.getDocument().getData().get("user_id").toString();
+                            String id = "0123456789";
+                            try {
+                                id = documentChange.getDocument().getId();
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
+
+                            String author = "未知作者";
+                            try {
+                                author = documentChange.getDocument().getData().get("author").toString();
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
+
+                            String authorId = "9876543210";
+                            try {
+                                authorId = documentChange.getDocument().getData().get("user_id").toString();
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
 
                             //TODO: Add author photo
-                            String authorPhoto = documentChange.getDocument().getData().get("author_photo").toString();
+                            String authorPhoto = null;
+                            try {
+                                authorPhoto = documentChange.getDocument().getData().get("author_photo").toString();
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
 
-                            String title = documentChange.getDocument().getData().get("title").toString();
-                            String content = documentChange.getDocument().getData().get("content").toString();
+                            String title = "未知標題";
+                            try {
+                                title = documentChange.getDocument().getData().get("title").toString();
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
 
-                            String time = String.valueOf(documentChange.getDocument().getTimestamp("create_time").getSeconds());
+                            String content = "未知內容";
+                            try {
+                                content = documentChange.getDocument().getData().get("content").toString();
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
 
-                            int createTime = Integer.parseInt(time);
-                            String tag = documentChange.getDocument().getData().get("article_tag").toString();
+                            int createTime = 0;
+                            try {
+                                String time = String.valueOf(documentChange.getDocument().getTimestamp("create_time").getSeconds());
+                                createTime = Integer.parseInt(time);
+                            } catch (NumberFormatException e1) {
+                                e1.printStackTrace();
+                            }
 
-                            Article articles = new Article(id, author, title, content, createTime, tag);
+                            String tag = "未知標籤";
+                            try {
+                                tag = documentChange.getDocument().getData().get("article_tag").toString();
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
+
+                            Article articles = new Article();
 
                             //TODO: Add author ID and photo to object
-                            articles.setAuthorId(authorId);
+                            articles.setId(id);
+                                articles.setName(author);
+                                    articles.setTitle(title);
+                                        articles.setContent(content);
+                                        articles.setCreatedTime(createTime);
+                                    articles.setTag(tag);
+                                articles.setAuthorId(authorId);
                             articles.setAuthorImage(authorPhoto);
 
 //                        documentChange.getDocument().getReference().collection("schedule").addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -158,7 +207,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void openDetail(Article article) {
-
+        mMainView.showDetailUi(article);
     }
 
     @Override

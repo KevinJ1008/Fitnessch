@@ -12,4 +12,8 @@ public class Constants {
     public static final int VIEWTYPE_ADDNEW_SCHEDULE_CONTENT = 4;
     public static final int VIEWTYPE_ADDNEW_SCHEDULE_ARTICLE_TITLE = 5;
     public static final int VIEWTYPE_ADDNEW_SCHEDULE_ARTICLE_CONTENT = 6;
+    public static final int VIEWTYPE_DETAIL_MAIN = 7;
+    public static final int VIEWTYPE_DETAIL_SCHEDULE_TITLE = 8;
+    public static final int VIEWTYPE_DETAIL_SCHEDULE_CONTENT = 9;
+
 }
