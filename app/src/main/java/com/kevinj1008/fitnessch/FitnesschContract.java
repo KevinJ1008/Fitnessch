@@ -39,9 +39,15 @@ public interface FitnesschContract {
 
         void transToAddNewArticle(List<Schedule> schedules);
 
+        void transToDate(Article article);
+
         void refreshAddNewUi();
 
         void refreshAddNewArticleUi();
+
+        void refreshDateArticleUi();
+
+        void refreshCalendarFocus();
 
 //        void transToChatRoom(Message message, User user);
 

@@ -195,6 +195,10 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         mPresenter.transToAddNewArticle(schedules);
     }
 
+    public void transToDate(Article article) {
+        mPresenter.transToDate(article);
+    }
+
     public void transToMain() {
         mPresenter.transToMain();
     }
@@ -233,6 +237,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         ConstraintLayout profilePage = findViewById(R.id.profile_page);
         ConstraintLayout addNewArticlePage = findViewById(R.id.fragment_addnewarticle);
         ConstraintLayout addNewPage = findViewById(R.id.addnew_page);
+        ConstraintLayout dateArticlePage = findViewById(R.id.date_article_page);
         FrameLayout mainPage = findViewById(R.id.main_page);
 
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -241,9 +246,13 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
             mPresenter.transToMain();
         } else if (calendarPage != null && calendarPage.getVisibility() == View.VISIBLE) {
             mPresenter.transToMain();
+            mPresenter.refreshCalendarFocus();
         } else if (addNewArticlePage != null && addNewArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToAddNew();
             mPresenter.refreshAddNewArticleUi();
+        } else if (dateArticlePage != null && dateArticlePage.getVisibility() == View.VISIBLE) {
+            mPresenter.transToCalendar();
+            mPresenter.refreshDateArticleUi();
         } else if ((addNewPage != null && addNewPage.getVisibility() == View.VISIBLE) ||
                 (mainPage != null && mainPage.getVisibility() == View.VISIBLE)) {
             backButtonHandler();

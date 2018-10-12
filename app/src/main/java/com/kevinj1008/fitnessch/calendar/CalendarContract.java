@@ -4,13 +4,19 @@ import com.kevinj1008.fitnessch.BasePresenter;
 import com.kevinj1008.fitnessch.BaseView;
 import com.kevinj1008.fitnessch.objects.Article;
 
+import java.util.List;
+
 public interface CalendarContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showArticles(Article bean);
+        void showArticles(List<Article> articles);
 
         void showDetailUi(Article article);
+
+        void showFocusDate();
+
+        void monthChangeArticle(List<Article> articles);
 
         void refreshUi();
 
@@ -25,6 +31,10 @@ public interface CalendarContract {
         void showArticles(Article bean);
 
         void openDetail(Article article);
+
+        void reloadArticle();
+
+        void monthChangeLoader(Article article);
 
 //        void updateInterestedIn(Article article, boolean isInterestedIn);
 

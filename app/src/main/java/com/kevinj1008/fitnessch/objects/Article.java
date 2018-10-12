@@ -13,6 +13,9 @@ public class Article {
     private String mName;
     private String mAuthorId;
     private String mAuthorImage;
+    private int mCreateYear;
+    private int mCreateMonth;
+    private int mCreateDay;
 //    private int mInterests;
 //    private boolean mInterestedIn;
 
@@ -26,6 +29,33 @@ public class Article {
         mTag = "";
         mAuthorId = "";
         mAuthorImage = "";
+        mCreateYear = 1;
+        mCreateMonth = 2;
+        mCreateDay = 3;
+    }
+
+    public int getCreateYear() {
+        return mCreateYear;
+    }
+
+    public void setCreateYear(int createYear) {
+        mCreateYear = createYear;
+    }
+
+    public int getCreateMonth() {
+        return mCreateMonth;
+    }
+
+    public void setCreateMonth(int createMonth) {
+        mCreateMonth = createMonth;
+    }
+
+    public int getCreateDay() {
+        return mCreateDay;
+    }
+
+    public void setCreateDay(int createDay) {
+        mCreateDay = createDay;
     }
 
     public String getId() {

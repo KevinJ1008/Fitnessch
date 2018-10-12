@@ -14,6 +14,8 @@ import com.kevinj1008.fitnessch.addnewarticle.AddNewArticlePresenter;
 import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildFragment;
 import com.kevinj1008.fitnessch.calendar.CalendarFragment;
 import com.kevinj1008.fitnessch.calendar.CalendarPresenter;
+import com.kevinj1008.fitnessch.datearticle.DateArticleFragment;
+import com.kevinj1008.fitnessch.datearticle.DateArticlePresenter;
 import com.kevinj1008.fitnessch.detail.DetailFragment;
 import com.kevinj1008.fitnessch.detail.DetailPresenter;
 import com.kevinj1008.fitnessch.main.MainFragment;
@@ -46,6 +48,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     public static final String DETAIL  = "DETAIL";
     public static final String CALENDAR = "CALENDAR";
     public static final String ADDNEW_ARTICLE = "ADDNEWARTICLE";
+    public static final String DATEARTICLE = "DATEARTICLE";
 
     private MainFragment mMainFragment;
     private ProfileFragment mProfileFragment;
@@ -53,6 +56,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     private AddNewFragment mAddNewFragment;
     private AddNewArticleFragment mAddNewArticleFragment;
     private AddNewScheduleChildFragment mAddNewScheduleChildFragment;
+    private DateArticleFragment mDateArticleFragment;
 
     private MainPresenter mMainPresenter;
     private ProfilePresenter mProfilePresenter;
@@ -60,6 +64,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     private AddNewPresenter mAddNewPresenter;
     private AddNewArticlePresenter mAddNewArticlePresenter;
     private DetailPresenter mDetailPresenter;
+    private DateArticlePresenter mDateArticlePresenter;
 
     public FitnesschPresenter(FitnesschContract.View fitnesschView, FragmentManager fragmentManager) {
         mFitnesschView = checkNotNull(fitnesschView, "fitnesschView cannot be null!");
@@ -93,6 +98,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
         if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
+        if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
         if (!mMainFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mMainFragment, MAIN);
         } else {
@@ -143,6 +149,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
         if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
+        if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
         if (!mAddNewFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mAddNewFragment, ADDNEW);
         } else {
@@ -173,6 +180,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
         if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
+        if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
         if (!mProfileFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mProfileFragment, PROFILE);
         } else {
@@ -204,6 +212,10 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             transaction.hide(mProfileFragment);
             transaction.addToBackStack(PROFILE);
         }
+        if (mDateArticleFragment != null && !mDateArticleFragment.isHidden()) {
+            transaction.hide(mDateArticleFragment);
+            transaction.addToBackStack(DATEARTICLE);
+        }
         DetailFragment detailFragment = DetailFragment.newInstance();
         transaction.add(R.id.linearlayout_main_container, detailFragment, DETAIL);
         transaction.commit();
@@ -231,10 +243,12 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
         if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
+        if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
         if (!mCalendarFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mCalendarFragment, CALENDAR);
         } else {
             transaction.show(mCalendarFragment);
+            mCalendarPresenter.reloadArticle();
         }
 
 
@@ -259,6 +273,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
+        if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
 
         if (!mAddNewArticleFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mAddNewArticleFragment, ADDNEW_ARTICLE);
@@ -274,6 +289,34 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     }
 
     @Override
+    public void transToDate(Article article) {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
+            mFragmentManager.popBackStack();
+            mDetailPresenter.refreshDetailUi();
+        }
+
+        if (mDateArticleFragment == null) mDateArticleFragment = DateArticleFragment.newInstance();
+        if (mProfileFragment != null) transaction.hide(mProfileFragment);
+        if (mMainFragment != null) transaction.hide(mMainFragment);
+        if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
+        if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
+
+        if (!mDateArticleFragment.isAdded()) {
+            transaction.add(R.id.linearlayout_main_container, mDateArticleFragment, DATEARTICLE);
+        } else {
+            transaction.show(mDateArticleFragment);
+            mDateArticlePresenter.changeDateUi(article);
+        }
+
+        if (mDateArticlePresenter == null) {
+            mDateArticlePresenter = new DateArticlePresenter(mDateArticleFragment, article);
+        }
+        transaction.commit();
+
+    }
+
+    @Override
     public void refreshAddNewUi() {
         mAddNewFragment.refreshSchedule();
     }
@@ -283,6 +326,16 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mAddNewArticleFragment != null) {
             mAddNewArticleFragment.refreshUi();
         }
+    }
+
+    @Override
+    public void refreshDateArticleUi() {
+        mDateArticlePresenter.refreshDateUi();
+    }
+
+    @Override
+    public void refreshCalendarFocus() {
+        mCalendarPresenter.refresh();
     }
 
 }
