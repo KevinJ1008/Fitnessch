@@ -107,7 +107,8 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
             mStringListMap.put(title, content);
         } else {
             List<Schedule> titleList = new ArrayList<>();
-            Schedule titleItem = new Schedule(schedules.getScheduleTitle(), "", "");
+            Schedule titleItem = new Schedule();
+            titleItem.setScheduleTitle(schedules.getScheduleTitle());
             titleItem.setType("TITLE");
 
             titleList.add(titleItem);

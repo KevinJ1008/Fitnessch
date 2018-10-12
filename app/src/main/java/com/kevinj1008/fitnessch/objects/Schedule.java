@@ -6,11 +6,11 @@ public class Schedule {
     private String mScheduleReps;
     private String mType;
 
-    public Schedule(String title, String weight, String reps) {
+    public Schedule() {
         mType = "CONTENT";
-        mScheduleTitle = title;
-        mScheduleWeight = weight;
-        mScheduleReps = reps;
+        mScheduleTitle = "";
+        mScheduleWeight = "";
+        mScheduleReps = "";
     }
 
     public String getScheduleTitle() {

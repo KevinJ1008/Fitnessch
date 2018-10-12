@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -231,6 +232,9 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         ConstraintLayout calendarPage = findViewById(R.id.calendar_page);
         ConstraintLayout profilePage = findViewById(R.id.profile_page);
         ConstraintLayout addNewArticlePage = findViewById(R.id.fragment_addnewarticle);
+        ConstraintLayout addNewPage = findViewById(R.id.addnew_page);
+        FrameLayout mainPage = findViewById(R.id.main_page);
+
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else if (profilePage != null && profilePage.getVisibility() == View.VISIBLE) {
@@ -239,8 +243,12 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
             mPresenter.transToMain();
         } else if (addNewArticlePage != null && addNewArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToAddNew();
-        } else {
+            mPresenter.refreshAddNewArticleUi();
+        } else if ((addNewPage != null && addNewPage.getVisibility() == View.VISIBLE) ||
+                (mainPage != null && mainPage.getVisibility() == View.VISIBLE)) {
             backButtonHandler();
+        } else {
+            super.onBackPressed();
         }
     }
 
@@ -256,6 +264,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
                     //TODO: clear data
                     mPresenter.transToMain();
                     mPresenter.refreshAddNewUi();
+                    mPresenter.refreshAddNewArticleUi();
                 }
             });
             alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {

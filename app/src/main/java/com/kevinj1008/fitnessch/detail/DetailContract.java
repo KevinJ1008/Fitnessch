@@ -27,7 +27,7 @@ public interface DetailContract {
 //
 //        void deleteCommentItem(int position);
 
-        void refreshUi(boolean isMoveToEnd);
+        void refreshUi();
 
 //        void moveToCommentPosition(int position);
 
@@ -48,6 +48,8 @@ public interface DetailContract {
         void showToolbar();
 
         void hideToolbar();
+
+        void refreshDetailUi();
 
 //        void clickItemOptions(String commentId, String comment, int position);
 //

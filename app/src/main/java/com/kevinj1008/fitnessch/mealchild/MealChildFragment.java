@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
+import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.adapters.MealChildAdapter;
 import com.kevinj1008.fitnessch.api.beans.MealArticles;
 import com.kevinj1008.fitnessch.objects.Article;
@@ -95,7 +96,7 @@ public class MealChildFragment extends Fragment implements MealChildContract.Vie
 
     @Override
     public void showDetailUi(Article article) {
-
+        ((FitnesschActivity) getActivity()).transToDetail(article);
     }
 
 

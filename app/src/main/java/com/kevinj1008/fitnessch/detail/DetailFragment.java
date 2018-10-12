@@ -86,12 +86,12 @@ public class DetailFragment extends Fragment implements DetailContract.View {
 
     @Override
     public void showSchedule(List<Schedule> schedules) {
-
+        mDetailAdapter.updateSchedule(schedules);
     }
 
     @Override
-    public void refreshUi(boolean isMoveToEnd) {
-
+    public void refreshUi() {
+        mDetailAdapter.initData();
     }
 
 

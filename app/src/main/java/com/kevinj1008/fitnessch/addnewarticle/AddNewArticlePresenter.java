@@ -68,13 +68,8 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
         Map<String, Object> article = new HashMap<>();
         article.put("article_tag", "課表");
         article.put("author", author);
-
-        //TODO: Add author ID
         article.put("user_id", authorId);
-        //TODO:Add author photo
         article.put("author_photo", authorPhoto);
-
-
         article.put("title", title);
         article.put("content", content);
         article.put("create_time", FieldValue.serverTimestamp());
@@ -85,6 +80,8 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(Constants.TAG, "Successfully written! " + documentReference.toString());
+                String articleId = documentReference.getId();
+                documentReference.update("article_id", articleId);
                 Map<String, Object> schedule = new HashMap<>();
                 for (int i = 0; i < mSchedules.size(); i++) {
                     schedule.put("schedule_title", mSchedules.get(i).getScheduleTitle());

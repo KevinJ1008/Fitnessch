@@ -3,16 +3,22 @@ package com.kevinj1008.fitnessch.activities;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.kevinj1008.fitnessch.R;
+import com.kevinj1008.fitnessch.util.DelayedProgressDialog;
+
 
 public class BaseActivity extends AppCompatActivity {
     protected Context mContext;
+    private DelayedProgressDialog mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +27,7 @@ public class BaseActivity extends AppCompatActivity {
         this.mContext = this;
 
         setStatusBar();
+
     }
 
     /**
@@ -43,5 +50,31 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public void showProgressBar() {
+        ConstraintLayout layout = findViewById(R.id.login_page);
+        if (mProgressBar == null) {
+            mProgressBar = new DelayedProgressDialog();
+            mProgressBar.show(getSupportFragmentManager(), "tag");
+//            mProgressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleLarge);
+//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(200, 200);
+//            params.addRule(RelativeLayout.CENTER_IN_PARENT);
+//            layout.addView(mProgressBar, params);
+//            mProgressBar.setIndeterminate(true);
+//            mProgressBar.setVisibility(View.VISIBLE);
+//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+//                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
+    }
+
+    public void hideProgressBar() {
+        if (mProgressBar != null) {
+            mProgressBar.cancel();
+        }
+//        if (mProgressBar != null && mProgressBar.isIndeterminate()) {
+//            mProgressBar.setIndeterminate(false);
+//            mProgressBar.setVisibility(View.GONE);
+//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+//        }
+    }
 
 }

@@ -83,7 +83,10 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
 //        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
 
-//        if (mFragmentManager.findFragmentByTag(DETAIL) != null) mFragmentManager.popBackStack();
+        if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
+            mFragmentManager.popBackStack();
+            mDetailPresenter.refreshDetailUi();
+        }
 //        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
         if (mMainFragment == null) mMainFragment = MainFragment.newInstance();
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
@@ -131,6 +134,10 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 //        transaction.commit();
 
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
+            mFragmentManager.popBackStack();
+            mDetailPresenter.refreshDetailUi();
+        }
         if (mAddNewFragment == null) mAddNewFragment = AddNewFragment.newInstance();
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
         if (mMainFragment != null) transaction.hide(mMainFragment);
@@ -156,7 +163,10 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
 //        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
 
-//        if (mFragmentManager.findFragmentByTag(DETAIL) != null) mFragmentManager.popBackStack();
+        if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
+            mFragmentManager.popBackStack();
+            mDetailPresenter.refreshDetailUi();
+        }
 //        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
         if (mProfileFragment == null) mProfileFragment = ProfileFragment.newInstance();
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
@@ -186,12 +196,17 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             transaction.hide(mMainFragment);
             transaction.addToBackStack(MAIN);
         }
+        if (mCalendarFragment != null && !mCalendarFragment.isHidden()) {
+            transaction.hide(mCalendarFragment);
+            transaction.addToBackStack(CALENDAR);
+        }
         if (mProfileFragment != null && !mProfileFragment.isHidden()) {
             transaction.hide(mProfileFragment);
             transaction.addToBackStack(PROFILE);
         }
         DetailFragment detailFragment = DetailFragment.newInstance();
         transaction.add(R.id.linearlayout_main_container, detailFragment, DETAIL);
+        transaction.commit();
 
         mDetailPresenter = new DetailPresenter(detailFragment, article);
     }
@@ -206,7 +221,10 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
 //        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
 
-//        if (mFragmentManager.findFragmentByTag(DETAIL) != null) mFragmentManager.popBackStack();
+        if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
+            mFragmentManager.popBackStack();
+            mDetailPresenter.refreshDetailUi();
+        }
 //        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
         if (mCalendarFragment == null) mCalendarFragment = CalendarFragment.newInstance();
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
@@ -231,6 +249,10 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     @Override
     public void transToAddNewArticle(List<Schedule> schedules) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
+            mFragmentManager.popBackStack();
+            mDetailPresenter.refreshDetailUi();
+        }
 
         if (mAddNewArticleFragment == null) mAddNewArticleFragment = AddNewArticleFragment.newInstance();
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
@@ -254,6 +276,13 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     @Override
     public void refreshAddNewUi() {
         mAddNewFragment.refreshSchedule();
+    }
+
+    @Override
+    public void refreshAddNewArticleUi() {
+        if (mAddNewArticleFragment != null) {
+            mAddNewArticleFragment.refreshUi();
+        }
     }
 
 }

@@ -151,7 +151,7 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter{
 
     @Override
     public void openDetail(Article article) {
-
+        mScheduleChildView.showDetailUi(article);
     }
 
 

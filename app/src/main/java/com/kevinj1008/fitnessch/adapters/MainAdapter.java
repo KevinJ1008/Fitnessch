@@ -55,7 +55,7 @@ public class MainAdapter extends RecyclerView.Adapter {
         //
         ((MainItemViewHolder) holder).mAuthorName.setText(mArticles.get(position).getName());
         //
-        String date = new SimpleDateFormat("HH:mm")
+        String date = new SimpleDateFormat("MM 月 dd 日 HH：mm")
                 .format(new Date(mArticles.get(position).getCreatedTime() * 1000L));
         ((MainItemViewHolder) holder).mArticleCreatedTime.setText(date);
         ((MainItemViewHolder) holder).mArticleTitle.setText(mArticles.get(position).getTitle());

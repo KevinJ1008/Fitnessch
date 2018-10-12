@@ -148,7 +148,7 @@ public class MealChildPresenter implements MealChildContract.Presenter {
 
     @Override
     public void openDetail(Article article) {
-
+        mMealChildView.showDetailUi(article);
     }
 
 

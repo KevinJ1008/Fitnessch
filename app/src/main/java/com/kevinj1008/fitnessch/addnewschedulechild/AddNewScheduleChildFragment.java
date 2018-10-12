@@ -173,7 +173,10 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
 
                 if (!"".equals(scheduleTitle) && !scheduleWeight.equals("") && !scheduleWeight.startsWith("0")
                         && !scheduleReps.equals("") && !scheduleReps.startsWith("0")) {
-                    Schedule schedule = new Schedule(scheduleTitle, scheduleWeight, scheduleReps);
+                    Schedule schedule = new Schedule();
+                    schedule.setScheduleTitle(scheduleTitle);
+                    schedule.setScheduleWeight(scheduleWeight);
+                    schedule.setScheduleReps(scheduleReps);
 //                    mSchedules.add(schedule);
                     mAddNewScheduleChildAdapter.updateData(schedule);
 

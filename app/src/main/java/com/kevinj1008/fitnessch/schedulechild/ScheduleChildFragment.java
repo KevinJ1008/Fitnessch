@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
+import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.adapters.ScheduleChildAdapter;
 import com.kevinj1008.fitnessch.api.beans.ScheduleArticles;
 import com.kevinj1008.fitnessch.objects.Article;
@@ -96,7 +97,7 @@ public class ScheduleChildFragment extends Fragment implements ScheduleChildCont
 
     @Override
     public void showDetailUi(Article article) {
-
+        ((FitnesschActivity) getActivity()).transToDetail(article);
     }
 
 

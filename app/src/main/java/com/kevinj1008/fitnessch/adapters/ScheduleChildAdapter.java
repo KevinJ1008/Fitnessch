@@ -2,6 +2,7 @@ package com.kevinj1008.fitnessch.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ public class ScheduleChildAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((ScheduleItemViewHolder) holder).mScheduleChildTitle.setText(mArticles.get(position).getTitle());
         ((ScheduleItemViewHolder) holder).mScheduleChildContent.setText(mArticles.get(position).getContent());
-        String date = new SimpleDateFormat("HH:mm")
+        String date = new SimpleDateFormat("MM 月 dd 日")
                 .format(new Date(mArticles.get(position).getCreatedTime() * 1000L));
         ((ScheduleItemViewHolder) holder).mScheduleChildCreateTime.setText(date);
     }
@@ -65,7 +66,16 @@ public class ScheduleChildAdapter extends RecyclerView.Adapter {
             mScheduleChildCreateTime = itemView.findViewById(R.id.schedule_child_create_time);
             mScheduleChildContent = itemView.findViewById(R.id.schedule_child_content);
 
+            ((ConstraintLayout) itemView.findViewById(R.id.schedule_child_article_container)).setOnClickListener(clickListener);
+
         }
+
+        private View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.openDetail(mArticles.get(getAdapterPosition()));
+            }
+        };
     }
 
     public void updateData(Article bean) {
