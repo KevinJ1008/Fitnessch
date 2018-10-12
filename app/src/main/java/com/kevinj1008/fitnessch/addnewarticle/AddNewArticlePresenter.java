@@ -21,6 +21,7 @@ import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,9 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
         String authorPhoto = mSharedPreferencesManager.getUserPhoto();
         //
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
         Map<String, Object> article = new HashMap<>();
         article.put("article_tag", "課表");
@@ -73,6 +77,9 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
         article.put("title", title);
         article.put("content", content);
         article.put("create_time", FieldValue.serverTimestamp());
+        article.put("create_year", year);
+        article.put("create_month", month);
+        article.put("create_day", day);
 
         //TODO: Change "article" to "articles"
 

@@ -17,4 +17,19 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="calendar_title_month">
+        <item>1 月</item>
+        <item>2 月</item>
+        <item>3 月</item>
+        <item>4 月</item>
+        <item>5 月</item>
+        <item>6 月</item>
+        <item>7 月</item>
+        <item>8 月</item>
+        <item>9 月</item>
+        <item>10 月</item>
+        <item>11 月</item>
+        <item>12 月</item>
+    </string-array>
 </resources>
