@@ -95,7 +95,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
     }
 
     @Override
-    public void monthChangeLoader(final Article article) {
+    public void monthChangeLoader(Article article) {
         final int year = article.getCreateYear();
         final int month = article.getCreateMonth();
         String uid = mSharedPreferencesManager.getUserDbUid();
@@ -117,11 +117,12 @@ public class CalendarPresenter implements CalendarContract.Presenter {
                                 String createDay = documentChange.getDocument().getData().get("create_day").toString();
                                 int day = Integer.parseInt(createDay);
 
-                                article.setCreateYear(year);
-                                article.setCreateMonth(month);
-                                article.setCreateDay(day);
+                                Article monthChangeArticle = new Article();
+                                monthChangeArticle.setCreateYear(year);
+                                monthChangeArticle.setCreateMonth(month);
+                                monthChangeArticle.setCreateDay(day);
 
-                                mArticles.add(article);
+                                mArticles.add(monthChangeArticle);
                             }
                             mCalendarView.monthChangeArticle(mArticles);
                         }

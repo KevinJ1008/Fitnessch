@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.objects.Article;
@@ -19,6 +21,7 @@ import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormat
 import com.prolificinteractive.materialcalendarview.format.TitleFormatter;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,6 +33,7 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
     private CalendarDay mCalendarDay;
     private List<Article> mArticles;
     private MaterialCalendarView mMaterialCalendarView;
+    private List<CalendarDay> mCalendarDays;
 
     public CalendarFragment() {
         // Requires empty public constructor
@@ -73,6 +77,7 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
     private OnDateSelectedListener dateSelectedListener = new OnDateSelectedListener() {
         @Override
         public void onDateSelected(@NonNull MaterialCalendarView materialCalendarView, @NonNull CalendarDay calendarDay, boolean isSelected) {
+            if (mCalendarDays.contains(calendarDay)) {
                 int year = calendarDay.getYear();
                 int month = calendarDay.getMonth();
                 int day = calendarDay.getDay();
@@ -83,13 +88,17 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
                 article.setCreateDay(day);
 
                 ((FitnesschActivity) getActivity()).transToDate(article);
+            } else {
+                materialCalendarView.setDateSelected(calendarDay, false);
+                showFocusDate();
+                Toast.makeText(Fitnessch.getAppContext(), "未建立任何課表與菜單。", Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
     private OnMonthChangedListener monthChangeListener = new OnMonthChangedListener() {
         @Override
         public void onMonthChanged(MaterialCalendarView materialCalendarView, CalendarDay calendarDay) {
-            mMaterialCalendarView = materialCalendarView;
             mPresenter.refresh();
             int year = calendarDay.getYear();
             int month = calendarDay.getMonth();
@@ -102,12 +111,16 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
 
     @Override
     public void showArticles(List<Article> articles) {
+        mCalendarDays = new ArrayList<>();
+        CalendarDay calendarDay = CalendarDay.today();
+        mMaterialCalendarView.setDateSelected(calendarDay, true);
         mArticles = articles;
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
         for (int i = 0; i < mArticles.size(); i++) {
             int day = mArticles.get(i).getCreateDay();
             mCalendarDay = CalendarDay.from(year, month, day);
+            mCalendarDays.add(mCalendarDay);
             mMaterialCalendarView.setDateSelected(mCalendarDay, true);
         }
     }
@@ -119,16 +132,29 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
 
     @Override
     public void showFocusDate() {
-        mPresenter.loadArticles();
+        CalendarDay today = CalendarDay.today();
+        mMaterialCalendarView.setDateSelected(today, true);
+        for (int i = 0; i < mCalendarDays.size(); i++) {
+            int year = mCalendarDays.get(i).getYear();
+            int month = mCalendarDays.get(i).getMonth();
+            int day = mCalendarDays.get(i).getDay();
+            CalendarDay calendarDay = CalendarDay.from(year, month, day);
+            mMaterialCalendarView.setDateSelected(calendarDay, true);
+        }
+//        mPresenter.loadArticles();
     }
 
     @Override
     public void monthChangeArticle(List<Article> articles) {
+        mMaterialCalendarView.clearSelection();
+        CalendarDay today = CalendarDay.today();
+        mMaterialCalendarView.setDateSelected(today, true);
         for (int i = 0; i < articles.size(); i++) {
             int year = articles.get(i).getCreateYear();
             int month = articles.get(i).getCreateMonth();
             int day = articles.get(i).getCreateDay();
             CalendarDay calendarDay = CalendarDay.from(year, month, day);
+            mCalendarDays.add(calendarDay);
             mMaterialCalendarView.setDateSelected(calendarDay, true);
         }
     }
@@ -136,6 +162,7 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
     @Override
     public void refreshUi() {
         mArticles.clear();
+        mCalendarDays.clear();
     }
 
 

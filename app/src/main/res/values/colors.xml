@@ -33,6 +33,7 @@
     <color name="header_text_color">#FFFFFF</color>
     <color name="calendar_background_color">#7dffffff</color>
     <color name="date_selected_color">#8095c7c6</color>
+    <color name="today_selection_color">#8095aec7</color>
 
     <!--Main Item-->
     <color name="main_text_color">#FFFFFF</color>
