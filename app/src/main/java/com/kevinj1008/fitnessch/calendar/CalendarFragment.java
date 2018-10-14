@@ -132,16 +132,21 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
 
     @Override
     public void showFocusDate() {
-        CalendarDay today = CalendarDay.today();
-        mMaterialCalendarView.setDateSelected(today, true);
-        for (int i = 0; i < mCalendarDays.size(); i++) {
-            int year = mCalendarDays.get(i).getYear();
-            int month = mCalendarDays.get(i).getMonth();
-            int day = mCalendarDays.get(i).getDay();
-            CalendarDay calendarDay = CalendarDay.from(year, month, day);
-            mMaterialCalendarView.setDateSelected(calendarDay, true);
+        if (!mCalendarDays.isEmpty()) {
+            CalendarDay today = CalendarDay.today();
+            mMaterialCalendarView.setDateSelected(today, true);
+            for (int i = 0; i < mCalendarDays.size(); i++) {
+                int year = mCalendarDays.get(i).getYear();
+                int month = mCalendarDays.get(i).getMonth();
+                int day = mCalendarDays.get(i).getDay();
+                CalendarDay calendarDay = CalendarDay.from(year, month, day);
+                mMaterialCalendarView.setDateSelected(calendarDay, true);
+            }
+        } else {
+            CalendarDay today = CalendarDay.today();
+            mMaterialCalendarView.setCurrentDate(today, true);
+            mPresenter.loadArticles();
         }
-//        mPresenter.loadArticles();
     }
 
     @Override
