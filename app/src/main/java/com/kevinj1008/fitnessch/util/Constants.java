@@ -10,10 +10,18 @@ public class Constants {
 //    RecyclerView Adapter ViewType
     public static final int VIEWTYPE_ADDNEW_SCHEDULE_TITLE = 3;
     public static final int VIEWTYPE_ADDNEW_SCHEDULE_CONTENT = 4;
+    public static final int VIEWTYPE_ADDNEW_MEAL_TITLE = 10;
+    public static final int VIEWTYPE_ADDNEW_MEAL_CONTENT = 11;
+
     public static final int VIEWTYPE_ADDNEW_SCHEDULE_ARTICLE_TITLE = 5;
     public static final int VIEWTYPE_ADDNEW_SCHEDULE_ARTICLE_CONTENT = 6;
+    public static final int VIEWTYPE_ADDNEW_MEAL_ARTICLE_TITLE = 12;
+    public static final int VIEWTYPE_ADDNEW_MEAL_ARTICLE_CONTENT = 13;
+
     public static final int VIEWTYPE_DETAIL_MAIN = 7;
     public static final int VIEWTYPE_DETAIL_SCHEDULE_TITLE = 8;
     public static final int VIEWTYPE_DETAIL_SCHEDULE_CONTENT = 9;
+    public static final int VIEWTYPE_DETAIL_MEAL_TITLE = 14;
+    public static final int VIEWTYPE_DETAIL_MEAL_CONTENT = 15;
 
 }

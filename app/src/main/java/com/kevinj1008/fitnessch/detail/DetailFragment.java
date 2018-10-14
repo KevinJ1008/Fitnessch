@@ -15,6 +15,7 @@ import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.adapters.DetailAdapter;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.objects.Meal;
 import com.kevinj1008.fitnessch.objects.Schedule;
 
 import java.util.List;
@@ -87,6 +88,11 @@ public class DetailFragment extends Fragment implements DetailContract.View {
     @Override
     public void showSchedule(List<Schedule> schedules) {
         mDetailAdapter.updateSchedule(schedules);
+    }
+
+    @Override
+    public void showMeal(List<Meal> meals) {
+        mDetailAdapter.updateMeal(meals);
     }
 
     @Override

@@ -26,6 +26,7 @@ import com.kevinj1008.fitnessch.FitnesschContract;
 import com.kevinj1008.fitnessch.FitnesschPresenter;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.objects.Meal;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.util.Constants;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
@@ -195,6 +196,10 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         mPresenter.transToAddNewArticle(schedules);
     }
 
+    public void transToAddNewMealArticle(List<Meal> meals) {
+        mPresenter.transToAddNewMealArticle(meals);
+    }
+
     public void transToDate(Article article) {
         mPresenter.transToDate(article);
     }
@@ -236,6 +241,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         ConstraintLayout calendarPage = findViewById(R.id.calendar_page);
         ConstraintLayout profilePage = findViewById(R.id.profile_page);
         ConstraintLayout addNewArticlePage = findViewById(R.id.fragment_addnewarticle);
+        ConstraintLayout addNewMealArticlePage = findViewById(R.id.fragment_addnew_meal_article);
         ConstraintLayout addNewPage = findViewById(R.id.addnew_page);
         ConstraintLayout dateArticlePage = findViewById(R.id.date_article_page);
         FrameLayout mainPage = findViewById(R.id.main_page);
@@ -250,6 +256,9 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         } else if (addNewArticlePage != null && addNewArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToAddNew();
             mPresenter.refreshAddNewArticleUi();
+        } else if (addNewMealArticlePage != null && addNewMealArticlePage.getVisibility() == View.VISIBLE) {
+            mPresenter.transToAddNew();
+            mPresenter.refreshAddNewMealArticleUi();
         } else if (dateArticlePage != null && dateArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToCalendar();
             mPresenter.refreshDateArticleUi();

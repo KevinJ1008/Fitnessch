@@ -88,7 +88,10 @@ public class DateArticleAdapter extends RecyclerView.Adapter {
     }
 
     public void updateArticle(Article article) {
-        mArticles.add(article);
+        mArticles.clear();
+        String tag = article.getTag();
+        
+        mArticles.add(0, article);
         notifyDataSetChanged();
     }
 

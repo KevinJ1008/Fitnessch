@@ -3,6 +3,7 @@ package com.kevinj1008.fitnessch.detail;
 import com.kevinj1008.fitnessch.BasePresenter;
 import com.kevinj1008.fitnessch.BaseView;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.objects.Meal;
 import com.kevinj1008.fitnessch.objects.Schedule;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface DetailContract {
         void showArticle(Article article);
 
         void showSchedule(List<Schedule> schedules);
+
+        void showMeal(List<Meal> meals);
 
 //        void setLoadMoreButtonVisibility(boolean visible);
 //
@@ -40,6 +43,8 @@ public interface DetailContract {
         void result(int requestCode, int resultCode);
 
         void loadSchedule();
+
+        void loadMeal();
 
 //        void loadComments();
 

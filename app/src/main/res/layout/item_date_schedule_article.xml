@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:id="@+id/date_schedule_article">
 
     <android.support.constraint.ConstraintLayout
@@ -19,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             app:srcCompat="@drawable/icon_dumbbell"/>
 
         <TextView
@@ -29,7 +30,7 @@
             app:layout_constraintLeft_toRightOf="@+id/date_schedule_article_tag_image"
             app:layout_constraintTop_toTopOf="@id/date_schedule_article_tag_image"
             app:layout_constraintBottom_toBottomOf="@id/date_schedule_article_tag_image"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="15dp"
             android:textSize="20sp"
             android:textColor="@color/addnew_text_color"
             android:text="課表"/>
@@ -56,7 +57,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="10dp"
         android:background="@drawable/date_ripple">
 
         <TextView
@@ -72,7 +73,7 @@
             android:maxLines="1"
             android:textColor="@color/addnew_text_color"
             android:textSize="22sp"
-            android:text="標題"/>
+            tool:text="標題........................"/>
 
         <TextView
             android:id="@+id/date_schedule_time"
@@ -84,7 +85,7 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/addnew_text_color"
             android:textSize="16sp"
-            android:text="19 : 00"/>
+            tool:text="19 : 00"/>
 
         <TextView
             android:id="@+id/date_schedule_content"
@@ -93,12 +94,13 @@
             app:layout_constraintTop_toBottomOf="@id/date_schedule_time"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:ellipsize="end"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:textSize="18sp"
             android:textColor="@color/addnew_text_color"
-            android:text="最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!"/>
+            tool:text="最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!最近要增肌，加了一些不一樣的吃法，希望幾個月後能夠有不一樣的體態，也希望大家能夠多多交流，YA!"/>
 
     </android.support.constraint.ConstraintLayout>
 

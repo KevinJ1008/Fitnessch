@@ -48,10 +48,10 @@ public class AddNewFragment extends Fragment implements AddNewContract.View {
             mAddNewScheduleChildPresenter = new AddNewScheduleChildPresenter(mAddNewScheduleChildFragment);
         }
 
-//        if (mAddNewMealChildFragment == null) mAddNewMealChildFragment = AddNewMealChildFragment.newInstance();
-//        if (mAddNewMealChildPresenter == null) {
-//            mAddNewMealChildPresenter = new AddNewMealChildPresenter(mAddNewMealChildFragment);
-//        }
+        if (mAddNewMealChildFragment == null) mAddNewMealChildFragment = AddNewMealChildFragment.newInstance();
+        if (mAddNewMealChildPresenter == null) {
+            mAddNewMealChildPresenter = new AddNewMealChildPresenter(mAddNewMealChildFragment);
+        }
 
     }
 
@@ -87,7 +87,7 @@ public class AddNewFragment extends Fragment implements AddNewContract.View {
     private void setupViewPager(ViewPager viewPager) {
         mViewPagerAdapter = new AddNewViewPagerAdapter(getFragmentManager());
         mViewPagerAdapter.addFragment(mAddNewScheduleChildFragment, getString(R.string.all_schedule_title));
-        mViewPagerAdapter.addFragment(new AddNewMealChildFragment(), getString(R.string.all_meal_title));
+        mViewPagerAdapter.addFragment(mAddNewMealChildFragment, getString(R.string.all_meal_title));
         viewPager.setAdapter(mViewPagerAdapter);
     }
 
@@ -102,8 +102,9 @@ public class AddNewFragment extends Fragment implements AddNewContract.View {
     }
 
     @Override
-    public void refreshSchedule() {
+    public void refreshUi() {
         mAddNewScheduleChildFragment.refreshUi();
+        mAddNewMealChildFragment.refreshUi();
     }
 
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.detail.DetailContract;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.objects.Meal;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.util.Constants;
 import com.squareup.picasso.Picasso;
@@ -27,6 +28,7 @@ public class DetailAdapter extends RecyclerView.Adapter {
 
     private Article mArticle;
     private List<Schedule> mSchedules = new ArrayList<>();
+    private List<Meal> mMeals = new ArrayList<>();
     private DetailContract.Presenter mPresenter;
 
     public DetailAdapter(Article article, DetailContract.Presenter presenter) {
@@ -44,16 +46,29 @@ public class DetailAdapter extends RecyclerView.Adapter {
         } else if (viewType == Constants.VIEWTYPE_DETAIL_SCHEDULE_TITLE) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_schedule_title, parent, false);
             return new DetailScheduleTitleViewHolder(view);
-        } else {
+
+        } else if (viewType == Constants.VIEWTYPE_DETAIL_MEAL_TITLE) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_meal_title, parent, false);
+            return new DetailMealTitleViewHolder(view);
+
+        } else if (viewType == Constants.VIEWTYPE_DETAIL_SCHEDULE_CONTENT) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_schedule_content, parent, false);
             return new DetailScheduleContentViewHolder(view);
+
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_meal_content, parent, false);
+            return new DetailMealContentViewHolder(view);
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (position == 1) {
-            ((DetailScheduleTitleViewHolder) holder).mScheduleSeparator.setVisibility(View.INVISIBLE);
+            if (mSchedules.size() > 0) {
+                ((DetailScheduleTitleViewHolder) holder).mScheduleSeparator.setVisibility(View.INVISIBLE);
+            } else {
+                ((DetailMealTitleViewHolder) holder).mMealeSeparator.setVisibility(View.INVISIBLE);
+            }
         }
         if (holder instanceof DetailMainItemViewHolder) {
             Picasso.get()
@@ -75,9 +90,16 @@ public class DetailAdapter extends RecyclerView.Adapter {
         } else if (holder instanceof DetailScheduleTitleViewHolder) {
             ((DetailScheduleTitleViewHolder) holder).mScheduleTitle.setText(mSchedules.get(position - 1).getScheduleTitle());
 
+        } else if (holder instanceof DetailMealTitleViewHolder) {
+            ((DetailMealTitleViewHolder) holder).mMealTitle.setText(mMeals.get(position - 1).getMealTitle());
+
         } else if (holder instanceof DetailScheduleContentViewHolder) {
             ((DetailScheduleContentViewHolder) holder).mScheduleWeight.setText(mSchedules.get(position - 1).getScheduleWeight());
             ((DetailScheduleContentViewHolder) holder).mScheduleReps.setText(mSchedules.get(position - 1).getScheduleReps());
+
+        } else if (holder instanceof DetailMealContentViewHolder) {
+            ((DetailMealContentViewHolder) holder).mMealIngredient.setText(mMeals.get(position - 1).getMealIngredient());
+            ((DetailMealContentViewHolder) holder).mMealCal.setText(mMeals.get(position - 1).getMealCal());
 
         }
 
@@ -90,18 +112,34 @@ public class DetailAdapter extends RecyclerView.Adapter {
         if (position == 0) {
             return Constants.VIEWTYPE_DETAIL_MAIN;
         }
-
-        try {
-            type = mSchedules.get(position - 1).getType();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (mSchedules.size() > 0) {
+            try {
+                type = mSchedules.get(position - 1).getType();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (mMeals.size() > 0) {
+            try {
+                type = mMeals.get(position - 1).getMealType();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
         switch (type) {
             case "CONTENT" :
-                return Constants.VIEWTYPE_DETAIL_SCHEDULE_CONTENT;
+                if (mSchedules.size() > 0) {
+                    return Constants.VIEWTYPE_DETAIL_SCHEDULE_CONTENT;
+                } else if (mMeals.size() > 0) {
+                    return Constants.VIEWTYPE_DETAIL_MEAL_CONTENT;
+                }
 
             case "TITLE" :
-                return Constants.VIEWTYPE_DETAIL_SCHEDULE_TITLE;
+                if (mSchedules.size() > 0) {
+                    return Constants.VIEWTYPE_DETAIL_SCHEDULE_TITLE;
+                } else if (mMeals.size() > 0) {
+                    return Constants.VIEWTYPE_DETAIL_MEAL_TITLE;
+                }
 
             default:
                 Log.d(Constants.TAG, "Detail Page View Type ");
@@ -112,7 +150,13 @@ public class DetailAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return (mSchedules.isEmpty() ? 1 : mSchedules.size() + 1);
+        if (mMeals.size() > 0) {
+            return mMeals.size() + 1;
+        } else if (mSchedules.size() > 0) {
+            return mSchedules.size() + 1;
+        } else {
+            return 1;
+        }
     }
 
     private class DetailMainItemViewHolder extends RecyclerView.ViewHolder {
@@ -149,6 +193,20 @@ public class DetailAdapter extends RecyclerView.Adapter {
         }
     }
 
+    private class DetailMealTitleViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView mMealTitle;
+        private View mMealeSeparator;
+
+        public DetailMealTitleViewHolder(View itemView) {
+            super(itemView);
+
+            mMealTitle = itemView.findViewById(R.id.item_detail_meal_title);
+            mMealeSeparator = itemView.findViewById(R.id.item_detail_meal_separator);
+
+        }
+    }
+
     private class DetailScheduleContentViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mScheduleWeight;
@@ -163,6 +221,19 @@ public class DetailAdapter extends RecyclerView.Adapter {
         }
     }
 
+    private class DetailMealContentViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView mMealIngredient;
+        private TextView mMealCal;
+
+        public DetailMealContentViewHolder(View itemView) {
+            super(itemView);
+
+            mMealIngredient = itemView.findViewById(R.id.item_detail_ingredient_content);
+            mMealCal = itemView.findViewById(R.id.item_detail_cal_content);
+        }
+    }
+
     public void updateArticle(Article article) {
         mArticle = article;
         notifyItemChanged(0);
@@ -174,8 +245,14 @@ public class DetailAdapter extends RecyclerView.Adapter {
         notifyItemInserted(1);
     }
 
+    public void updateMeal(List<Meal> meals) {
+        mMeals = meals;
+        notifyItemInserted(1);
+    }
+
     public void initData() {
         mSchedules.clear();
+        mMeals.clear();
         notifyDataSetChanged();
     }
 }

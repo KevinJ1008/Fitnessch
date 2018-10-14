@@ -11,6 +11,8 @@ import com.kevinj1008.fitnessch.addnew.AddNewFragment;
 import com.kevinj1008.fitnessch.addnew.AddNewPresenter;
 import com.kevinj1008.fitnessch.addnewarticle.AddNewArticleFragment;
 import com.kevinj1008.fitnessch.addnewarticle.AddNewArticlePresenter;
+import com.kevinj1008.fitnessch.addnewmealarticle.AddNewMealArticleFragment;
+import com.kevinj1008.fitnessch.addnewmealarticle.AddNewMealArticlePresenter;
 import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildFragment;
 import com.kevinj1008.fitnessch.calendar.CalendarFragment;
 import com.kevinj1008.fitnessch.calendar.CalendarPresenter;
@@ -21,6 +23,7 @@ import com.kevinj1008.fitnessch.detail.DetailPresenter;
 import com.kevinj1008.fitnessch.main.MainFragment;
 import com.kevinj1008.fitnessch.main.MainPresenter;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.objects.Meal;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.profile.ProfileFragment;
 import com.kevinj1008.fitnessch.profile.ProfilePresenter;
@@ -48,6 +51,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     public static final String DETAIL  = "DETAIL";
     public static final String CALENDAR = "CALENDAR";
     public static final String ADDNEW_ARTICLE = "ADDNEWARTICLE";
+    public static final String ADDNEW_MEAL_ARTICLE = "ADDNEWMEALARTICLE";
     public static final String DATEARTICLE = "DATEARTICLE";
 
     private MainFragment mMainFragment;
@@ -55,6 +59,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     private CalendarFragment mCalendarFragment;
     private AddNewFragment mAddNewFragment;
     private AddNewArticleFragment mAddNewArticleFragment;
+    private AddNewMealArticleFragment mAddNewMealArticleFragment;
     private AddNewScheduleChildFragment mAddNewScheduleChildFragment;
     private DateArticleFragment mDateArticleFragment;
 
@@ -63,6 +68,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     private CalendarPresenter mCalendarPresenter;
     private AddNewPresenter mAddNewPresenter;
     private AddNewArticlePresenter mAddNewArticlePresenter;
+    private AddNewMealArticlePresenter mAddNewMealArticlePresenter;
     private DetailPresenter mDetailPresenter;
     private DateArticlePresenter mDateArticlePresenter;
 
@@ -98,6 +104,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
         if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
+        if (mAddNewMealArticleFragment != null) transaction.hide(mAddNewMealArticleFragment);
         if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
         if (!mMainFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mMainFragment, MAIN);
@@ -149,6 +156,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
         if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
+        if (mAddNewMealArticleFragment != null) transaction.hide(mAddNewMealArticleFragment);
         if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
         if (!mAddNewFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mAddNewFragment, ADDNEW);
@@ -180,6 +188,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
         if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
+        if (mAddNewMealArticleFragment != null) transaction.hide(mAddNewMealArticleFragment);
         if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
         if (!mProfileFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mProfileFragment, PROFILE);
@@ -243,6 +252,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
         if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
+        if (mAddNewMealArticleFragment != null) transaction.hide(mAddNewMealArticleFragment);
         if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
         if (!mCalendarFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mCalendarFragment, CALENDAR);
@@ -274,6 +284,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
         if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
+        if (mAddNewMealArticleFragment != null) transaction.hide(mAddNewMealArticleFragment);
 
         if (!mAddNewArticleFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mAddNewArticleFragment, ADDNEW_ARTICLE);
@@ -284,6 +295,36 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
         if (mAddNewArticlePresenter == null) {
             mAddNewArticlePresenter = new AddNewArticlePresenter(mAddNewArticleFragment, mAddNewFragment, schedules);
+        }
+        transaction.commit();
+    }
+
+    @Override
+    public void transToAddNewMealArticle(List<Meal> meals) {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
+            mFragmentManager.popBackStack();
+            mDetailPresenter.refreshDetailUi();
+        }
+
+        if (mAddNewMealArticleFragment == null) mAddNewMealArticleFragment = AddNewMealArticleFragment.newInstance();
+        if (mProfileFragment != null) transaction.hide(mProfileFragment);
+        if (mMainFragment != null) transaction.hide(mMainFragment);
+        if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
+        if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
+        if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
+        if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
+
+        if (!mAddNewMealArticleFragment.isAdded()) {
+            transaction.add(R.id.linearlayout_main_container, mAddNewMealArticleFragment, ADDNEW_MEAL_ARTICLE);
+        } else {
+            transaction.show(mAddNewMealArticleFragment);
+        }
+
+
+        if (mAddNewMealArticlePresenter == null) {
+            mAddNewMealArticlePresenter = new AddNewMealArticlePresenter(mAddNewMealArticleFragment,
+                    mAddNewFragment, mAddNewArticleFragment, meals);
         }
         transaction.commit();
     }
@@ -300,6 +341,8 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (mProfileFragment != null) transaction.hide(mProfileFragment);
         if (mMainFragment != null) transaction.hide(mMainFragment);
         if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
+        if (mAddNewMealArticleFragment != null) transaction.hide(mAddNewMealArticleFragment);
+        if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
 
         if (!mDateArticleFragment.isAdded()) {
@@ -318,7 +361,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
     @Override
     public void refreshAddNewUi() {
-        mAddNewFragment.refreshSchedule();
+        mAddNewFragment.refreshUi();
     }
 
     @Override
@@ -336,6 +379,13 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     @Override
     public void refreshCalendarFocus() {
         mCalendarPresenter.refresh();
+    }
+
+    @Override
+    public void refreshAddNewMealArticleUi() {
+        if (mAddNewMealArticleFragment != null) {
+            mAddNewMealArticleFragment.refreshUi();
+        }
     }
 
 }

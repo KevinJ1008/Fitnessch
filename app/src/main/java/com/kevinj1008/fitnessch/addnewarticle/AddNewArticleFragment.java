@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.kevinj1008.fitnessch.Fitnessch;
@@ -73,7 +74,8 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
         View root = inflater.inflate(R.layout.fragment_addnewarticle, container, false);
 
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview_add_new_article);
-        Button sendBtn = root.findViewById(R.id.add_new_article_btn);
+//        Button sendBtn = root.findViewById(R.id.add_new_article_btn);
+        ImageView sendBtn = root.findViewById(R.id.add_new_article_btn);
         mTitleEditText = root.findViewById(R.id.add_new_article_title_edittext);
         mContentEditText = root.findViewById(R.id.add_new_article_content_edittext);
         ConstraintLayout constraintLayout = root.findViewById(R.id.fragment_addnewarticle);

@@ -29,8 +29,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/addnew_schedule_title"
         app:layout_constraintLeft_toRightOf="@+id/addnew_schedule_title"
-        app:layout_constraintRight_toLeftOf="@id/addnew_schedule_btn"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/addnew_schedule_title"
+        android:layout_marginEnd="15dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:paddingTop="5dp"
@@ -44,10 +45,8 @@
         android:layout_width="@dimen/addnew_btn_width"
         android:layout_height="@dimen/addnew_btn_height"
         app:layout_constraintTop_toTopOf="@+id/addnew_schedule_title"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/addnew_schedule_edittext"
+        app:layout_constraintRight_toRightOf="@+id/addnew_schedule_edittext"
         app:layout_constraintBottom_toBottomOf="@id/addnew_schedule_title"
-        android:layout_marginEnd="15dp"
         android:layout_marginStart="10dp"
         android:shadowRadius="8"
         android:shadowDy="8"
@@ -55,6 +54,7 @@
         android:shadowColor="@color/addnew_btn_shadow_color"
         android:elevation="@dimen/addnew_btn_elevation"
         android:translationZ="@dimen/addnew_btn_translationz"
+        android:visibility="invisible"
         android:background="@drawable/addnew_btn_ripple"
         android:textColor="@color/addnew_text_color"
         android:textSize="14sp"
@@ -88,20 +88,22 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:inputType="number"
+        android:hint="KG"
+        android:textColorHint="@color/new_schedule_article_title_edit_color"
         android:textColor="@color/addnew_text_color"
         android:background="@drawable/addnew_edittext_background"/>
 
-    <TextView
-        android:id="@+id/addnew_schedule_weight_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/addnew_weight_edittext"
-        app:layout_constraintTop_toTopOf="@+id/addnew_weight_edittext"
-        app:layout_constraintBottom_toBottomOf="@+id/addnew_weight_edittext"
-        android:layout_marginStart="3dp"
-        android:textSize="12sp"
-        android:textColor="@color/addnew_text_color"
-        android:text="(KG)"/>
+    <!--<TextView-->
+        <!--android:id="@+id/addnew_schedule_weight_hint"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_constraintLeft_toRightOf="@id/addnew_weight_edittext"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/addnew_weight_edittext"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/addnew_weight_edittext"-->
+        <!--android:layout_marginStart="3dp"-->
+        <!--android:textSize="12sp"-->
+        <!--android:textColor="@color/addnew_text_color"-->
+        <!--android:text="(KG)"/>-->
 
     <TextView
         android:id="@+id/addnew_schedule_reps"
@@ -150,18 +152,29 @@
         <!--android:textColor="@color/white"-->
         <!--android:text="開始"/>-->
 
+
+
+    <!--<Chronometer-->
+        <!--android:id="@+id/addnew_timer"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/addnew_clock"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/addnew_clock"-->
+        <!--app:layout_constraintLeft_toLeftOf="@+id/addnew_clock"-->
+        <!--app:layout_constraintRight_toRightOf="@+id/addnew_clock"-->
+        <!--android:textColor="@color/addnew_text_color"-->
+        <!--android:textSize="14sp"-->
+        <!--android:visibility="invisible"/>-->
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/addnew_start_btn"
         android:layout_width="@dimen/addnew_btn_width"
-        android:layout_height="@dimen/addnew_btn_height"
+        android:layout_height="40dp"
         app:layout_constraintLeft_toRightOf="@id/addnew_schedule_weight"
         app:layout_constraintTop_toBottomOf="@id/addnew_schedule_weight"
         android:layout_marginTop="10dp"
-        android:elevation="@dimen/addnew_btn_elevation"
-        android:translationZ="@dimen/addnew_btn_translationz"
         android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/addnew_btn_ripple">
+        android:focusable="true">
 
         <TextView
             android:id="@+id/addnew_start_btn_text"
@@ -175,9 +188,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:visibility="invisible"
             android:textColor="@color/addnew_text_color"
             android:textSize="14sp"
             android:text="開始"/>
+
+        <ImageView
+            android:id="@+id/addnew_clock"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/clock_btn_selector" />
+
 
         <Chronometer
             android:id="@+id/addnew_timer"
@@ -211,12 +236,25 @@
         <!--android:textSize="14sp"-->
         <!--android:text="休息"/>-->
 
+    <ImageView
+        android:id="@+id/addnew_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="@id/addnew_reps_edittext"
+        app:layout_constraintRight_toRightOf="@+id/addnew_reps_edittext"
+        app:layout_constraintTop_toBottomOf="@id/addnew_schedule_reps"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/add_btn_selector" />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/addnew_rest_btn"
         android:layout_width="@dimen/addnew_btn_width"
         android:layout_height="@dimen/addnew_btn_height"
         app:layout_constraintLeft_toRightOf="@id/addnew_schedule_reps"
         app:layout_constraintTop_toBottomOf="@id/addnew_schedule_reps"
+        android:visibility="invisible"
         android:layout_marginTop="10dp"
         android:elevation="@dimen/addnew_btn_elevation"
         android:translationZ="@dimen/addnew_btn_translationz"
@@ -236,6 +274,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:visibility="invisible"
             android:textColor="@color/addnew_text_color"
             android:textSize="14sp"
             android:text="休息"/>
@@ -288,6 +327,18 @@
         android:background="@drawable/addnew_btn_ripple"
         android:textColor="@color/white"
         android:textSize="14sp"
+        android:visibility="invisible"
         android:text="完成"/>
+
+    <ImageView
+        android:id="@+id/addnew_schedule_next_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@id/addnew_btn"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/next_btn_selector" />
 
 </android.support.constraint.ConstraintLayout>

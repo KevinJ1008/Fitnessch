@@ -20,6 +20,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,9 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     private EditText mScheduleWeight;
     private EditText mScheduleReps;
     private Button mScheduleCompleteBtn;
+    private ImageView mClockBtn;
+    private ImageView mAddBtn;
+    private ImageView mNextBtn;
     private boolean isStartButtonClicked = false;
     private boolean isRestButtonClicked = false;
     private long mStartEscapeTime = 0;
@@ -73,7 +77,7 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     @Override
     public void onPause() {
         super.onPause();
-        mAddNewScheduleChildAdapter.clearData();
+//        mAddNewScheduleChildAdapter.clearData();
     }
 
     @Nullable
@@ -92,6 +96,9 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
         mScheduleWeight = root.findViewById(R.id.addnew_weight_edittext);
         mScheduleReps = root.findViewById(R.id.addnew_reps_edittext);
         mScheduleCompleteBtn = root.findViewById(R.id.addnew_schedule_complete_btn);
+        mClockBtn = root.findViewById(R.id.addnew_clock);
+        mAddBtn = root.findViewById(R.id.addnew_btn);
+        mNextBtn = root.findViewById(R.id.addnew_schedule_next_btn);
         ConstraintLayout constraintLayout = root.findViewById(R.id.childfragment_addnewschedule);
 
 
@@ -124,6 +131,8 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
         mRestBtn.setOnLongClickListener(longClickListener);
         mAddNewBtn.setOnClickListener(clickListener);
         mScheduleCompleteBtn.setOnClickListener(clickListener);
+        mAddBtn.setOnClickListener(clickListener);
+        mNextBtn.setOnClickListener(clickListener);
 
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview_addnew_schedule);
         recyclerView.setLayoutManager(new LinearLayoutManager(Fitnessch.getAppContext()));
@@ -141,10 +150,12 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                     mStartChronometer.setVisibility(View.VISIBLE);
                     mStartChronometer.setBase(SystemClock.elapsedRealtime() + mStartEscapeTime);
                     mStartChronometer.start();
-                    mStartText.setVisibility(View.INVISIBLE);
+                    mClockBtn.setVisibility(View.INVISIBLE);
+//                    mStartText.setVisibility(View.INVISIBLE);
                 } else {
                     isStartButtonClicked = false;
-                    mStartText.setVisibility(View.INVISIBLE);
+//                    mStartText.setVisibility(View.INVISIBLE);
+                    mClockBtn.setVisibility(View.INVISIBLE);
                     mStartChronometer.setVisibility(View.VISIBLE);
                     mStartEscapeTime = mStartChronometer.getBase() - SystemClock.elapsedRealtime();
                     mStartChronometer.stop();
@@ -163,7 +174,7 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                     mRestEscapeTime = mRestChronometer.getBase() - SystemClock.elapsedRealtime();
                     mRestChronometer.stop();
                 }
-            } else if (view.getId() == R.id.addnew_schedule_btn) {
+            } else if (view.getId() == R.id.addnew_btn) {
                 String scheduleTitle = mScheduleTitle.getText().toString();
                 String scheduleWeight = mScheduleWeight.getText().toString() + " KG";
                 String scheduleReps = "X " + mScheduleReps.getText().toString();
@@ -192,9 +203,27 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                 mScheduleTitle.clearFocus();
                 mScheduleWeight.clearFocus();
                 mScheduleReps.clearFocus();
-            } else if (view.getId() == R.id.addnew_schedule_complete_btn) {
+            } else if (view.getId() == R.id.addnew_schedule_next_btn) {
                 if (mAddNewScheduleChildAdapter.getScheduleList().size() > 0) {
+                    mScheduleTitle.getText().clear();
+                    mScheduleWeight.getText().clear();
+                    mScheduleReps.getText().clear();
+
+                    mScheduleTitle.clearFocus();
+                    mScheduleWeight.clearFocus();
+                    mScheduleReps.clearFocus();
+
                     ((FitnesschActivity) getActivity()).transToAddNewArticle(mAddNewScheduleChildAdapter.getScheduleList());
+                } else if (mAddNewScheduleChildAdapter.getScheduleMap().size() > 0) {
+                    mScheduleTitle.getText().clear();
+                    mScheduleWeight.getText().clear();
+                    mScheduleReps.getText().clear();
+
+                    mScheduleTitle.clearFocus();
+                    mScheduleWeight.clearFocus();
+                    mScheduleReps.clearFocus();
+
+                    ((FitnesschActivity) getActivity()).transToAddNewArticle(mAddNewScheduleChildAdapter.getNewScheduleList());
                 } else {
                     Toast.makeText(getContext(), "請輸入課表。", Toast.LENGTH_SHORT).show();
                 }
@@ -218,7 +247,8 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                 mStartChronometer.stop();
                 mStartEscapeTime = 0;
                 mStartChronometer.setVisibility(View.INVISIBLE);
-                mStartText.setVisibility(View.VISIBLE);
+                mClockBtn.setVisibility(View.VISIBLE);
+//                mStartText.setVisibility(View.VISIBLE);
                 return true;
             } else if (view.getId() == R.id.addnew_rest_btn) {
                 isRestButtonClicked = false;

@@ -59,17 +59,26 @@
         android:gravity="top"
         android:background="@drawable/addnew_edittext_background"/>
 
-    <Button
+    <!--<Button-->
+        <!--android:id="@+id/add_new_article_btn"-->
+        <!--android:layout_width="@dimen/addnew_btn_width"-->
+        <!--android:layout_height="@dimen/addnew_btn_height"-->
+        <!--app:layout_constraintRight_toRightOf="@id/add_new_article_title_edittext"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/add_new_article_content_edittext"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:text="發送"-->
+        <!--android:textColor="@color/addnew_text_color"-->
+        <!--android:textSize="14sp"-->
+        <!--android:background="@drawable/addnew_btn_ripple"/>-->
+
+    <ImageView
         android:id="@+id/add_new_article_btn"
-        android:layout_width="@dimen/addnew_btn_width"
-        android:layout_height="@dimen/addnew_btn_height"
+        android:layout_width="@dimen/size_all_adnew_btn"
+        android:layout_height="@dimen/size_all_adnew_btn"
         app:layout_constraintRight_toRightOf="@id/add_new_article_title_edittext"
         app:layout_constraintTop_toBottomOf="@id/add_new_article_content_edittext"
         android:layout_marginTop="15dp"
-        android:text="發送"
-        android:textColor="@color/addnew_text_color"
-        android:textSize="14sp"
-        android:background="@drawable/addnew_btn_ripple"/>
+        android:background="@drawable/send_article_btn_selector"/>
 
     <View
         android:id="@+id/add_new_article_separator"

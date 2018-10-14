@@ -143,7 +143,7 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
 
     @Override
     public void refresh() {
-        mAddNewView.refreshSchedule();
+        mAddNewView.refreshUi();
         mAddNewArticleView.refreshUi();
     }
 

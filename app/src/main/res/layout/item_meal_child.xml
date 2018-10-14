@@ -28,7 +28,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
             android:lines="1"
-            android:maxWidth="250dp"
+            android:maxWidth="220dp"
             android:ellipsize="end"
             android:textSize="25sp"
             android:textColor="@color/meal_child_text_color"
@@ -43,7 +43,7 @@
             android:layout_marginEnd="15dp"
             android:textSize="14sp"
             android:textColor="@color/meal_child_text_color"
-            tool:text="13:23"/>
+            tool:text="10 月 22 日"/>
 
         <TextView
             android:id="@+id/meal_child_content"

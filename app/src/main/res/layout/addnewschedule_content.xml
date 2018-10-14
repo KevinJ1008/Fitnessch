@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:paddingBottom="5dp">
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_marginBottom="10dp"
         android:textColor="@color/addnew_text_color"
         android:textSize="14sp"
-        android:text="120 KG"/>
+        tool:text="120 KG"/>
 
     <TextView
         android:id="@+id/addnew_reps_content"
@@ -30,6 +30,6 @@
         app:layout_constraintBottom_toBottomOf="@id/addnew_weight_content"
         android:textColor="@color/addnew_text_color"
         android:textSize="14sp"
-        android:text="X 12"/>
+        tool:text="X 12"/>
 
 </android.support.constraint.ConstraintLayout>

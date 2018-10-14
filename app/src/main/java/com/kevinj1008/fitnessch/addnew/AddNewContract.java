@@ -12,7 +12,7 @@ public interface AddNewContract {
 
         void showAddNewMealChildUi();
 
-        void refreshSchedule();
+        void refreshUi();
 
     }
 

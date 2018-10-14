@@ -6,6 +6,7 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.objects.Article;
@@ -51,6 +52,7 @@ public class DateArticlePresenter implements DateArticleContract.Presenter {
         String uid = mSharedPreferencesManager.getUserDbUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("articles")
+                .orderBy("create_time", Query.Direction.ASCENDING)
                 .whereEqualTo("user_id", uid)
                 .whereEqualTo("create_year", year)
                 .whereEqualTo("create_month", month)

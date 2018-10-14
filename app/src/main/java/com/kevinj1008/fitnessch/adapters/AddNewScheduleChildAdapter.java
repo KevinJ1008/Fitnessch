@@ -132,6 +132,21 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
         return mSchedules;
     }
 
+    public Map<String, List<Schedule>> getScheduleMap() {
+        return mStringListMap;
+    }
+
+    public List<Schedule> getNewScheduleList() {
+        Iterator iterator = mStringListMap.keySet().iterator();
+        while (iterator.hasNext()) {
+            String key = (String)iterator.next();
+            for (int i = 0 ; i < mStringListMap.get(key).size() ; ++i) {
+                mSchedules.add(mStringListMap.get(key).get(i));
+            }
+        }
+        return mSchedules;
+    }
+
     public void clearData() {
 //        int size = mSchedules.size();
         mSchedules.clear();
