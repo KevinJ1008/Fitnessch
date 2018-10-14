@@ -52,8 +52,6 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void loadArticles() {
-        if (!isLoading()) {
-            setLoading(true);
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("articles")
                     .orderBy("create_time", Query.Direction.ASCENDING)
@@ -160,7 +158,6 @@ public class MainPresenter implements MainContract.Presenter {
                     }
                 }
             });
-        }
     }
 
     @Override

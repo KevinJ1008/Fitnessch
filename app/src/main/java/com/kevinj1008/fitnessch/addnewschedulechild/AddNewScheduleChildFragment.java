@@ -191,7 +191,6 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
 //                    mSchedules.add(schedule);
                     mAddNewScheduleChildAdapter.updateData(schedule);
 
-                    mScheduleTitle.getText().clear();
                     mScheduleWeight.getText().clear();
                     mScheduleReps.getText().clear();
                 } else {

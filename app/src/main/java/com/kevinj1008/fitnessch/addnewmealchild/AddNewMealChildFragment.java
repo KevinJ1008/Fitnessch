@@ -136,7 +136,6 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
 
                     mAddNewMealChildAdapter.updateData(meal);
 
-                    mMealTitle.getText().clear();
                     mMealIngredient.getText().clear();
                     mMealCal.getText().clear();
                 } else {

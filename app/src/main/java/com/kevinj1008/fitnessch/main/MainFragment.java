@@ -1,9 +1,11 @@
 package com.kevinj1008.fitnessch.main;
 
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     private MainContract.Presenter mPresenter;
     private MainAdapter mMainAdapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public MainFragment() {
         // Requires empty public constructor
@@ -58,6 +61,8 @@ public class MainFragment extends Fragment implements MainContract.View {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview_main);
+        mSwipeRefreshLayout = root.findViewById(R.id.main_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(refreshListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(Fitnessch.getAppContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -102,6 +107,21 @@ public class MainFragment extends Fragment implements MainContract.View {
     public void refreshUi() {
         mMainAdapter.initData();
     }
+
+    private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            mSwipeRefreshLayout.setRefreshing(true);
+            mMainAdapter.initData();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPresenter.loadArticles();
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+            }, 1000);
+        }
+    };
 
 
 }
