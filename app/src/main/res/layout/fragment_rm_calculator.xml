@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rm_calculator_scroll_view"
+    android:orientation="vertical">
+
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/rm_calculator_page"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:paddingBottom="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/reset_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintTop_toTopOf="@id/set_weight_text"
+        app:layout_constraintBottom_toBottomOf="@id/set_weight_text"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/calculator_reset_btn_selector"/>
+
+    <TextView
+        android:id="@+id/set_weight_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="22sp"
+        android:textColor="@color/rm_calculator_text_gray_color"
+        android:text="設定重量"/>
+
+    <EditText
+        android:id="@+id/set_weight_edittext"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/set_weight_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:backgroundTint="@android:color/transparent"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textColor="@color/rm_calculator_text_white_color"
+        android:text="100"/>
+
+    <ImageView
+        android:id="@+id/plus_weight_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toRightOf="@id/set_weight_edittext"
+        app:layout_constraintTop_toTopOf="@id/set_weight_edittext"
+        app:layout_constraintBottom_toBottomOf="@id/set_weight_edittext"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/plus_weight_btn_selector"/>
+
+    <ImageView
+        android:id="@+id/minus_weight_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintRight_toLeftOf="@id/set_weight_edittext"
+        app:layout_constraintTop_toTopOf="@id/set_weight_edittext"
+        app:layout_constraintBottom_toBottomOf="@id/set_weight_edittext"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/minus_weight_btn_selector"/>
+
+    <TextView
+        android:id="@+id/performed_rep_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/set_weight_edittext"
+        app:layout_constraintLeft_toLeftOf="@id/set_weight_text"
+        app:layout_constraintRight_toRightOf="@id/set_weight_text"
+        android:layout_marginTop="55dp"
+        android:textSize="22sp"
+        android:textColor="@color/rm_calculator_text_gray_color"
+        android:text="設定次數"/>
+
+    <EditText
+        android:id="@+id/performed_rep_edittext"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/performed_rep_text"
+        app:layout_constraintLeft_toLeftOf="@id/performed_rep_text"
+        app:layout_constraintRight_toRightOf="@id/performed_rep_text"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:inputType="number"
+        android:backgroundTint="@android:color/transparent"
+        android:background="@android:color/transparent"
+        android:textSize="22sp"
+        android:textColor="@color/rm_calculator_text_white_color"
+        android:text="1"/>
+
+    <ImageView
+        android:id="@+id/plus_rep_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toLeftOf="@id/plus_weight_btn"
+        app:layout_constraintRight_toRightOf="@id/plus_weight_btn"
+        app:layout_constraintTop_toTopOf="@id/performed_rep_edittext"
+        app:layout_constraintBottom_toBottomOf="@id/performed_rep_edittext"
+        android:background="@drawable/plus_weight_btn_selector"/>
+
+    <ImageView
+        android:id="@+id/minus_rep_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toLeftOf="@id/minus_weight_btn"
+        app:layout_constraintRight_toRightOf="@id/minus_weight_btn"
+        app:layout_constraintTop_toTopOf="@id/performed_rep_edittext"
+        app:layout_constraintBottom_toBottomOf="@id/performed_rep_edittext"
+        android:background="@drawable/minus_weight_btn_selector"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/performed_rep_container"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@id/performed_rep_edittext"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rm_calculator_container_background">
+
+        <TextView
+            android:id="@+id/performed_rm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="90dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="26sp"
+            android:textColor="@color/rm_calculator_text_black_color"
+            android:text="1"/>
+
+        <TextView
+            android:id="@+id/rm_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/performed_rm"
+            app:layout_constraintBottom_toBottomOf="@id/performed_rm"
+            android:textSize="22sp"
+            android:textColor="@color/rm_calculator_text_gray_color"
+            android:text="RM"/>
+
+        <TextView
+            android:id="@+id/performed_weight_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="90dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="26sp"
+            android:textColor="@color/rm_calculator_text_black_color"
+            android:text="100"/>
+
+        <TextView
+            android:id="@+id/performed_weight_kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/performed_weight_text"
+            app:layout_constraintBottom_toBottomOf="@id/performed_weight_text"
+            android:layout_marginStart="3dp"
+            android:textSize="22sp"
+            android:textColor="@color/rm_calculator_text_gray_color"
+            android:text="kg"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/set_rm_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/performed_rep_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="55dp"
+        android:textSize="22sp"
+        android:textColor="@color/rm_calculator_text_gray_color"
+        android:text="設定 RM"/>
+
+    <EditText
+        android:id="@+id/rm_edittext"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/set_rm_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:inputType="number"
+        android:backgroundTint="@android:color/transparent"
+        android:background="@android:color/transparent"
+        android:textSize="22sp"
+        android:textColor="@color/rm_calculator_text_white_color"
+        android:text="1"/>
+
+    <ImageView
+        android:id="@+id/plus_rm_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toLeftOf="@id/plus_weight_btn"
+        app:layout_constraintRight_toRightOf="@id/plus_weight_btn"
+        app:layout_constraintTop_toTopOf="@id/rm_edittext"
+        app:layout_constraintBottom_toBottomOf="@id/rm_edittext"
+        android:background="@drawable/plus_weight_btn_selector"/>
+
+    <ImageView
+        android:id="@+id/minus_rm_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toLeftOf="@id/minus_weight_btn"
+        app:layout_constraintRight_toRightOf="@id/minus_weight_btn"
+        app:layout_constraintTop_toTopOf="@id/rm_edittext"
+        app:layout_constraintBottom_toBottomOf="@id/rm_edittext"
+        android:background="@drawable/minus_weight_btn_selector"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/rm_container"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@id/rm_edittext"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rm_calculator_container_background">
+
+        <TextView
+            android:id="@+id/rm_calculate_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="90dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="26sp"
+            android:textColor="@color/rm_calculator_text_black_color"
+            android:text="1"/>
+
+        <TextView
+            android:id="@+id/rm_calculate_text_rm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/rm_calculate_text"
+            app:layout_constraintBottom_toBottomOf="@id/rm_calculate_text"
+            android:textSize="22sp"
+            android:textColor="@color/rm_calculator_text_gray_color"
+            android:text="RM"/>
+
+        <TextView
+            android:id="@+id/rm_weight_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="90dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="26sp"
+            android:textColor="@color/rm_calculator_text_black_color"
+            android:text="100"/>
+
+        <TextView
+            android:id="@+id/rm_weight_kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/rm_weight_text"
+            app:layout_constraintBottom_toBottomOf="@id/rm_weight_text"
+            android:layout_marginStart="3dp"
+            android:textSize="22sp"
+            android:textColor="@color/rm_calculator_text_gray_color"
+            android:text="kg"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -65,4 +65,11 @@
     <!--Add New Schedule Article Item-->
     <color name="new_schedule_article_title_edit_color">#9dffffff</color>
 
+    <!--RM Calculator Item-->
+    <color name="rm_calculator_container_background_color">#ffffff</color>
+    <color name="rm_calculator_container_stroke_color">#ecb4b4</color>
+    <color name="rm_calculator_text_white_color">#ffffff</color>
+    <color name="rm_calculator_text_black_color">#000000</color>
+    <color name="rm_calculator_text_gray_color">#bcadad</color>
+
 </resources>

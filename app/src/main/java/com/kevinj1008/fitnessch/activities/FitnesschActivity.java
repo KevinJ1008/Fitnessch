@@ -15,13 +15,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.FitnesschContract;
 import com.kevinj1008.fitnessch.FitnesschPresenter;
 import com.kevinj1008.fitnessch.R;
@@ -221,6 +225,12 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
                 mPresenter.transToCalendar();
                 break;
 
+            case R.id.nav_rm_calculator:
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                Toast.makeText(Fitnessch.getAppContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
+//                mPresenter.transToRMCalculator();
+                break;
+
             case R.id.nav_profile:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 mPresenter.transToProfile();
@@ -244,10 +254,14 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         ConstraintLayout addNewMealArticlePage = findViewById(R.id.fragment_addnew_meal_article);
         ConstraintLayout addNewPage = findViewById(R.id.addnew_page);
         ConstraintLayout dateArticlePage = findViewById(R.id.date_article_page);
+        ConstraintLayout rmCalculatorPage = findViewById(R.id.rm_calculator_page);
         FrameLayout mainPage = findViewById(R.id.main_page);
 
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else if ((addNewPage != null && addNewPage.getVisibility() == View.VISIBLE) ||
+                (mainPage != null && mainPage.getVisibility() == View.VISIBLE)) {
+            backButtonHandler();
         } else if (profilePage != null && profilePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToMain();
         } else if (calendarPage != null && calendarPage.getVisibility() == View.VISIBLE) {
@@ -262,10 +276,9 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         } else if (dateArticlePage != null && dateArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToCalendar();
             mPresenter.refreshDateArticleUi();
-        } else if ((addNewPage != null && addNewPage.getVisibility() == View.VISIBLE) ||
-                (mainPage != null && mainPage.getVisibility() == View.VISIBLE)) {
-            backButtonHandler();
-        } else {
+        } else if (rmCalculatorPage != null && rmCalculatorPage.getVisibility() == View.VISIBLE) {
+            mPresenter.transToMain();
+        }  else {
             super.onBackPressed();
         }
     }

@@ -14,6 +14,8 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -60,6 +62,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private static final int RC_SIGN_IN = 9001;
     public SharedPreferencesManager mSharedPreferencesManager;
@@ -75,6 +78,8 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Transition explode = TransitionInflater.from(this).inflateTransition(R.transition.explode);
+//        getWindow().setExitTransition(explode);
         setContentView(R.layout.activity_login);
 
         setLoginStatusBar();
@@ -85,8 +90,9 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         configureGoogleSignIn();
 
         mFirebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (isUserTokenExist()) {
+        if (mFirebaseUser != null || isUserTokenExist()) {
             if (isNetworkAvailable()) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
