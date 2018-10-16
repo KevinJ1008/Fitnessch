@@ -81,7 +81,7 @@ public class DetailAdapter extends RecyclerView.Adapter {
 
             ((DetailMainItemViewHolder) holder).mArticleTitle.setText(mArticle.getTitle());
 
-            String date = new SimpleDateFormat("yyyy 年 MM 月 dd 日 HH：mm")
+            String date = new SimpleDateFormat("yyyy 年 MM 月 dd 日")
                     .format(new Date(mArticle.getCreatedTime() * 1000L));
             ((DetailMainItemViewHolder) holder).mArticleCreateTime.setText(date);
 

@@ -89,10 +89,10 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 
         configureGoogleSignIn();
 
-        mFirebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (mFirebaseUser != null || isUserTokenExist()) {
+        if (mFirebaseUser != null) {
             if (isNetworkAvailable()) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -296,7 +296,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
     protected void onStart() {
         super.onStart();
         if (mAuthStateListener != null) {
-            FirebaseAuth.getInstance().signOut();
+//            FirebaseAuth.getInstance().signOut();
         }
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
@@ -306,6 +306,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         super.onStop();
         if (mAuthStateListener != null) {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+            Log.d(Constants.TAG, "remove Auth Listener ");
         }
     }
 
