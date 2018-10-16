@@ -189,8 +189,8 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                     user.put("id_token", mGoogleIdToken);
                     user.put("joined_time", FieldValue.serverTimestamp());
                     user.put("db_uid", uid);
-                    user.put("height", "0 CM");
-                    user.put("weight", "0 KG");
+                    user.put("height", "0");
+                    user.put("weight", "0");
                     user.put("info", "...");
 
                     db.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {

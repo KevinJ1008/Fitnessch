@@ -23,6 +23,10 @@
         </activity>
         <activity android:name=".activities.FitnesschActivity"/>
         <activity android:name=".activities.BaseActivity"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="933e65789ac2948fa00deff7f2d8ac3da14fc643"
+            />
     </application>
 
 </manifest>

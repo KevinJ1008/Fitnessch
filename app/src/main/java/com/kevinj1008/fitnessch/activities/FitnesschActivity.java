@@ -17,12 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.kevinj1008.fitnessch.Fitnessch;
@@ -39,6 +41,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import io.fabric.sdk.android.Fabric;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -57,8 +60,17 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         mPresenter = new FitnesschPresenter(this, getSupportFragmentManager());
         init();
+
+//        Button crashButton = findViewById(R.id.test_crash_btn);
+//        crashButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Crashlytics.getInstance().crash();
+//            }
+//        });
 
     }
 
@@ -225,11 +237,11 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
                 mPresenter.transToCalendar();
                 break;
 
-            case R.id.nav_rm_calculator:
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-                Toast.makeText(Fitnessch.getAppContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
-//                mPresenter.transToRMCalculator();
-                break;
+//            case R.id.nav_rm_calculator:
+//                mDrawerLayout.closeDrawer(GravityCompat.START);
+//                Toast.makeText(Fitnessch.getAppContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
+////                mPresenter.transToRMCalculator();
+//                break;
 
             case R.id.nav_profile:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -269,10 +281,10 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
             mPresenter.refreshCalendarFocus();
         } else if (addNewArticlePage != null && addNewArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToAddNew();
-            mPresenter.refreshAddNewArticleUi();
+//            mPresenter.refreshAddNewArticleUi();
         } else if (addNewMealArticlePage != null && addNewMealArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToAddNew();
-            mPresenter.refreshAddNewMealArticleUi();
+//            mPresenter.refreshAddNewMealArticleUi();
         } else if (dateArticlePage != null && dateArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToCalendar();
             mPresenter.refreshDateArticleUi();
@@ -296,6 +308,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
                     mPresenter.transToMain();
                     mPresenter.refreshAddNewUi();
                     mPresenter.refreshAddNewArticleUi();
+                    mPresenter.refreshAddNewMealArticleUi();
                 }
             });
             alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {

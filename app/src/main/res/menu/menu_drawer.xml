@@ -27,10 +27,10 @@
                 android:id="@+id/nav_calendar"
                 android:icon="@drawable/nav_calendaricon"
                 android:title="@string/all_calendar" />
-            <item
-                android:id="@+id/nav_rm_calculator"
-                android:icon="@drawable/nav_rm_calculator"
-                android:title="@string/all_rm_calculator"/>
+            <!--<item-->
+                <!--android:id="@+id/nav_rm_calculator"-->
+                <!--android:icon="@drawable/nav_rm_calculator"-->
+                <!--android:title="@string/all_rm_calculator"/>-->
             <item
                 android:id="@+id/nav_profile"
                 android:icon="@drawable/nav_profileicon"

@@ -47,6 +47,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private TextView mProfileHeight;
     private TextView mProfileWeight;
     private TextView mProfileInfo;
+    private TextView mProfileHeightUnit;
+    private TextView mProfileWeightUnit;
     private SharedPreferencesManager mSharedPreferencesManager;
 
     private ScheduleChildFragment mScheduleChildFragment;
@@ -115,6 +117,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         mProfileHeight = root.findViewById(R.id.profile_height);
         mProfileWeight = root.findViewById(R.id.profile_weight);
         mProfileInfo = root.findViewById(R.id.profile_info);
+        mProfileHeightUnit = root.findViewById(R.id.profile_height_unit);
+        mProfileWeightUnit = root.findViewById(R.id.profile_weight_unit);
         ConstraintLayout profileLayout = root.findViewById(R.id.profile_page);
 
         mProfileEditBtn.setOnClickListener(clickListener);
@@ -181,7 +185,9 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         public void onClick(View view) {
             if (view.getId() == R.id.profile_edit_btn) {
                 mProfileHeight.setVisibility(View.INVISIBLE);
+                mProfileHeightUnit.setVisibility(View.INVISIBLE);
                 mProfileWeight.setVisibility(View.INVISIBLE);
+                mProfileWeightUnit.setVisibility(View.INVISIBLE);
                 mProfileInfo.setVisibility(View.INVISIBLE);
                 mProfileEditBtn.setVisibility(View.INVISIBLE);
                 mProfileConfirmBtn.setVisibility(View.VISIBLE);
@@ -196,14 +202,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
             } else if (view.getId() == R.id.profile_confirm_btn) {
                 String height = mProfileEditHeight.getText().toString();
-                if (height.contains("[cm|CM]")) {
-                    height = height.replace("[cm|CM]", "");
-                }
-
                 String weight = mProfileEditWeight.getText().toString();
-                if (weight.contains("[kg|KG]")) {
-                    weight = weight.replace("[kg|KG]", "");
-                }
                 String info = mProfileEditInfo.getText().toString();
 
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -226,7 +225,9 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                     mProfileEditInfo.setVisibility(View.INVISIBLE);
 
                     mProfileHeight.setVisibility(View.VISIBLE);
+                    mProfileHeightUnit.setVisibility(View.VISIBLE);
                     mProfileWeight.setVisibility(View.VISIBLE);
+                    mProfileWeightUnit.setVisibility(View.VISIBLE);
                     mProfileInfo.setVisibility(View.VISIBLE);
                     mProfileEditBtn.setVisibility(View.VISIBLE);
                     mProfileConfirmBtn.setVisibility(View.INVISIBLE);
@@ -247,7 +248,9 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 mProfileEditInfo.setVisibility(View.INVISIBLE);
 
                 mProfileHeight.setVisibility(View.VISIBLE);
+                mProfileHeightUnit.setVisibility(View.VISIBLE);
                 mProfileWeight.setVisibility(View.VISIBLE);
+                mProfileWeightUnit.setVisibility(View.VISIBLE);
                 mProfileInfo.setVisibility(View.VISIBLE);
                 mProfileEditBtn.setVisibility(View.VISIBLE);
                 mProfileConfirmBtn.setVisibility(View.INVISIBLE);

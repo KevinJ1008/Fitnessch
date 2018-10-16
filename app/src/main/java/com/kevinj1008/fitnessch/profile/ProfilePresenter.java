@@ -103,18 +103,9 @@ public class ProfilePresenter implements ProfileContract.Presenter {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> info = new HashMap<>();
-        if (user.getHeight().contains("CM")) {
-            info.put("height", user.getHeight());
-        } else {
-            info.put("height", user.getHeight() + " CM");
-        }
 
-        if (user.getWeight().contains("KG")) {
-            info.put("weight", user.getWeight());
-        } else {
-            info.put("weight", user.getWeight() + " KG");
-        }
-
+        info.put("height", user.getHeight());
+        info.put("weight", user.getWeight());
         info.put("info", user.getInfo());
 
         db.collection("users").document(self).update(info).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -148,14 +139,14 @@ public class ProfilePresenter implements ProfileContract.Presenter {
 //                        String source = snapshot != null && snapshot.getMetadata().hasPendingWrites() ? "Local" : "Server";
 //                        if (source.equals("Server")) {
                             for (DocumentChange documentChange  : snapshot.getDocumentChanges()) {
-                                String weight = "0 KG";
+                                String weight = "0";
                                 try {
                                     weight = documentChange.getDocument().getData().get("weight").toString();
                                 } catch (Exception e1) {
                                     e1.printStackTrace();
                                 }
 
-                                String height = "0 CM";
+                                String height = "0";
                                 try {
                                     height = documentChange.getDocument().getData().get("height").toString();
                                 } catch (Exception e1) {

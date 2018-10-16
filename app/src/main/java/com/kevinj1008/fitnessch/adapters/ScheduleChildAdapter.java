@@ -13,6 +13,7 @@ import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.schedulechild.ScheduleChildContract;
 import com.kevinj1008.fitnessch.api.beans.ScheduleArticles;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.util.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +36,6 @@ public class ScheduleChildAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext = parent.getContext();
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_schedule_child, parent, false);
         return new ScheduleItemViewHolder(view);
     }

@@ -46,6 +46,15 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/background_image_04" />
 
+        <!--<Button-->
+            <!--android:id="@+id/test_crash_btn"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginEnd="20dp"-->
+            <!--android:layout_marginBottom="200dp"/>-->
+
         <LinearLayout
             android:id="@+id/linearlayout_main_container"
             android:layout_width="match_parent"

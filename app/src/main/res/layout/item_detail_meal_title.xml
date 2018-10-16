@@ -23,7 +23,7 @@
         android:maxLines="1"
         android:maxWidth="280dp"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:textSize="18sp"
         android:textColor="@color/addnew_text_color"
         toole:text="水煮雞胸肉.................................................................."/>

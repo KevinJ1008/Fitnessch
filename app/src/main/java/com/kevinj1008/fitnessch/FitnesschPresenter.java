@@ -401,13 +401,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     }
 
     @Override
-    public void refreshAddNewArticleUi() {
-        if (mAddNewArticleFragment != null) {
-            mAddNewArticleFragment.refreshUi();
-        }
-    }
-
-    @Override
     public void refreshDateArticleUi() {
         mDateArticlePresenter.refreshDateUi();
     }
@@ -421,6 +414,13 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     public void refreshAddNewMealArticleUi() {
         if (mAddNewMealArticleFragment != null) {
             mAddNewMealArticleFragment.refreshUi();
+        }
+    }
+
+    @Override
+    public void refreshAddNewArticleUi() {
+        if (mAddNewArticleFragment != null) {
+            mAddNewArticleFragment.refreshUi();
         }
     }
 

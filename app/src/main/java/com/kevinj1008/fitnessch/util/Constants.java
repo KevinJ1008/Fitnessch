@@ -24,4 +24,10 @@ public class Constants {
     public static final int VIEWTYPE_DETAIL_MEAL_TITLE = 14;
     public static final int VIEWTYPE_DETAIL_MEAL_CONTENT = 15;
 
+    public static final int VIEWTYPE_PROFILE_SCHEDULE_DEFAULT = 16;
+    public static final int VIEWTYPE_PROFILE_SCHEDULE_CHILD = 17;
+
+    public static final int VIEWTYPE_PROFILE_MEAL_DEFAULT = 18;
+    public static final int VIEWTYPE_PROFILE_MEAL_CHILD = 19;
+
 }

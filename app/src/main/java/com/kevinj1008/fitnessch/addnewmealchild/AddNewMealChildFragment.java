@@ -115,6 +115,11 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
     @Override
     public void refreshUi() {
         mAddNewMealChildAdapter.clearData();
+
+        mMealTitle.getText().clear();
+        mMealIngredient.getText().clear();
+        mMealCal.getText().clear();
+
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -123,21 +128,28 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
             if (view.getId() == R.id.addnew_meal_btn_iamge) {
                 String title = mMealTitle.getText().toString();
                 String ingredient = mMealIngredient.getText().toString();
-                String cal = mMealCal.getText().toString() + " cal";
+                String cal = mMealCal.getText().toString();
 
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                 if (!title.equals("") && !ingredient.equals("") && !cal.equals("") && !cal.startsWith("0")) {
-                    Meal meal = new Meal();
-                    meal.setMealTitle(title);
-                    meal.setMealIngredient(ingredient);
-                    meal.setMealCal(cal);
+                    if (!title.contains(" ") && !ingredient.contains(" ") &!cal.contains(" ")) {
+                        Meal meal = new Meal();
+                        meal.setMealTitle(title);
+                        meal.setMealIngredient(ingredient);
+                        meal.setMealCal(cal + " cal");
 
-                    mAddNewMealChildAdapter.updateData(meal);
+                        mAddNewMealChildAdapter.updateData(meal);
 
-                    mMealIngredient.getText().clear();
-                    mMealCal.getText().clear();
+                        mMealIngredient.getText().clear();
+                        mMealCal.getText().clear();
+                    } else {
+                        Toast.makeText(getContext(), "請勿輸入空白。", Toast.LENGTH_SHORT).show();
+                        mMealTitle.clearFocus();
+                        mMealIngredient.clearFocus();
+                        mMealCal.clearFocus();
+                    }
                 } else {
                     Toast.makeText(getContext(), "請輸入菜單、食材及熱量。", Toast.LENGTH_SHORT).show();
                     mMealTitle.clearFocus();

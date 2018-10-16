@@ -87,7 +87,7 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
 
         mStartChronometer = root.findViewById(R.id.addnew_timer);
         mStartText = root.findViewById(R.id.addnew_start_btn_text);
-        mStartBtn = root.findViewById(R.id.addnew_start_btn);
+        mStartBtn = root.findViewById(R.id.addnew_timer_btn);
         mRestChronometer = root.findViewById(R.id.addnew_rest_timer);
         mRestText = root.findViewById(R.id.addnew_rest_btn_text);
         mRestBtn = root.findViewById(R.id.addnew_rest_btn);
@@ -144,13 +144,14 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.addnew_start_btn) {
+            if (view.getId() == R.id.addnew_timer_btn) {
                 if (!isStartButtonClicked) {
                     isStartButtonClicked = true;
                     mStartChronometer.setVisibility(View.VISIBLE);
                     mStartChronometer.setBase(SystemClock.elapsedRealtime() + mStartEscapeTime);
                     mStartChronometer.start();
                     mClockBtn.setVisibility(View.INVISIBLE);
+                    Toast.makeText(Fitnessch.getAppContext(), "長按可歸零。", Toast.LENGTH_SHORT).show();
 //                    mStartText.setVisibility(View.INVISIBLE);
                 } else {
                     isStartButtonClicked = false;
@@ -176,23 +177,31 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                 }
             } else if (view.getId() == R.id.addnew_btn) {
                 String scheduleTitle = mScheduleTitle.getText().toString();
-                String scheduleWeight = mScheduleWeight.getText().toString() + " KG";
-                String scheduleReps = "X " + mScheduleReps.getText().toString();
+                String scheduleWeight = mScheduleWeight.getText().toString();
+                String scheduleReps = mScheduleReps.getText().toString();
 
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                 if (!"".equals(scheduleTitle) && !scheduleWeight.equals("") && !scheduleWeight.startsWith("0")
                         && !scheduleReps.equals("") && !scheduleReps.startsWith("0")) {
-                    Schedule schedule = new Schedule();
-                    schedule.setScheduleTitle(scheduleTitle);
-                    schedule.setScheduleWeight(scheduleWeight);
-                    schedule.setScheduleReps(scheduleReps);
+                    if (!scheduleTitle.contains(" ") && !scheduleWeight.contains(" ")
+                            && !scheduleReps.contains(" ")) {
+                        Schedule schedule = new Schedule();
+                        schedule.setScheduleTitle(scheduleTitle);
+                        schedule.setScheduleWeight(scheduleWeight + " KG");
+                        schedule.setScheduleReps("X " + scheduleReps);
 //                    mSchedules.add(schedule);
-                    mAddNewScheduleChildAdapter.updateData(schedule);
+                        mAddNewScheduleChildAdapter.updateData(schedule);
 
-                    mScheduleWeight.getText().clear();
-                    mScheduleReps.getText().clear();
+                        mScheduleWeight.getText().clear();
+                        mScheduleReps.getText().clear();
+                    } else {
+                        Toast.makeText(getContext(), "請勿輸入空白。", Toast.LENGTH_SHORT).show();
+                        mScheduleTitle.clearFocus();
+                        mScheduleWeight.clearFocus();
+                        mScheduleReps.clearFocus();
+                    }
                 } else {
                     Toast.makeText(getContext(), "請輸入項目、重量及次數。", Toast.LENGTH_SHORT).show();
                     mScheduleTitle.clearFocus();
@@ -240,13 +249,14 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     private View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View view) {
-            if (view.getId() == R.id.addnew_start_btn) {
+            if (view.getId() == R.id.addnew_timer_btn) {
                 isStartButtonClicked = false;
                 mStartChronometer.setBase(SystemClock.elapsedRealtime());
                 mStartChronometer.stop();
                 mStartEscapeTime = 0;
                 mStartChronometer.setVisibility(View.INVISIBLE);
                 mClockBtn.setVisibility(View.VISIBLE);
+                Toast.makeText(Fitnessch.getAppContext(), "碼表已歸零。", Toast.LENGTH_SHORT).show();
 //                mStartText.setVisibility(View.VISIBLE);
                 return true;
             } else if (view.getId() == R.id.addnew_rest_btn) {
@@ -279,6 +289,10 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     @Override
     public void refreshUi() {
         mAddNewScheduleChildAdapter.clearData();
+
+        mScheduleTitle.getText().clear();
+        mScheduleReps.getText().clear();
+        mScheduleWeight.getText().clear();
     }
 
     @Override

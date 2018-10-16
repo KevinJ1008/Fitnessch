@@ -138,7 +138,7 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                if (!title.equals("") && !content.equals("")) {
+                if (!title.equals("") && !title.startsWith(" ") && !content.equals("") &&!content.startsWith(" ")) {
                     mPresenter.sendSchedule(title, content);
                     mTitleEditText.getText().clear();
                     mContentEditText.getText().clear();
