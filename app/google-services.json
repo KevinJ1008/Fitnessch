@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "998262941163-lf3a269v7ku6b3umnto8ibmp5tbgjefi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kevinj1008.fitnessch",
+            "certificate_hash": "115d2489dbb44326c4ff2c2bcc7deffd755f914c"
+          }
+        },
+        {
+          "client_id": "998262941163-h27r67bjt40dh2rigvc3t9pq2k40bnk8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kevinj1008.fitnessch",
+            "certificate_hash": "cd01604d981df79f402e4216456bee0e7573d9a4"
+          }
+        },
+        {
+          "client_id": "998262941163-nlgqisdm2igju2smshr10nlhprg5ng0h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kevinj1008.fitnessch",
+            "certificate_hash": "0bc3d4587f0688ff96fd9fcaf119a92ae3134598"
+          }
+        },
+        {
           "client_id": "998262941163-d047oj5o2uur2di3f6sp4k2pll729rlt.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +53,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998262941163-lpqkbdstk691apus55v46oaadpdgh732.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

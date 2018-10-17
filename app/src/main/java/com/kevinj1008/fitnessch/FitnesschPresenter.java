@@ -418,6 +418,13 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     }
 
     @Override
+    public void refreshDetailUi() {
+        if (mDetailPresenter != null) {
+            mDetailPresenter.refreshDetailUi();
+        }
+    }
+
+    @Override
     public void refreshAddNewArticleUi() {
         if (mAddNewArticleFragment != null) {
             mAddNewArticleFragment.refreshUi();

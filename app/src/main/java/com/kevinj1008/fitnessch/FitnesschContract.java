@@ -56,6 +56,8 @@ public interface FitnesschContract {
 
         void refreshAddNewMealArticleUi();
 
+        void refreshDetailUi();
+
 //        void transToChatRoom(Message message, User user);
 
 //        void refreshChatFragmentUiPresenter();

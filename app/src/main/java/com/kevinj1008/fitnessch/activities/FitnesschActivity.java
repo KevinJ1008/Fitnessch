@@ -267,6 +267,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         ConstraintLayout addNewPage = findViewById(R.id.addnew_page);
         ConstraintLayout dateArticlePage = findViewById(R.id.date_article_page);
         ConstraintLayout rmCalculatorPage = findViewById(R.id.rm_calculator_page);
+        ConstraintLayout detailPage = findViewById(R.id.detail_page);
         FrameLayout mainPage = findViewById(R.id.main_page);
 
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -291,6 +292,9 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         } else if (rmCalculatorPage != null && rmCalculatorPage.getVisibility() == View.VISIBLE) {
             mPresenter.transToMain();
         }  else {
+            if (detailPage != null && detailPage.getVisibility() == View.VISIBLE) {
+                mPresenter.refreshDetailUi();
+            }
             super.onBackPressed();
         }
     }
