@@ -4,6 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/add_new_meal_container"
+    android:clickable="true"
+    android:focusable="true"
     android:paddingBottom="5dp">
 
     <TextView

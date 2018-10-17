@@ -1,6 +1,10 @@
 package com.kevinj1008.fitnessch.adapters;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,10 +26,12 @@ public class AddNewMealChildAdapter extends RecyclerView.Adapter {
 
     private List<Meal> mMeals;
     private Map<String, List<Meal>> mStringListMap;
+    private Context mContext;
 
-    public AddNewMealChildAdapter(List<Meal> meals) {
+    public AddNewMealChildAdapter(List<Meal> meals, Context context) {
         this.mMeals = meals;
         mStringListMap = new HashMap<>();
+        this.mContext = context;
     }
 
     @NonNull
@@ -42,10 +48,12 @@ public class AddNewMealChildAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (position == 0) {
-            ((MealTitleItemViewHolder) holder).mSeparator.setVisibility(View.INVISIBLE);
-        }
         if (holder instanceof MealTitleItemViewHolder) {
+            if (position == 0) {
+                ((MealTitleItemViewHolder) holder).mSeparator.setVisibility(View.INVISIBLE);
+            } else {
+                ((MealTitleItemViewHolder) holder).mSeparator.setVisibility(View.VISIBLE);
+            }
             ((MealTitleItemViewHolder) holder).mMealTitle.setText(mMeals.get(position).getMealTitle());
         } else if (holder instanceof MealContentItemViewHolder){
             ((MealContentItemViewHolder) holder).mIngredient.setText(mMeals.get(position).getMealIngredient());
@@ -61,7 +69,7 @@ public class AddNewMealChildAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         String type = mMeals.get(position).getMealType();
-        if (type.equals("CONTENT")) {
+        if ("CONTENT".equals(type)) {
             return Constants.VIEWTYPE_ADDNEW_MEAL_CONTENT;
         } else {
             return Constants.VIEWTYPE_ADDNEW_MEAL_TITLE;
@@ -81,17 +89,67 @@ public class AddNewMealChildAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private class MealContentItemViewHolder extends RecyclerView.ViewHolder {
+    private class MealContentItemViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
         private TextView mIngredient;
         private TextView mCal;
+        private ConstraintLayout mMealContentContainer;
 
         public MealContentItemViewHolder(View itemView) {
             super(itemView);
 
             mIngredient = itemView.findViewById(R.id.addnew_ingredient_content);
             mCal = itemView.findViewById(R.id.addnew_cal_content);
+            mMealContentContainer = itemView.findViewById(R.id.add_new_meal_container);
+
+            mMealContentContainer.setOnLongClickListener(this);
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            String type = mMeals.get(getAdapterPosition()).getMealType();
+            if (view.getId() == R.id.add_new_meal_container) {
+                if ("CONTENT".equals(type)) {
+                    deleteDialog(getAdapterPosition());
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            return false;
+        }
+    }
+
+    private void deleteDialog(final int position) {
+        AlertDialog.Builder dialogAlert = new AlertDialog.Builder(mContext);
+        dialogAlert.setTitle("確定刪除？");
+        dialogAlert.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                removeItem(position);
+            }
+        });
+        dialogAlert.setNegativeButton("否", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        dialogAlert.show();
+    }
+
+    private void removeItem(int position) {
+        String title = mMeals.get(position).getMealTitle();
+        if (mStringListMap.get(title).size() == 2) {
+            mStringListMap.remove(title);
+            for (int i = position; i >= position - 1; i--) {
+                mMeals.remove(i);
+            }
+        } else {
+            mStringListMap.get(title).remove(mMeals.get(position));
+            mMeals.remove(position);
+        }
+        notifyDataSetChanged();
     }
 
     public void updateData(Meal meal) {

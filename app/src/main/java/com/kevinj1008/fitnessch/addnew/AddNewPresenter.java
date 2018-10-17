@@ -50,8 +50,8 @@ public class AddNewPresenter implements AddNewContract.Presenter {
     }
 
     @Override
-    public void refreshLikedArticles() {
-
+    public void refreshUi() {
+        mAddNewView.refreshUi();
     }
 
 }

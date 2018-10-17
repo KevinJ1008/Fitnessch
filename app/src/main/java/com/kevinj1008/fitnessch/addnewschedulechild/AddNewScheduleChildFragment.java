@@ -71,7 +71,7 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSchedules = new ArrayList<>();
-        mAddNewScheduleChildAdapter = new AddNewScheduleChildAdapter(mSchedules);
+        mAddNewScheduleChildAdapter = new AddNewScheduleChildAdapter(mSchedules, getContext());
     }
 
     @Override
@@ -183,8 +183,8 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                if (!"".equals(scheduleTitle) && !scheduleWeight.equals("") && !scheduleWeight.startsWith("0")
-                        && !scheduleReps.equals("") && !scheduleReps.startsWith("0")) {
+                if (!"".equals(scheduleTitle) && !"".equals(scheduleWeight) && !scheduleWeight.startsWith("0")
+                        && !"".equals(scheduleReps) && !scheduleReps.startsWith("0")) {
                     if (!scheduleTitle.contains(" ") && !scheduleWeight.contains(" ")
                             && !scheduleReps.contains(" ")) {
                         Schedule schedule = new Schedule();

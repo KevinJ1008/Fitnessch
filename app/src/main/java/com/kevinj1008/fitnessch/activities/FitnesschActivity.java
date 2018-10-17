@@ -295,7 +295,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
             mPresenter.refreshDateArticleUi();
         } else if (rmCalculatorPage != null && rmCalculatorPage.getVisibility() == View.VISIBLE) {
             mPresenter.transToMain();
-        }  else {
+        } else {
             if (detailPage != null && detailPage.getVisibility() == View.VISIBLE) {
                 mPresenter.refreshDetailUi();
             }

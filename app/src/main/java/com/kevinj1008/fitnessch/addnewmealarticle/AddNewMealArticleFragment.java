@@ -9,6 +9,9 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +86,9 @@ public class AddNewMealArticleFragment extends Fragment implements AddNewMealArt
         mTitleEditText = root.findViewById(R.id.add_new_meal_article_title_edittext);
         mContentEditText = root.findViewById(R.id.add_new_meal_article_content_edittext);
         ConstraintLayout constraintLayout = root.findViewById(R.id.fragment_addnew_meal_article);
+
+        mTitleEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(15)});
+        mTitleEditText.addTextChangedListener(textWatcher);
 
 //        sendBtn.setOnClickListener(clickListener);
         constraintLayout.setOnClickListener(clickListener);
@@ -173,5 +179,24 @@ public class AddNewMealArticleFragment extends Fragment implements AddNewMealArt
         }
     };
 
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String editText = mTitleEditText.getText().toString();
+            if (editText.length() >= 15) {
+                Toast.makeText(Fitnessch.getAppContext(), "標題不可多於 15 個字元", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
 }

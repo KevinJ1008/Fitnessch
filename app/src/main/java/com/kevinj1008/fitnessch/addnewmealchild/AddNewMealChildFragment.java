@@ -54,7 +54,7 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
         super.onCreate(savedInstanceState);
 
         mMeals = new ArrayList<>();
-        mAddNewMealChildAdapter = new AddNewMealChildAdapter(mMeals);
+        mAddNewMealChildAdapter = new AddNewMealChildAdapter(mMeals, getContext());
     }
 
     @Nullable
@@ -133,7 +133,7 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                if (!title.equals("") && !ingredient.equals("") && !cal.equals("") && !cal.startsWith("0")) {
+                if (!"".equals(title) && !"".equals(ingredient) && !"".equals(cal) && !cal.startsWith("0")) {
                     if (!title.contains(" ") && !ingredient.contains(" ") &!cal.contains(" ")) {
                         Meal meal = new Meal();
                         meal.setMealTitle(title);

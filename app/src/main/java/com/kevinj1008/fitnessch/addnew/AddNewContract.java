@@ -24,7 +24,7 @@ public interface AddNewContract {
 
         void transToAddNewMealChild();
 
-        void refreshLikedArticles();
+        void refreshUi();
 
 //        void setupPresenter(ScheduleChildFragment fragment, ScheduleChildPresenter presenter);
     }

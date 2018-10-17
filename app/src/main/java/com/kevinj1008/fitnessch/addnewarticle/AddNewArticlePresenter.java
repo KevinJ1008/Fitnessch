@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.addnew.AddNewContract;
+import com.kevinj1008.fitnessch.addnewmealarticle.AddNewMealArticleContract;
 import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildContract;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.util.Constants;
@@ -31,6 +32,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
 
     private AddNewArticleContract.View mAddNewArticleView;
+    private AddNewMealArticleContract.View mAddNewMealArticleView;
     private AddNewScheduleChildContract.View mAddNewScheduleChildView;
     private AddNewContract.View mAddNewView;
     private List<Schedule> mSchedules;
@@ -38,9 +40,12 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
     private int mlastVisibleItemPosition;
     private int mfirstVisibleItemPosition;
 
-    public AddNewArticlePresenter(AddNewArticleContract.View addNewArticleView, AddNewContract.View addNewView, List<Schedule> schedules) {
+    public AddNewArticlePresenter(AddNewArticleContract.View addNewArticleView, AddNewContract.View addNewView, AddNewMealArticleContract.View addNewMealArticleView, List<Schedule> schedules) {
         mAddNewArticleView = checkNotNull(addNewArticleView, "addNewArticleView cannot be null!");
         mAddNewView = checkNotNull(addNewView, "addNewView cannot be null!");
+        if (addNewMealArticleView != null) {
+            mAddNewMealArticleView = checkNotNull(addNewMealArticleView, "addNewMealArticleView cannot be null!");
+        }
         mAddNewArticleView.setPresenter(this);
         mSchedules = schedules;
         mSharedPreferencesManager = new SharedPreferencesManager(Fitnessch.getAppContext());
@@ -145,6 +150,9 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
     public void refresh() {
         mAddNewView.refreshUi();
         mAddNewArticleView.refreshUi();
+        if (mAddNewMealArticleView != null) {
+            mAddNewMealArticleView.refreshUi();
+        }
     }
 
 
