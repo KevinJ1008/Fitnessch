@@ -37,7 +37,7 @@
     <!-- Main items-->
     <dimen name="space_main_item">1dp</dimen>
     <dimen name="size_main_authorimage">50dp</dimen>
-
+    <dimen name="size_create_by_icon">16dp</dimen>
     <dimen name="size_main_article_tag_icon">30dp</dimen>
 
     <dimen name="height_main_item">155dp</dimen>

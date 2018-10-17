@@ -29,22 +29,21 @@
             android:layout_marginEnd="20dp"
             app:srcCompat="@drawable/all_placeholder_avatar" />
 
-        <TextView
-            android:id="@+id/main_author_by"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/create_by"
+            android:layout_width="@dimen/size_create_by_icon"
+            android:layout_height="@dimen/size_create_by_icon"
             app:layout_constraintLeft_toLeftOf="@+id/main_title"
-            app:layout_constraintBottom_toBottomOf="@id/main_author_name"
-            android:textSize="14sp"
-            android:textColor="@color/main_text_color"
-            android:text="by"/>
+            app:layout_constraintTop_toTopOf="@+id/main_author_name"
+            app:layout_constraintBottom_toBottomOf="@+id/main_author_name"
+            app:srcCompat="@drawable/create_icon"/>
 
         <TextView
             android:id="@+id/main_author_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/main_title"
-            app:layout_constraintLeft_toRightOf="@+id/main_author_by"
+            app:layout_constraintLeft_toRightOf="@+id/create_by"
             android:layout_marginTop="5dp"
             android:layout_marginStart="5dp"
             android:maxWidth="200dp"
@@ -90,8 +89,9 @@
             android:id="@+id/main_create_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@+id/main_author_by"
-            app:layout_constraintTop_toBottomOf="@+id/main_author_by"
+            app:layout_constraintLeft_toLeftOf="@+id/create_by"
+            app:layout_constraintTop_toBottomOf="@+id/create_by"
+            android:layout_marginTop="10dp"
             android:textStyle="italic"
             android:layout_marginEnd="10dp"
             android:textSize="12sp"
@@ -116,7 +116,7 @@
             android:layout_height="@dimen/size_main_article_tag_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="5dp"
             app:srcCompat="@drawable/icon_dumbbell"/>
 
