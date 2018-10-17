@@ -78,13 +78,15 @@ public class AddNewMealArticleFragment extends Fragment implements AddNewMealArt
 
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview_add_new_meal_article);
 //        Button sendBtn = root.findViewById(R.id.add_new_meal_article_btn);
-        ImageView sendBtn = root.findViewById(R.id.add_new_meal_article_btn);
+//        ImageView sendBtn = root.findViewById(R.id.add_new_meal_article_btn);
+        ConstraintLayout sendMealArticleBtn = root.findViewById(R.id.add_new_meal_article_btn_background);
         mTitleEditText = root.findViewById(R.id.add_new_meal_article_title_edittext);
         mContentEditText = root.findViewById(R.id.add_new_meal_article_content_edittext);
         ConstraintLayout constraintLayout = root.findViewById(R.id.fragment_addnew_meal_article);
 
-        sendBtn.setOnClickListener(clickListener);
+//        sendBtn.setOnClickListener(clickListener);
         constraintLayout.setOnClickListener(clickListener);
+        sendMealArticleBtn.setOnClickListener(clickListener);
 
         mTitleEditText.setOnFocusChangeListener(focusChangeListener);
         mContentEditText.setOnFocusChangeListener(focusChangeListener);
@@ -131,7 +133,7 @@ public class AddNewMealArticleFragment extends Fragment implements AddNewMealArt
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.add_new_meal_article_btn) {
+            if (view.getId() == R.id.add_new_meal_article_btn_background) {
 
                 //TODO: Add typing input limitation
 

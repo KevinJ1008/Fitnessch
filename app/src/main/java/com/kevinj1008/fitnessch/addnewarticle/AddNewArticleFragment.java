@@ -75,13 +75,15 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
 
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview_add_new_article);
 //        Button sendBtn = root.findViewById(R.id.add_new_article_btn);
-        ImageView sendBtn = root.findViewById(R.id.add_new_article_btn);
+        ConstraintLayout sendArticleBtn = root.findViewById(R.id.add_new_article_btn_background);
+//        ImageView sendBtn = root.findViewById(R.id.add_new_article_btn);
         mTitleEditText = root.findViewById(R.id.add_new_article_title_edittext);
         mContentEditText = root.findViewById(R.id.add_new_article_content_edittext);
         ConstraintLayout constraintLayout = root.findViewById(R.id.fragment_addnewarticle);
 
-        sendBtn.setOnClickListener(clickListener);
+//        sendBtn.setOnClickListener(clickListener);
         constraintLayout.setOnClickListener(clickListener);
+        sendArticleBtn.setOnClickListener(clickListener);
 
         mTitleEditText.setOnFocusChangeListener(focusChangeListener);
         mContentEditText.setOnFocusChangeListener(focusChangeListener);
@@ -128,7 +130,7 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.add_new_article_btn) {
+            if (view.getId() == R.id.add_new_article_btn_background) {
 
                 //TODO: Add typing input limitation
 

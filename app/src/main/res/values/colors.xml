@@ -72,4 +72,10 @@
     <color name="rm_calculator_text_black_color">#000000</color>
     <color name="rm_calculator_text_gray_color">#bcadad</color>
 
+    <!--Add New Article Item-->
+    <color name="send_btn_stroke_color_selected">#ff006a</color>
+    <color name="send_btn_stroke_color">#ffffff</color>
+    <color name="send_btn_solid_color_selected">#4fffffff</color>
+    <color name="send_btn_solid_color">#4fff006a</color>
+
 </resources>
