@@ -236,18 +236,18 @@ public class DetailAdapter extends RecyclerView.Adapter {
 
     public void updateArticle(Article article) {
         mArticle = article;
-        notifyItemChanged(0);
+        notifyDataSetChanged();
     }
 
     public void updateSchedule(List<Schedule> schedules) {
         mSchedules = schedules;
 //        notifyDataSetChanged();
-        notifyItemInserted(1);
+        notifyDataSetChanged();
     }
 
     public void updateMeal(List<Meal> meals) {
         mMeals = meals;
-        notifyItemInserted(1);
+        notifyDataSetChanged();
     }
 
     public void initData() {

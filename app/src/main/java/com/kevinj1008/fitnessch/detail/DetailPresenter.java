@@ -55,102 +55,108 @@ public class DetailPresenter implements DetailContract.Presenter {
 
     @Override
     public void loadSchedule() {
-        final String articleId = mArticle.getId();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("articles")
-                .whereEqualTo("article_id", articleId)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.d(Constants.TAG, "Articles listen failed.", e);
-                            return;
-                        }
-                        String source = snapshot != null && snapshot.getMetadata().hasPendingWrites() ? "Local" : "Server";
-                        if (source.equals("Server")) {
-                            for (DocumentChange documentChange : snapshot.getDocumentChanges()) {
-                                documentChange.getDocument().getReference().collection("schedule").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onSuccess(QuerySnapshot querySnapshot) {
-                                        Log.d(Constants.TAG, "Successfully get schedule " + querySnapshot.toString());
-                                        for (DocumentChange scheduleChange : querySnapshot.getDocumentChanges()) {
-                                            String scheduleType = scheduleChange.getDocument().getData().get("schedule_type").toString();
-                                            String scheduleTitle = scheduleChange.getDocument().getData().get("schedule_title").toString();
-                                            String scheduleWeight = scheduleChange.getDocument().getData().get("schedule_weight").toString();
-                                            String scheduleReps = scheduleChange.getDocument().getData().get("schedule_reps").toString();
+        String articleTag = mArticle.getTag();
+        if (articleTag.equals("課表")) {
+            final String articleId = mArticle.getId();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("articles")
+                    .whereEqualTo("article_id", articleId)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                            if (e != null) {
+                                Log.d(Constants.TAG, "Articles listen failed.", e);
+                                return;
+                            }
+                            String source = snapshot != null && snapshot.getMetadata().hasPendingWrites() ? "Local" : "Server";
+                            if (source.equals("Server")) {
+                                for (DocumentChange documentChange : snapshot.getDocumentChanges()) {
+                                    documentChange.getDocument().getReference().collection("schedule").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onSuccess(QuerySnapshot querySnapshot) {
+                                            Log.d(Constants.TAG, "Successfully get schedule " + querySnapshot.toString());
+                                            for (DocumentChange scheduleChange : querySnapshot.getDocumentChanges()) {
+                                                String scheduleType = scheduleChange.getDocument().getData().get("schedule_type").toString();
+                                                String scheduleTitle = scheduleChange.getDocument().getData().get("schedule_title").toString();
+                                                String scheduleWeight = scheduleChange.getDocument().getData().get("schedule_weight").toString();
+                                                String scheduleReps = scheduleChange.getDocument().getData().get("schedule_reps").toString();
 
-                                            Schedule schedule = new Schedule();
-                                            schedule.setType(scheduleType);
-                                            schedule.setScheduleTitle(scheduleTitle);
-                                            schedule.setScheduleWeight(scheduleWeight);
-                                            schedule.setScheduleReps(scheduleReps);
+                                                Schedule schedule = new Schedule();
+                                                schedule.setType(scheduleType);
+                                                schedule.setScheduleTitle(scheduleTitle);
+                                                schedule.setScheduleWeight(scheduleWeight);
+                                                schedule.setScheduleReps(scheduleReps);
 
-                                            mSchedules.add(schedule);
+                                                mSchedules.add(schedule);
+                                            }
+
+                                            mDetailView.showSchedule(mSchedules);
                                         }
-
-                                        mDetailView.showSchedule(mSchedules);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d(Constants.TAG, "Fail to get schedule " + e.getMessage());
-                                        Toast.makeText(Fitnessch.getAppContext(), "請檢查網路連線。", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d(Constants.TAG, "Fail to get schedule " + e.getMessage());
+                                            Toast.makeText(Fitnessch.getAppContext(), "請檢查網路連線。", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     @Override
     public void loadMeal() {
-        final String articleId = mArticle.getId();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("articles")
-                .whereEqualTo("article_id", articleId)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.d(Constants.TAG, "Articles listen failed.", e);
-                            return;
-                        }
-                        String source = snapshot != null && snapshot.getMetadata().hasPendingWrites() ? "Local" : "Server";
-                        if (source.equals("Server")) {
-                            for (DocumentChange documentChange : snapshot.getDocumentChanges()) {
-                                documentChange.getDocument().getReference().collection("meal").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onSuccess(QuerySnapshot querySnapshot) {
-                                        Log.d(Constants.TAG, "Successfully get meal " + querySnapshot.toString());
-                                        for (DocumentChange scheduleChange : querySnapshot.getDocumentChanges()) {
-                                            String mealType = scheduleChange.getDocument().getData().get("meal_type").toString();
-                                            String mealTitle = scheduleChange.getDocument().getData().get("meal_title").toString();
-                                            String mealIngredient = scheduleChange.getDocument().getData().get("meal_ingredient").toString();
-                                            String mealCal = scheduleChange.getDocument().getData().get("meal_cal").toString();
+        String articleTag = mArticle.getTag();
+        if (articleTag.equals("菜單")) {
+            final String articleId = mArticle.getId();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("articles")
+                    .whereEqualTo("article_id", articleId)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                            if (e != null) {
+                                Log.d(Constants.TAG, "Articles listen failed.", e);
+                                return;
+                            }
+                            String source = snapshot != null && snapshot.getMetadata().hasPendingWrites() ? "Local" : "Server";
+                            if (source.equals("Server")) {
+                                for (DocumentChange documentChange : snapshot.getDocumentChanges()) {
+                                    documentChange.getDocument().getReference().collection("meal").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onSuccess(QuerySnapshot querySnapshot) {
+                                            Log.d(Constants.TAG, "Successfully get meal " + querySnapshot.toString());
+                                            for (DocumentChange scheduleChange : querySnapshot.getDocumentChanges()) {
+                                                String mealType = scheduleChange.getDocument().getData().get("meal_type").toString();
+                                                String mealTitle = scheduleChange.getDocument().getData().get("meal_title").toString();
+                                                String mealIngredient = scheduleChange.getDocument().getData().get("meal_ingredient").toString();
+                                                String mealCal = scheduleChange.getDocument().getData().get("meal_cal").toString();
 
-                                            Meal meal = new Meal();
-                                            meal.setMealType(mealType);
-                                            meal.setMealTitle(mealTitle);
-                                            meal.setMealIngredient(mealIngredient);
-                                            meal.setMealCal(mealCal);
+                                                Meal meal = new Meal();
+                                                meal.setMealType(mealType);
+                                                meal.setMealTitle(mealTitle);
+                                                meal.setMealIngredient(mealIngredient);
+                                                meal.setMealCal(mealCal);
 
-                                            mMeals.add(meal);
+                                                mMeals.add(meal);
+                                            }
+
+                                            mDetailView.showMeal(mMeals);
                                         }
-
-                                        mDetailView.showMeal(mMeals);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d(Constants.TAG, "Fail to get meal " + e.getMessage());
-                                        Toast.makeText(Fitnessch.getAppContext(), "請檢查網路連線。", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d(Constants.TAG, "Fail to get meal " + e.getMessage());
+                                            Toast.makeText(Fitnessch.getAppContext(), "請檢查網路連線。", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     @Override

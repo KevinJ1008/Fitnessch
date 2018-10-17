@@ -396,6 +396,11 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     }
 
     @Override
+    public void transToUserProfile() {
+
+    }
+
+    @Override
     public void refreshAddNewUi() {
         mAddNewFragment.refreshUi();
     }

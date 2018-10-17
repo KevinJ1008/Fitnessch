@@ -87,12 +87,12 @@ public class DetailFragment extends Fragment implements DetailContract.View {
 
     @Override
     public void showSchedule(List<Schedule> schedules) {
-        mDetailAdapter.updateSchedule(schedules);
+        if (mDetailAdapter != null) mDetailAdapter.updateSchedule(schedules);
     }
 
     @Override
     public void showMeal(List<Meal> meals) {
-        mDetailAdapter.updateMeal(meals);
+        if (mDetailAdapter != null) mDetailAdapter.updateMeal(meals);
     }
 
     @Override

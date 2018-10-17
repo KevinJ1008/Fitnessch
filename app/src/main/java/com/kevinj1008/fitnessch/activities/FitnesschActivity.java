@@ -224,6 +224,10 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         mPresenter.transToMain();
     }
 
+    public void transToUserProfile() {
+        mPresenter.transToUserProfile();
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {

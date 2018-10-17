@@ -1,12 +1,7 @@
 package com.kevinj1008.fitnessch.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Point;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,14 +9,12 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
 import android.util.Log;
-import android.view.Display;
+
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
+
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -40,19 +33,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
+
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.UserExistCallback;
 import com.kevinj1008.fitnessch.util.Constants;
+import com.kevinj1008.fitnessch.util.NetworkUtils;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
-import com.squareup.picasso.Picasso;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,6 +57,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private static final int RC_SIGN_IN = 9001;
     public SharedPreferencesManager mSharedPreferencesManager;
+    private NetworkUtils mNetworkUtils;
 
     private String mGoogleIdToken;
     private String mGoogleId;
@@ -84,6 +76,8 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 
         setLoginStatusBar();
 
+        mNetworkUtils = new NetworkUtils(mContext);
+
         mGoogleLogInBtn = findViewById(R.id.google_login_btn);
         mGoogleLogInBtn.setOnClickListener(clickListener);
 
@@ -93,7 +87,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (mFirebaseUser != null) {
-            if (isNetworkAvailable()) {
+            if (mNetworkUtils.isNetworkAvailable()) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -118,7 +112,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 //                    createUserInFirestore();
                     Log.d(Constants.TAG, "onAuthStateChanged:signed_in: " + user.getUid());
                 } else {
-
+                    Log.d(Constants.TAG, "Not Auth User, need sign in account. ");
                 }
             }
         };
@@ -147,7 +141,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         public void onClick(View view) {
 
             if (view.getId() == R.id.google_login_btn) {
-                if (isNetworkAvailable()) {
+                if (mNetworkUtils.isNetworkAvailable()) {
                     googleSignIn();
                 } else {
                     Toast.makeText(FitnesschLoginActivity.this, "登入失敗，請檢查網路連線。", Toast.LENGTH_SHORT).show();
@@ -325,16 +319,16 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 
     }
 
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+//    public boolean isNetworkAvailable() {
+//        ConnectivityManager connectivityManager
+//                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+//
+//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+//    }
 
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    private boolean isUserTokenExist() {
-        SharedPreferences userLoginStatus = getSharedPreferences("User_Profile", MODE_PRIVATE);
-        return !userLoginStatus.getString("access_token", "").equals("");
-    }
+//    private boolean isUserTokenExist() {
+//        SharedPreferences userLoginStatus = getSharedPreferences("User_Profile", MODE_PRIVATE);
+//        return !userLoginStatus.getString("access_token", "").equals("");
+//    }
 }

@@ -46,6 +46,8 @@ public interface FitnesschContract {
 
         void transToDate(Article article);
 
+        void transToUserProfile();
+
         void refreshAddNewUi();
 
         void refreshAddNewArticleUi();
