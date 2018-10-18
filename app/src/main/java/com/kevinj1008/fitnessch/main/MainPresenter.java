@@ -169,7 +169,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void onScrollStateChanged(int visibleItemCount, int totalItemCount, int newState) {
         if (newState == RecyclerView.SCROLL_STATE_IDLE && visibleItemCount > 0) {
             if (mlastVisibleItemPosition == totalItemCount - 1) {
-                loadArticles();
+//                loadArticles();
             } else if (mfirstVisibleItemPosition == 0) {
                 // Scroll to top
             }
