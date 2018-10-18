@@ -1,6 +1,7 @@
 package com.kevinj1008.fitnessch.addnewschedulechild;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -17,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
@@ -29,6 +32,7 @@ import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.adapters.AddNewScheduleChildAdapter;
 import com.kevinj1008.fitnessch.objects.Schedule;
+import com.kevinj1008.fitnessch.objects.Title;
 import com.kevinj1008.fitnessch.util.Constants;
 
 import java.util.ArrayList;
@@ -37,6 +41,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AddNewScheduleChildFragment extends Fragment implements AddNewScheduleChildContract.View {
 
@@ -54,12 +60,15 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     private ImageView mClockBtn;
     private ImageView mAddBtn;
     private ImageView mNextBtn;
+    private AutoCompleteTextView mSearchText;
     private boolean isStartButtonClicked = false;
     private boolean isRestButtonClicked = false;
     private long mStartEscapeTime = 0;
     private long mRestEscapeTime = 0;
     private List<Schedule> mSchedules = new ArrayList<>();
     private int mPosition;
+
+    private AddNewScheduleChildContract.Presenter mPresenter;
 
     private AddNewScheduleChildAdapter mAddNewScheduleChildAdapter;
 
@@ -68,10 +77,16 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     }
 
     @Override
+    public void setPresenter(AddNewScheduleChildContract.Presenter presenter) {
+        mPresenter = checkNotNull(presenter);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSchedules = new ArrayList<>();
         mAddNewScheduleChildAdapter = new AddNewScheduleChildAdapter(mSchedules, getContext());
+        mPresenter.start();
     }
 
     @Override
@@ -92,13 +107,15 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
         mRestText = root.findViewById(R.id.addnew_rest_btn_text);
         mRestBtn = root.findViewById(R.id.addnew_rest_btn);
         mAddNewBtn = root.findViewById(R.id.addnew_schedule_btn);
-        mScheduleTitle = root.findViewById(R.id.addnew_schedule_edittext);
+//        mScheduleTitle = root.findViewById(R.id.addnew_schedule_edittext);
+//        mScheduleTitle.setVisibility(View.INVISIBLE);
         mScheduleWeight = root.findViewById(R.id.addnew_weight_edittext);
         mScheduleReps = root.findViewById(R.id.addnew_reps_edittext);
         mScheduleCompleteBtn = root.findViewById(R.id.addnew_schedule_complete_btn);
         mClockBtn = root.findViewById(R.id.addnew_clock);
         mAddBtn = root.findViewById(R.id.addnew_btn);
         mNextBtn = root.findViewById(R.id.addnew_schedule_next_btn);
+        mSearchText = root.findViewById(R.id.addnew_schedule_auto_search);
         ConstraintLayout constraintLayout = root.findViewById(R.id.childfragment_addnewschedule);
 
 
@@ -112,13 +129,15 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
             }
         };
 
-        mScheduleTitle.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10), typeFilter});
+//        mScheduleTitle.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10), typeFilter});
+        mSearchText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10), typeFilter});
         mScheduleWeight.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
         mScheduleReps.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
 
-        mScheduleTitle.setOnFocusChangeListener(focusChangeListener);
+//        mScheduleTitle.setOnFocusChangeListener(focusChangeListener);
         mScheduleWeight.setOnFocusChangeListener(focusChangeListener);
         mScheduleReps.setOnFocusChangeListener(focusChangeListener);
+        mSearchText.setOnFocusChangeListener(focusChangeListener);
 
 
 //        mScheduleWeight.addTextChangedListener(textWatcher);
@@ -176,7 +195,7 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                     mRestChronometer.stop();
                 }
             } else if (view.getId() == R.id.addnew_btn) {
-                String scheduleTitle = mScheduleTitle.getText().toString();
+                String scheduleTitle = mSearchText.getText().toString();
                 String scheduleWeight = mScheduleWeight.getText().toString();
                 String scheduleReps = mScheduleReps.getText().toString();
 
@@ -198,38 +217,45 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                         mScheduleReps.getText().clear();
                     } else {
                         Toast.makeText(getContext(), "請勿輸入空白。", Toast.LENGTH_SHORT).show();
-                        mScheduleTitle.clearFocus();
+//                        mScheduleTitle.clearFocus();
                         mScheduleWeight.clearFocus();
                         mScheduleReps.clearFocus();
+                        mSearchText.clearFocus();
                     }
                 } else {
                     Toast.makeText(getContext(), "請輸入項目、重量及次數。", Toast.LENGTH_SHORT).show();
-                    mScheduleTitle.clearFocus();
+//                    mScheduleTitle.clearFocus();
                     mScheduleWeight.clearFocus();
                     mScheduleReps.clearFocus();
+                    mSearchText.clearFocus();
                 }
-                mScheduleTitle.clearFocus();
+//                mScheduleTitle.clearFocus();
                 mScheduleWeight.clearFocus();
                 mScheduleReps.clearFocus();
+                mSearchText.clearFocus();
             } else if (view.getId() == R.id.addnew_schedule_next_btn) {
                 if (mAddNewScheduleChildAdapter.getScheduleList().size() > 0) {
-                    mScheduleTitle.getText().clear();
+//                    mScheduleTitle.getText().clear();
                     mScheduleWeight.getText().clear();
                     mScheduleReps.getText().clear();
+                    mSearchText.getText().clear();
 
-                    mScheduleTitle.clearFocus();
+//                    mScheduleTitle.clearFocus();
                     mScheduleWeight.clearFocus();
                     mScheduleReps.clearFocus();
+                    mSearchText.clearFocus();
 
                     ((FitnesschActivity) getActivity()).transToAddNewArticle(mAddNewScheduleChildAdapter.getScheduleList());
                 } else if (mAddNewScheduleChildAdapter.getScheduleMap().size() > 0) {
-                    mScheduleTitle.getText().clear();
+//                    mScheduleTitle.getText().clear();
                     mScheduleWeight.getText().clear();
                     mScheduleReps.getText().clear();
+                    mSearchText.getText().clear();
 
-                    mScheduleTitle.clearFocus();
+//                    mScheduleTitle.clearFocus();
                     mScheduleWeight.clearFocus();
                     mScheduleReps.clearFocus();
+                    mSearchText.clearFocus();
 
                     ((FitnesschActivity) getActivity()).transToAddNewArticle(mAddNewScheduleChildAdapter.getNewScheduleList());
                 } else {
@@ -238,9 +264,10 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
             } else if (view.getId() == R.id.childfragment_addnewschedule) {
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                mScheduleTitle.clearFocus();
+//                mScheduleTitle.clearFocus();
                 mScheduleWeight.clearFocus();
                 mScheduleReps.clearFocus();
+                mSearchText.clearFocus();
             }
 
         }
@@ -282,23 +309,26 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     };
 
     @Override
-    public void showScheduleItem(int position) {
-
+    public void showScheduleSearchTitle(List<Title> titles) {
+        String[] titleList = new String[titles.size()];
+        for (int i = 0; i < titles.size(); i++) {
+            titleList[i] = titles.get(i).getTitle();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Fitnessch.getAppContext(), R.layout.search_text_layout, R.id.search_text, titleList);
+        mSearchText.setThreshold(1);
+        mSearchText.setAdapter(adapter);
     }
 
     @Override
     public void refreshUi() {
         mAddNewScheduleChildAdapter.clearData();
 
-        mScheduleTitle.getText().clear();
+//        mScheduleTitle.getText().clear();
         mScheduleReps.getText().clear();
         mScheduleWeight.getText().clear();
+        mSearchText.getText().clear();
     }
 
-    @Override
-    public void setPresenter(AddNewScheduleChildContract.Presenter presenter) {
-
-    }
 
 //    private TextWatcher textWatcher = new TextWatcher() {
 //        @Override

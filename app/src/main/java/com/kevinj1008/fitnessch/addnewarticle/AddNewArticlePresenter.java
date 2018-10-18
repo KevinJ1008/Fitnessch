@@ -7,11 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.addnew.AddNewContract;
 import com.kevinj1008.fitnessch.addnewmealarticle.AddNewMealArticleContract;
@@ -114,6 +119,19 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
             public void onFailure(@NonNull Exception e) {
                 Log.d(Constants.TAG, "Error writing document " + e.toString());
                 Toast.makeText(Fitnessch.getAppContext(), "新增課表失敗，請檢查網路連線。", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        CollectionReference collectionReference = db.collection("schedule_title_list");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        String title = documentSnapshot.getData().get("title").toString();
+                        
+                    }
+                }
             }
         });
     }

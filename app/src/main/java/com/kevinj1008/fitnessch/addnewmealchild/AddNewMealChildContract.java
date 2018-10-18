@@ -3,6 +3,7 @@ package com.kevinj1008.fitnessch.addnewmealchild;
 import com.kevinj1008.fitnessch.BasePresenter;
 import com.kevinj1008.fitnessch.BaseView;
 import com.kevinj1008.fitnessch.objects.Meal;
+import com.kevinj1008.fitnessch.objects.Title;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface AddNewMealChildContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showScheduleItem(int position);
+        void showMealSearchTitle(List<Title> titles);
 
         void refreshUi();
     }
@@ -19,7 +20,7 @@ public interface AddNewMealChildContract {
 
         void result(int requestCode, int resultCode);
 
-        void setMeal(String title, String ingredient, String cal, int position);
+        void searchTitle();
 
         void openAddNewArticle(List<Meal> meals);
     }

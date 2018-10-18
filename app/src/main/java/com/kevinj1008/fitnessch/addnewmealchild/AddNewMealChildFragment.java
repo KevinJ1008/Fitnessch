@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,6 +27,7 @@ import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.adapters.AddNewMealChildAdapter;
 import com.kevinj1008.fitnessch.objects.Meal;
+import com.kevinj1008.fitnessch.objects.Title;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +35,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AddNewMealChildFragment extends Fragment implements AddNewMealChildContract.View {
 
@@ -44,14 +49,22 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
     private Button mMealCompleteBtn;
     private ImageView mAddBtn;
     private ImageView mNextBtn;
+    private AutoCompleteTextView mSearchText;
+    private AddNewMealChildContract.Presenter mPresenter;
 
     public static AddNewMealChildFragment newInstance() {
         return new AddNewMealChildFragment();
     }
 
     @Override
+    public void setPresenter(AddNewMealChildContract.Presenter presenter) {
+        mPresenter = checkNotNull(presenter);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter.start();
 
         mMeals = new ArrayList<>();
         mAddNewMealChildAdapter = new AddNewMealChildAdapter(mMeals, getContext());
@@ -63,12 +76,13 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
         View root = inflater.inflate(R.layout.childfragment_addnewmeal, container, false);
 
         mAddNewBtn = root.findViewById(R.id.addnew_meal_btn);
-        mMealTitle = root.findViewById(R.id.addnew_meal_title_edittext);
+//        mMealTitle = root.findViewById(R.id.addnew_meal_title_edittext);
         mMealIngredient = root.findViewById(R.id.addnew_meal_ingredient_edittext);
         mMealCal = root.findViewById(R.id.addnew_meal_cal_edittext);
         mMealCompleteBtn = root.findViewById(R.id.addnew_meal_complete_btn);
         mAddBtn = root.findViewById(R.id.addnew_meal_btn_iamge);
         mNextBtn = root.findViewById(R.id.addnew_meal_next_btn);
+        mSearchText = root.findViewById(R.id.addnew_meal_auto_search);
         ConstraintLayout constraintLayout = root.findViewById(R.id.childfragment_addnewmeal);
 
         InputFilter typeFilter = new InputFilter() {
@@ -81,13 +95,15 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
             }
         };
 
-        mMealTitle.setFilters(new InputFilter[]{typeFilter});
+//        mMealTitle.setFilters(new InputFilter[]{typeFilter});
+        mSearchText.setFilters(new InputFilter[]{typeFilter});
         mMealIngredient.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5), typeFilter});
         mMealCal.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
 
-        mMealTitle.setOnFocusChangeListener(focusChangeListener);
+//        mMealTitle.setOnFocusChangeListener(focusChangeListener);
         mMealIngredient.setOnFocusChangeListener(focusChangeListener);
         mMealCal.setOnFocusChangeListener(focusChangeListener);
+        mSearchText.setOnFocusChangeListener(focusChangeListener);
 
         constraintLayout.setOnClickListener(clickListener);
         mAddNewBtn.setOnClickListener(clickListener);
@@ -103,22 +119,24 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
     }
 
     @Override
-    public void setPresenter(AddNewMealChildContract.Presenter presenter) {
-
-    }
-
-    @Override
-    public void showScheduleItem(int position) {
-
+    public void showMealSearchTitle(List<Title> titles) {
+        String[] titleList = new String[titles.size()];
+        for (int i = 0; i < titles.size(); i++) {
+            titleList[i] = titles.get(i).getTitle();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Fitnessch.getAppContext(), R.layout.search_text_layout, R.id.search_text, titleList);
+        mSearchText.setThreshold(1);
+        mSearchText.setAdapter(adapter);
     }
 
     @Override
     public void refreshUi() {
         mAddNewMealChildAdapter.clearData();
 
-        mMealTitle.getText().clear();
+//        mMealTitle.getText().clear();
         mMealIngredient.getText().clear();
         mMealCal.getText().clear();
+        mSearchText.getText().clear();
 
     }
 
@@ -126,7 +144,7 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.addnew_meal_btn_iamge) {
-                String title = mMealTitle.getText().toString();
+                String title = mSearchText.getText().toString();
                 String ingredient = mMealIngredient.getText().toString();
                 String cal = mMealCal.getText().toString();
 
@@ -146,37 +164,37 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
                         mMealCal.getText().clear();
                     } else {
                         Toast.makeText(getContext(), "請勿輸入空白。", Toast.LENGTH_SHORT).show();
-                        mMealTitle.clearFocus();
+                        mSearchText.clearFocus();
                         mMealIngredient.clearFocus();
                         mMealCal.clearFocus();
                     }
                 } else {
                     Toast.makeText(getContext(), "請輸入菜單、食材及熱量。", Toast.LENGTH_SHORT).show();
-                    mMealTitle.clearFocus();
+                    mSearchText.clearFocus();
                     mMealIngredient.clearFocus();
                     mMealCal.clearFocus();
                 }
-                mMealTitle.clearFocus();
+                mSearchText.clearFocus();
                 mMealIngredient.clearFocus();
                 mMealCal.clearFocus();
 
             } else if (view.getId() == R.id.addnew_meal_next_btn) {
                 if (mAddNewMealChildAdapter.getMeals().size() > 0) {
-                    mMealTitle.getText().clear();
+                    mSearchText.getText().clear();
                     mMealIngredient.getText().clear();
                     mMealCal.getText().clear();
 
-                    mMealTitle.clearFocus();
+                    mSearchText.clearFocus();
                     mMealIngredient.clearFocus();
                     mMealCal.clearFocus();
 
                     ((FitnesschActivity) getActivity()).transToAddNewMealArticle(mAddNewMealChildAdapter.getMeals());
                 } else if (mAddNewMealChildAdapter.getMealMap().size() > 0) {
-                    mMealTitle.getText().clear();
+                    mSearchText.getText().clear();
                     mMealIngredient.getText().clear();
                     mMealCal.getText().clear();
 
-                    mMealTitle.clearFocus();
+                    mSearchText.clearFocus();
                     mMealIngredient.clearFocus();
                     mMealCal.clearFocus();
 
@@ -188,7 +206,7 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
             } else if (view.getId() == R.id.childfragment_addnewmeal) {
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                mMealTitle.clearFocus();
+                mSearchText.clearFocus();
                 mMealIngredient.clearFocus();
                 mMealCal.clearFocus();
             }
