@@ -53,7 +53,6 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     private ConstraintLayout mStartBtn;
     private ConstraintLayout mRestBtn;
     private Button mAddNewBtn;
-    private EditText mScheduleTitle;
     private EditText mScheduleWeight;
     private EditText mScheduleReps;
     private Button mScheduleCompleteBtn;

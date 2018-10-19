@@ -43,7 +43,6 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
     private AddNewMealChildAdapter mAddNewMealChildAdapter;
     private List<Meal> mMeals;
     private Button mAddNewBtn;
-    private EditText mMealTitle;
     private EditText mMealIngredient;
     private EditText mMealCal;
     private Button mMealCompleteBtn;

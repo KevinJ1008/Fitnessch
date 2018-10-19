@@ -43,8 +43,7 @@ public class AddNewScheduleChildPresenter implements AddNewScheduleChildContract
     @Override
     public void searchTitle() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        //TODO:change "title_list" to "schedule_title_list"
-        CollectionReference reference = db.collection("title_list");
+        CollectionReference reference = db.collection("schedule_title_list");
         reference.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

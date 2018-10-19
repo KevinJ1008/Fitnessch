@@ -20,6 +20,8 @@ public interface DetailContract {
 
         void showMeal(List<Meal> meals);
 
+        void showUserProfile(Article article);
+
 //        void setLoadMoreButtonVisibility(boolean visible);
 //
 //        void showEditOptionDialog(String commentId, String comment, int position);
@@ -68,6 +70,6 @@ public interface DetailContract {
 
 //        void loadCommentsAndMoveToEnd();
 
-//        void openFriend(Article article);
+        void openUser(Article article);
     }
 }

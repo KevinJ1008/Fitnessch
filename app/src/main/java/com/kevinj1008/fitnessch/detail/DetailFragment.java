@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
+import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.adapters.DetailAdapter;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.objects.Meal;
@@ -93,6 +94,11 @@ public class DetailFragment extends Fragment implements DetailContract.View {
     @Override
     public void showMeal(List<Meal> meals) {
         if (mDetailAdapter != null) mDetailAdapter.updateMeal(meals);
+    }
+
+    @Override
+    public void showUserProfile(Article article) {
+        ((FitnesschActivity) getActivity()).transToUserProfile(article);
     }
 
     @Override

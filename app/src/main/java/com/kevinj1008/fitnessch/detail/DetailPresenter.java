@@ -174,5 +174,10 @@ public class DetailPresenter implements DetailContract.Presenter {
         mDetailView.refreshUi();
     }
 
+    @Override
+    public void openUser(Article article) {
+        mDetailView.showUserProfile(article);
+    }
+
 
 }

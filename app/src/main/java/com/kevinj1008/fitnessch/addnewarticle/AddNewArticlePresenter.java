@@ -122,18 +122,18 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
             }
         });
 
-        CollectionReference collectionReference = db.collection("schedule_title_list");
-        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        String title = documentSnapshot.getData().get("title").toString();
-                        
-                    }
-                }
-            }
-        });
+//        CollectionReference collectionReference = db.collection("schedule_title_list");
+//        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+//                        String title = documentSnapshot.getData().get("title").toString();
+//
+//                    }
+//                }
+//            }
+//        });
     }
 
     @Override

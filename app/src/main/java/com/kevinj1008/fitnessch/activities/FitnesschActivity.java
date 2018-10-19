@@ -224,8 +224,8 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         mPresenter.transToMain();
     }
 
-    public void transToUserProfile() {
-        mPresenter.transToUserProfile();
+    public void transToUserProfile(Article article) {
+        mPresenter.transToUserProfile(article);
     }
 
     @Override

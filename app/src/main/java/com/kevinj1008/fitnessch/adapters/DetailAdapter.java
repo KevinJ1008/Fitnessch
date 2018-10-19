@@ -9,12 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
+import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.detail.DetailContract;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.objects.Meal;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.util.Constants;
+import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -30,11 +33,12 @@ public class DetailAdapter extends RecyclerView.Adapter {
     private List<Schedule> mSchedules = new ArrayList<>();
     private List<Meal> mMeals = new ArrayList<>();
     private DetailContract.Presenter mPresenter;
+    private SharedPreferencesManager mSharedPreferencesManager;
 
     public DetailAdapter(Article article, DetailContract.Presenter presenter) {
         this.mArticle = article;
         mPresenter = presenter;
-
+        mSharedPreferencesManager = new SharedPreferencesManager(Fitnessch.getAppContext());
     }
 
     @NonNull
@@ -67,7 +71,7 @@ public class DetailAdapter extends RecyclerView.Adapter {
             if (mSchedules.size() > 0) {
                 ((DetailScheduleTitleViewHolder) holder).mScheduleSeparator.setVisibility(View.INVISIBLE);
             } else {
-                ((DetailMealTitleViewHolder) holder).mMealeSeparator.setVisibility(View.INVISIBLE);
+                ((DetailMealTitleViewHolder) holder).mMealSeparator.setVisibility(View.INVISIBLE);
             }
         }
         if (holder instanceof DetailMainItemViewHolder) {
@@ -159,7 +163,7 @@ public class DetailAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private class DetailMainItemViewHolder extends RecyclerView.ViewHolder {
+    private class DetailMainItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView mAuthorImage;
         private TextView mAuthor;
@@ -175,7 +179,16 @@ public class DetailAdapter extends RecyclerView.Adapter {
             mArticleTitle = itemView.findViewById(R.id.detail_article_title);
             mArticleCreateTime = itemView.findViewById(R.id.detail_article_create_time);
             mArticleContent = itemView.findViewById(R.id.detail_article_content);
+            if (!mSharedPreferencesManager.getUserDbUid().equals(mArticle.getAuthorId())) {
+                mAuthorImage.setOnClickListener(this);
+            }
+        }
 
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == R.id.detail_article_author_image) {
+//                mPresenter.openUser(mArticle);
+            }
         }
     }
 
@@ -196,13 +209,13 @@ public class DetailAdapter extends RecyclerView.Adapter {
     private class DetailMealTitleViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mMealTitle;
-        private View mMealeSeparator;
+        private View mMealSeparator;
 
         public DetailMealTitleViewHolder(View itemView) {
             super(itemView);
 
             mMealTitle = itemView.findViewById(R.id.item_detail_meal_title);
-            mMealeSeparator = itemView.findViewById(R.id.item_detail_meal_separator);
+            mMealSeparator = itemView.findViewById(R.id.item_detail_meal_separator);
 
         }
     }
