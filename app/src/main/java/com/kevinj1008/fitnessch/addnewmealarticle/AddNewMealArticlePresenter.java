@@ -101,13 +101,19 @@ public class AddNewMealArticlePresenter implements AddNewMealArticleContract.Pre
                     meal.put("meal_ingredient", mMeals.get(i).getMealIngredient());
                     meal.put("meal_cal", mMeals.get(i).getMealCal());
 
-                    String documentKey = String.valueOf(i);
+                    String documentKey;
+                    if (i < 10) {
+                        documentKey = "0" + String.valueOf(i);
+                    } else {
+                        documentKey = String.valueOf(i);
+                    }
 
                     documentReference.collection("meal").document(documentKey).set(meal);
                 }
 
                 //TODO: Available clean data
                 refresh();
+                Toast.makeText(Fitnessch.getAppContext(), "建立菜單成功。", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

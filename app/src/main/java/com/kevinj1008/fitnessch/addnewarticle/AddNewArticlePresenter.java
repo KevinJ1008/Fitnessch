@@ -106,13 +106,19 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
                     schedule.put("schedule_weight", mSchedules.get(i).getScheduleWeight());
                     schedule.put("schedule_reps", mSchedules.get(i).getScheduleReps());
 
-                    String documentKey = String.valueOf(i);
+                    String documentKey;
+                    if(i < 10) {
+                        documentKey = "0" + String.valueOf(i);
+                    } else {
+                        documentKey = String.valueOf(i);
+                    }
 
-                    documentReference.collection("schedule").document(documentKey).set(schedule);
+                   documentReference.collection("schedule").document(documentKey).set(schedule);
                 }
 
                 //TODO: Available clean data
                 refresh();
+                Toast.makeText(Fitnessch.getAppContext(), "建立課表成功。", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

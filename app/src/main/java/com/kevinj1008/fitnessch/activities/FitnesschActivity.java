@@ -233,6 +233,9 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         switch (menuItem.getItemId()) {
             case R.id.nav_main:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
+                mPresenter.refreshAddNewUi();
+                mPresenter.refreshAddNewArticleUi();
+                mPresenter.refreshAddNewMealArticleUi();
                 mPresenter.transToMain();
                 break;
 
