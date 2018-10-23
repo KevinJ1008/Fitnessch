@@ -70,54 +70,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="27dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/floating_add_btn"
             app:fab_colorNormal="@color/floating_add_btn_color"
             app:fab_colorPressed="@color/floating_add_btn_color_pressed"
             app:fab_colorRipple="@color/floating_add_btn_color_pressed"/>
-
-        <!--<com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout-->
-            <!--android:id="@+id/floating_add_btn_container"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_marginEnd="32dp"-->
-            <!--android:layout_marginBottom="15dp"-->
-            <!--app:fabAnimateMenu="false">-->
-
-            <!--<android.support.design.widget.FloatingActionButton-->
-                <!--android:id="@+id/floating_add_btn"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:backgroundTint="@color/floating_add_btn_color"/>-->
-
-        <!--<com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton-->
-            <!--android:id="@+id/floating_add_btn"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_marginBottom="20dp"-->
-            <!--android:layout_marginEnd="35dp"/>-->
-
-                <!--<android.support.design.widget.FloatingActionButton-->
-                    <!--android:id="@+id/floating_add_btn_schedule"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--app:fabSizes="mini"-->
-                    <!--app:fabColor="#000d56" />-->
-
-                <!--<android.support.design.widget.FloatingActionButton-->
-                    <!--android:id="@+id/floating_add_btn_meal"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--app:fabSizes="mini"-->
-                    <!--app:fabColor="#ffffff" />-->
-
-        <!--</com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout>-->
 
     </RelativeLayout>
 

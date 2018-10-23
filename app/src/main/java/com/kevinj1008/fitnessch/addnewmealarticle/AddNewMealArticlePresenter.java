@@ -136,20 +136,7 @@ public class AddNewMealArticlePresenter implements AddNewMealArticleContract.Pre
 
     @Override
     public void onScrolled(RecyclerView.LayoutManager layoutManager) {
-//        if (layoutManager instanceof LinearLayoutManager) {
-//
-//            mlastVisibleItemPosition = ((LinearLayoutManager) layoutManager)
-//                    .findLastVisibleItemPosition();
-//            mfirstVisibleItemPosition = ((LinearLayoutManager) layoutManager)
-//                    .findFirstVisibleItemPosition();
-//
-//        } else if (layoutManager instanceof GridLayoutManager) {
-//
-//            mlastVisibleItemPosition = ((GridLayoutManager) layoutManager)
-//                    .findLastVisibleItemPosition();
-//            mfirstVisibleItemPosition = ((GridLayoutManager) layoutManager)
-//                    .findFirstVisibleItemPosition();
-//        }
+
     }
 
     @Override

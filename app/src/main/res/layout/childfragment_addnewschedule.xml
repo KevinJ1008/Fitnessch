@@ -21,7 +21,7 @@
         android:paddingBottom="15dp"
         android:textSize="16sp"
         android:textColor="@color/addnew_text_color"
-        android:text="項目："/>
+        android:text="@string/add_new_schedule_title"/>
 
     <EditText
         android:id="@+id/addnew_schedule_edittext"
@@ -78,7 +78,7 @@
         android:background="@drawable/addnew_btn_ripple"
         android:textColor="@color/addnew_text_color"
         android:textSize="14sp"
-        android:text="新增"/>
+        android:text="@string/all_add"/>
 
     <TextView
         android:id="@+id/addnew_schedule_weight"
@@ -93,7 +93,7 @@
         android:paddingBottom="15dp"
         android:textSize="16sp"
         android:textColor="@color/addnew_text_color"
-        android:text="重量："/>
+        android:text="@string/add_new_schedule_weight"/>
 
     <EditText
         android:id="@+id/addnew_weight_edittext"
@@ -108,7 +108,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:inputType="number"
-        android:hint="KG"
+        android:hint="@string/add_new_schedule_weight_hint"
         android:textColorHint="@color/new_schedule_article_title_edit_color"
         android:textColor="@color/addnew_text_color"
         android:background="@drawable/addnew_edittext_background"/>
@@ -137,7 +137,7 @@
         android:paddingBottom="15dp"
         android:textSize="16sp"
         android:textColor="@color/addnew_text_color"
-        android:text="次數："/>
+        android:text="@string/add_new_schedule_reps"/>
 
     <EditText
         android:id="@+id/addnew_reps_edittext"
@@ -154,37 +154,6 @@
         android:inputType="number"
         android:textColor="@color/addnew_text_color"
         android:background="@drawable/addnew_edittext_background"/>
-
-    <!--<Button-->
-        <!--android:id="@+id/addnew_start_btn"-->
-        <!--android:layout_width="@dimen/addnew_btn_width"-->
-        <!--android:layout_height="@dimen/addnew_btn_height"-->
-        <!--app:layout_constraintLeft_toRightOf="@id/addnew_schedule_weight"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/addnew_schedule_weight"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:shadowRadius="8"-->
-        <!--android:shadowDy="8"-->
-        <!--android:shadowDx="3"-->
-        <!--android:shadowColor="@color/addnew_btn_shadow_color"-->
-        <!--android:elevation="@dimen/addnew_btn_elevation"-->
-        <!--android:translationZ="@dimen/addnew_btn_translationz"-->
-        <!--android:background="@drawable/addnew_btn_ripple"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:text="開始"/>-->
-
-
-
-    <!--<Chronometer-->
-        <!--android:id="@+id/addnew_timer"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/addnew_clock"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/addnew_clock"-->
-        <!--app:layout_constraintLeft_toLeftOf="@+id/addnew_clock"-->
-        <!--app:layout_constraintRight_toRightOf="@+id/addnew_clock"-->
-        <!--android:textColor="@color/addnew_text_color"-->
-        <!--android:textSize="14sp"-->
-        <!--android:visibility="invisible"/>-->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/addnew_timer_btn"
@@ -248,42 +217,9 @@
             android:visibility="invisible"
             android:textColor="@color/addnew_text_color"
             android:textSize="14sp"
-            android:text="開始"/>
-
-
-
-
-        <!--<Chronometer-->
-            <!--android:id="@+id/addnew_timer"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--android:textColor="@color/addnew_text_color"-->
-            <!--android:textSize="14sp"-->
-            <!--android:visibility="invisible"/>-->
+            android:text="@string/all_start"/>
 
     </android.support.constraint.ConstraintLayout>
-
-    <!--<Button-->
-        <!--android:id="@+id/addnew_rest_btn"-->
-        <!--android:layout_width="@dimen/addnew_btn_width"-->
-        <!--android:layout_height="@dimen/addnew_btn_height"-->
-        <!--app:layout_constraintLeft_toRightOf="@id/addnew_schedule_reps"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/addnew_schedule_reps"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:shadowRadius="8"-->
-        <!--android:shadowDy="8"-->
-        <!--android:shadowDx="3"-->
-        <!--android:shadowColor="@color/addnew_btn_shadow_color"-->
-        <!--android:elevation="@dimen/addnew_btn_elevation"-->
-        <!--android:translationZ="@dimen/addnew_btn_translationz"-->
-        <!--android:background="@drawable/addnew_btn_ripple"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="14sp"-->
-        <!--android:text="休息"/>-->
 
     <ImageView
         android:id="@+id/addnew_btn"
@@ -327,7 +263,7 @@
             android:visibility="invisible"
             android:textColor="@color/addnew_text_color"
             android:textSize="14sp"
-            android:text="休息"/>
+            android:text="@string/all_rest"/>
 
         <Chronometer
             android:id="@+id/addnew_rest_timer"
@@ -359,7 +295,7 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/addnew_schedule_separator"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/addnew_schedule_complete_btn"
@@ -378,7 +314,7 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         android:visibility="invisible"
-        android:text="完成"/>
+        android:text="@string/all_complete"/>
 
     <ImageView
         android:id="@+id/addnew_schedule_next_btn"

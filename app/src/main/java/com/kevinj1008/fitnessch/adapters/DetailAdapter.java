@@ -67,13 +67,13 @@ public class DetailAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (position == 1) {
-            if (mSchedules.size() > 0) {
-                ((DetailScheduleTitleViewHolder) holder).mScheduleSeparator.setVisibility(View.INVISIBLE);
-            } else {
-                ((DetailMealTitleViewHolder) holder).mMealSeparator.setVisibility(View.INVISIBLE);
-            }
-        }
+//        if (position == 1) {
+//            if (mSchedules.size() > 0) {
+//                ((DetailScheduleTitleViewHolder) holder).mScheduleSeparator.setVisibility(View.INVISIBLE);
+//            } else {
+//                ((DetailMealTitleViewHolder) holder).mMealSeparator.setVisibility(View.INVISIBLE);
+//            }
+//        }
         if (holder instanceof DetailMainItemViewHolder) {
             Picasso.get()
                     .load(mArticle.getAuthorImage())
@@ -92,9 +92,19 @@ public class DetailAdapter extends RecyclerView.Adapter {
             ((DetailMainItemViewHolder) holder).mArticleContent.setText(mArticle.getContent());
 
         } else if (holder instanceof DetailScheduleTitleViewHolder) {
+            if (position == 1) {
+                ((DetailScheduleTitleViewHolder) holder).mScheduleSeparator.setVisibility(View.GONE);
+            } else {
+                ((DetailScheduleTitleViewHolder) holder).mScheduleSeparator.setVisibility(View.VISIBLE);
+            }
             ((DetailScheduleTitleViewHolder) holder).mScheduleTitle.setText(mSchedules.get(position - 1).getScheduleTitle());
 
         } else if (holder instanceof DetailMealTitleViewHolder) {
+            if (position == 1) {
+                ((DetailMealTitleViewHolder) holder).mMealSeparator.setVisibility(View.GONE);
+            } else {
+                ((DetailMealTitleViewHolder) holder).mMealSeparator.setVisibility(View.VISIBLE);
+            }
             ((DetailMealTitleViewHolder) holder).mMealTitle.setText(mMeals.get(position - 1).getMealTitle());
 
         } else if (holder instanceof DetailScheduleContentViewHolder) {
@@ -254,7 +264,6 @@ public class DetailAdapter extends RecyclerView.Adapter {
 
     public void updateSchedule(List<Schedule> schedules) {
         mSchedules = schedules;
-//        notifyDataSetChanged();
         notifyDataSetChanged();
     }
 

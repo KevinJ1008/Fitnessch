@@ -44,10 +44,12 @@ public class AddNewMealArticleAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (position == 0) {
-            ((MealArticleTitleItemViewHolder) holder).mArticleSeparator.setVisibility(View.INVISIBLE);
-        }
         if (holder instanceof MealArticleTitleItemViewHolder) {
+            if (position == 0) {
+                ((MealArticleTitleItemViewHolder) holder).mArticleSeparator.setVisibility(View.GONE);
+            } else {
+                ((MealArticleTitleItemViewHolder) holder).mArticleSeparator.setVisibility(View.VISIBLE);
+            }
             ((MealArticleTitleItemViewHolder) holder).mMealTitle.setText(mMeals.get(position).getMealTitle());
         } else if (holder instanceof MealArticleContentItemViewHolder){
             ((MealArticleContentItemViewHolder) holder).mIngredient.setText(mMeals.get(position).getMealIngredient());

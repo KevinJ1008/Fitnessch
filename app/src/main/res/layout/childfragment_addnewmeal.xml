@@ -19,7 +19,7 @@
         android:paddingBottom="15dp"
         android:textSize="16sp"
         android:textColor="@color/addnew_text_color"
-        android:text="菜單："/>
+        android:text="@string/add_new_meal_title"/>
 
     <EditText
         android:id="@+id/addnew_meal_title_edittext"
@@ -73,7 +73,7 @@
         android:paddingBottom="15dp"
         android:textSize="16sp"
         android:textColor="@color/addnew_text_color"
-        android:text="食材："/>
+        android:text="@string/add_new_meal_ingredient"/>
 
     <EditText
         android:id="@+id/addnew_meal_ingredient_edittext"
@@ -105,7 +105,7 @@
         android:paddingBottom="15dp"
         android:textSize="16sp"
         android:textColor="@color/addnew_text_color"
-        android:text="熱量："/>
+        android:text="@string/add_new_meal_cal"/>
 
     <EditText
         android:id="@+id/addnew_meal_cal_edittext"
@@ -120,7 +120,7 @@
         android:paddingBottom="5dp"
         android:inputType="number"
         android:maxLines="1"
-        android:hint="cal"
+        android:hint="@string/add_new_meal_cal_hint"
         android:textColorHint="@color/new_schedule_article_title_edit_color"
         android:textColor="@color/addnew_text_color"
         android:background="@drawable/addnew_edittext_background"/>
@@ -143,7 +143,7 @@
         android:textColor="@color/addnew_text_color"
         android:visibility="invisible"
         android:textSize="14sp"
-        android:text="新增"/>
+        android:text="@string/all_add"/>
 
     <ImageView
         android:id="@+id/addnew_meal_btn_iamge"
@@ -173,7 +173,7 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/addnew_meal_separator"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/addnew_meal_complete_btn"
@@ -192,7 +192,7 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         android:visibility="invisible"
-        android:text="完成"/>
+        android:text="@string/all_complete"/>
 
     <ImageView
         android:id="@+id/addnew_meal_next_btn"
@@ -203,17 +203,5 @@
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/next_btn_selector" />
-
-    <!--<TextView-->
-        <!--android:id="@+id/coming_soon"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="20sp"-->
-        <!--android:text="Coming Soon"/>-->
 
 </android.support.constraint.ConstraintLayout>

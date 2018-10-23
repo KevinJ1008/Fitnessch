@@ -50,7 +50,7 @@ public class AddNewMealChildAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MealTitleItemViewHolder) {
             if (position == 0) {
-                ((MealTitleItemViewHolder) holder).mSeparator.setVisibility(View.INVISIBLE);
+                ((MealTitleItemViewHolder) holder).mSeparator.setVisibility(View.GONE);
             } else {
                 ((MealTitleItemViewHolder) holder).mSeparator.setVisibility(View.VISIBLE);
             }

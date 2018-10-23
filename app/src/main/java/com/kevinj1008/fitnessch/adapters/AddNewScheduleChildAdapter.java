@@ -53,7 +53,7 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ScheduleTitleItemViewHolder) {
             if (position == 0) {
-                ((ScheduleTitleItemViewHolder) holder).mSeparator.setVisibility(View.INVISIBLE);
+                ((ScheduleTitleItemViewHolder) holder).mSeparator.setVisibility(View.GONE);
             } else {
                 ((ScheduleTitleItemViewHolder) holder).mSeparator.setVisibility(View.VISIBLE);
             }

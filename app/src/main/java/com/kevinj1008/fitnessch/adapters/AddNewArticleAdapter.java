@@ -42,10 +42,12 @@ public class AddNewArticleAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (position == 0) {
-            ((ScheduleArticleTitleItemViewHolder) holder).mArticleSeparator.setVisibility(View.INVISIBLE);
-        }
         if (holder instanceof ScheduleArticleTitleItemViewHolder) {
+            if (position == 0) {
+                ((ScheduleArticleTitleItemViewHolder) holder).mArticleSeparator.setVisibility(View.GONE);
+            } else {
+                ((ScheduleArticleTitleItemViewHolder) holder).mArticleSeparator.setVisibility(View.VISIBLE);
+            }
             ((ScheduleArticleTitleItemViewHolder) holder).mScheduleTitle.setText(mSchedules.get(position).getScheduleTitle());
         } else if (holder instanceof ScheduleArticleContentItemViewHolder){
             ((ScheduleArticleContentItemViewHolder) holder).mScheduleWeight.setText(mSchedules.get(position).getScheduleWeight());

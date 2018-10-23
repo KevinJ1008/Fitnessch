@@ -15,6 +15,25 @@
     <string name="all_sign_up_password">密碼</string>
     <string name="all_sign_up">註冊</string>
     <string name="all_rm_calculator">RM 計算機</string>
+    <string name="profile_info_height_unit">CM</string>
+    <string name="profile_info_weight_unit">KG</string>
+    <string name="profile_height_edit_hint">身高</string>
+    <string name="profile_weight_edit_hint">體重</string>
+    <string name="profile_info_edit_hint">個人簡介</string>
+    <string name="add_new_article_title">標題：</string>
+    <string name="add_new_article_content_hint">說點甚麼 &#8230;</string>
+    <string name="all_start">開始</string>
+    <string name="all_rest">休息</string>
+    <string name="all_complete">完成</string>
+    <string name="all_add">新增</string>
+    <string name="add_new_schedule_title">項目：</string>
+    <string name="add_new_schedule_weight">重量：</string>
+    <string name="add_new_schedule_weight_hint">KG</string>
+    <string name="add_new_schedule_reps">次數：</string>
+    <string name="add_new_meal_cal">熱量：</string>
+    <string name="add_new_meal_cal_hint">cal</string>
+    <string name="add_new_meal_ingredient">食材：</string>
+    <string name="add_new_meal_title">菜單：</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
