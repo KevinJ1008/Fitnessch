@@ -71,5 +71,10 @@ public class AddNewMealChildPresenter implements AddNewMealChildContract.Present
 
     }
 
+    @Override
+    public void refreshMealUi() {
+        mAddNewMealChildView.refreshUi();
+    }
+
 
 }

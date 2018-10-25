@@ -4,6 +4,7 @@
     <string name="all_logout">登出</string>
     <string name="all_main">主頁</string>
     <string name="all_calendar">歷史課表</string>
+    <string name="all_date_schedule_meal">單日課表與菜單</string>
     <string name="all_profile">個人檔案</string>
     <string name="all_nav_title">Functions</string>
     <string name="all_schedule_title">健身課表</string>
@@ -34,6 +35,7 @@
     <string name="add_new_meal_cal_hint">cal</string>
     <string name="add_new_meal_ingredient">食材：</string>
     <string name="add_new_meal_title">菜單：</string>
+    <string name="date_article_title">單日課表與菜單</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

@@ -13,14 +13,12 @@ import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.util.DaySelectorDecorator;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
-import com.prolificinteractive.materialcalendarview.format.TitleFormatter;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -68,6 +66,7 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
         super.onViewCreated(view, savedInstanceState);
 
         mMaterialCalendarView = view.findViewById(R.id.calendar);
+        mMaterialCalendarView.addDecorator(new DaySelectorDecorator(getActivity()));
         mMaterialCalendarView.setTitleFormatter(new MonthArrayTitleFormatter(getResources().getStringArray(R.array.calendar_title_month)));
 
         mMaterialCalendarView.setOnDateChangedListener(dateSelectedListener);

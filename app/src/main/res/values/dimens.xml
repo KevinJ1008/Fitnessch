@@ -54,11 +54,13 @@
 
     <!--Schedule child items-->
     <dimen name="height_schedule_child_item_container">135dp</dimen>
+    <dimen name="height_schedule_child_item_default_container">140dp</dimen>
     <dimen name="height_schedule_child_item">125dp</dimen>
     <dimen name="width_schedule_child_item">340dp</dimen>
 
     <!--Meal child items-->
     <dimen name="height_meal_child_item_container">135dp</dimen>
+    <dimen name="height_meal_child_item_default_container">140dp</dimen>
     <dimen name="height_meal_child_item">125dp</dimen>
     <dimen name="width_meal_child_item">340dp</dimen>
 
@@ -76,6 +78,8 @@
     <!--Detail Item-->
     <dimen name="detail_author_image_size">50dp</dimen>
 
+    <!--Date Article Item-->
+    <dimen name="date_article_container_height">135dp</dimen>
 
 
 </resources>

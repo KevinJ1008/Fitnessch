@@ -31,17 +31,19 @@
 
         <TextView
             android:id="@+id/main_author_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:paddingEnd="5dp"
             android:ellipsize="end"
             android:lines="1"
-            android:maxWidth="200dp"
             android:textColor="@color/main_text_color"
             android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/main_create_time"
             app:layout_constraintLeft_toRightOf="@+id/main_author_image"
+            app:layout_constraintRight_toLeftOf="@+id/article_tag_icon"
             app:layout_constraintTop_toTopOf="@+id/main_author_image"
             tool:text="Wun-Bin Jhou" />
 

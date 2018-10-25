@@ -17,5 +17,4 @@
         app:mcv_selectionColor="@color/date_selected_color"
         android:background="@color/white_70_transparent"/>
 
-
 </android.support.constraint.ConstraintLayout>

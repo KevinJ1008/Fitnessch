@@ -97,7 +97,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     @Override
     public void transToMain() {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-//        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
 
         if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
             mFragmentManager.popBackStack();
@@ -108,7 +107,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mFragmentManager.popBackStack();
             mUserProfilePresenter.refresh();
         }
-//        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
         if (mMainFragment == null) mMainFragment = MainFragment.newInstance();
         if (mCalendarFragment != null) {
             transaction.setCustomAnimations(
@@ -167,9 +165,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     R.anim.slide_right_out)
                     .add(R.id.linearlayout_main_container, mMainFragment, MAIN);
         } else {
-//            if (mAddNewArticleFragment != null) mAddNewArticlePresenter.refresh();
-//            if (mAddNewMealArticleFragment != null) mAddNewMealArticlePresenter.refresh();
-//            if (mAddNewFragment != null) mAddNewPresenter.refreshUi();
 
             transaction.setCustomAnimations(
                     R.anim.slide_right_in,
@@ -190,28 +185,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
     @Override
     public void transToAddNew() {
-//        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
-//        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-//
-//        if (mMainFragment != null && !mMainFragment.isHidden()) {
-//            transaction.hide(mMainFragment);
-//            transaction.addToBackStack(MAIN);
-//        }
-//        if (mProfileFragment != null && !mProfileFragment.isHidden()) {
-//            transaction.hide(mProfileFragment);
-//            transaction.addToBackStack(PROFILE);
-//        }
-//        if (mCalendarFragment != null && !mCalendarFragment.isHidden()) {
-//            transaction.hide(mCalendarFragment);
-//            transaction.addToBackStack(CALENDAR);
-//        }
-//        AddNewFragment addNewFragment = AddNewFragment.newInstance();
-//        transaction.add(R.id.linearlayout_main_container, addNewFragment, ADDNEW);
-//
-//        mAddNewPresenter = new AddNewPresenter(addNewFragment, addNewFragment.getFragmentManager());
-//
-//        transaction.commit();
-
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
             mFragmentManager.popBackStack();
@@ -334,7 +307,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     @Override
     public void transToProfile() {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-//        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
 
         if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
             mFragmentManager.popBackStack();
@@ -345,7 +317,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mFragmentManager.popBackStack();
             mUserProfilePresenter.refresh();
         }
-//        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
         if (mProfileFragment == null) {
             mProfileFragment = ProfileFragment.newInstance();
             if (mAddNewArticleFragment != null) mAddNewArticlePresenter.refresh();
@@ -514,7 +485,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     @Override
     public void transToCalendar() {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-//        if (mFragmentManager.findFragmentByTag(ADDNEW) != null) mFragmentManager.popBackStack();
 
         if (mFragmentManager.findFragmentByTag(DETAIL) != null) {
             mFragmentManager.popBackStack();
@@ -526,7 +496,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mUserProfilePresenter.refresh();
         }
 
-//        if (mFragmentManager.findFragmentByTag(SCHEDULE) != null) mFragmentManager.popBackStack();
         if (mCalendarFragment == null) {
             mCalendarFragment = CalendarFragment.newInstance();
             if (mAddNewArticleFragment != null) mAddNewArticlePresenter.refresh();
@@ -831,6 +800,8 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         }
         transaction.commit();
 
+        mFitnesschView.showDateUi();
+
     }
 
     @Override
@@ -881,27 +852,30 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                 .add(R.id.linearlayout_main_container, userProfileFragment, USERPROFILE);
         transaction.commit();
 
-        mUserProfilePresenter = new UserProfilePresenter(userProfileFragment, userProfileFragment.getFragmentManager(), article);
+        if (mUserProfilePresenter == null) {
+            mUserProfilePresenter = new UserProfilePresenter(userProfileFragment, userProfileFragment.getFragmentManager(), article);
+        }
     }
 
     @Override
     public void refreshAddNewUi() {
-        if (mAddNewFragment != null) mAddNewFragment.refreshUi();
+//        if (mAddNewFragment != null) mAddNewFragment.refreshUi();
+//        if (mAddNewMealArticleFragment != null) mAddNewMealArticleFragment.refreshUi();
+//        if (mAddNewArticleFragment != null) mAddNewArticleFragment.refreshUi();
+        if (mAddNewPresenter != null) mAddNewPresenter.refreshUi();
+        if (mAddNewMealArticlePresenter != null) mAddNewMealArticlePresenter.refresh();
+        if (mAddNewArticlePresenter != null) mAddNewArticlePresenter.refresh();
     }
 
     @Override
     public void refreshDateArticleUi() {
-        mDateArticlePresenter.refreshDateUi();
+//        if (mDateArticleFragment != null) mDateArticleFragment.refreshUi();
+        if (mDateArticlePresenter != null) mDateArticlePresenter.refreshDateUi();
     }
 
     @Override
     public void refreshCalendarFocus() {
-        mCalendarPresenter.refresh();
-    }
-
-    @Override
-    public void refreshAddNewMealArticleUi() {
-        if (mAddNewMealArticleFragment != null) mAddNewMealArticleFragment.refreshUi();
+        if (mCalendarPresenter != null) mCalendarPresenter.refresh();
     }
 
     @Override
@@ -910,8 +884,13 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     }
 
     @Override
-    public void refreshAddNewArticleUi() {
-        if (mAddNewArticleFragment != null) mAddNewArticleFragment.refreshUi();
+    public void refreshAllUi() {
+        if (mAddNewPresenter != null) mAddNewPresenter.refreshUi();
+        if (mAddNewMealArticlePresenter != null) mAddNewMealArticlePresenter.refresh();
+        if (mAddNewArticlePresenter != null) mAddNewArticlePresenter.refresh();
+        if (mDateArticlePresenter != null) mDateArticlePresenter.refreshDateUi();
+        if (mCalendarPresenter != null) mCalendarPresenter.refresh();
+        if (mDetailPresenter != null) mDetailPresenter.refreshDetailUi();
     }
 
 }

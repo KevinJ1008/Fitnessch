@@ -103,8 +103,8 @@ public class AddNewFragment extends Fragment implements AddNewContract.View {
 
     @Override
     public void refreshUi() {
-        mAddNewScheduleChildFragment.refreshUi();
-        mAddNewMealChildFragment.refreshUi();
+        if (mAddNewScheduleChildPresenter != null) mAddNewScheduleChildPresenter.refreshScheduleUi();
+        if (mAddNewMealChildPresenter != null) mAddNewMealChildPresenter.refreshMealUi();
     }
 
 

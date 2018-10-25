@@ -70,8 +70,6 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Transition explode = TransitionInflater.from(this).inflateTransition(R.transition.explode);
-//        getWindow().setExitTransition(explode);
         setContentView(R.layout.activity_login);
 
         setLoginStatusBar();
@@ -117,23 +115,6 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
             }
         };
 
-    }
-
-    private void setLoginStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //4.4
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { //5.0
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-            window.setNavigationBarColor(Color.TRANSPARENT);
-            window.setStatusBarColor(Color.TRANSPARENT);//calculateStatusColor(Color.WHITE, (int) alphaValue)
-        }
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -185,7 +166,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                     user.put("db_uid", uid);
                     user.put("height", "0");
                     user.put("weight", "0");
-                    user.put("info", "...");
+                    user.put("info", "在這裡輸入個人資訊。");
 
                     db.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -319,16 +300,4 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 
     }
 
-//    public boolean isNetworkAvailable() {
-//        ConnectivityManager connectivityManager
-//                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-//
-//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-//    }
-
-//    private boolean isUserTokenExist() {
-//        SharedPreferences userLoginStatus = getSharedPreferences("User_Profile", MODE_PRIVATE);
-//        return !userLoginStatus.getString("access_token", "").equals("");
-//    }
 }

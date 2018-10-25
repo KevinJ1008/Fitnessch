@@ -23,5 +23,7 @@ public interface AddNewMealChildContract {
         void searchTitle();
 
         void openAddNewArticle(List<Meal> meals);
+
+        void refreshMealUi();
     }
 }

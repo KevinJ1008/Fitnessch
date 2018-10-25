@@ -23,5 +23,7 @@ public interface AddNewScheduleChildContract {
         void searchTitle();
 
         void openAddNewArticle(List<Schedule> schedules);
+
+        void refreshScheduleUi();
     }
 }

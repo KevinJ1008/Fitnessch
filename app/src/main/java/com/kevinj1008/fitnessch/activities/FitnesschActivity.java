@@ -83,13 +83,6 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
         mSharedPreferencesManager = new SharedPreferencesManager(mContext);
 
-        // Blur background image
-//        ImageView imageView = findViewById(R.id.parent_background);
-//        Picasso.get()
-//                .load(R.drawable.background_image_03)
-//                .transform(new BlurTransformation(getBaseContext(), 65))
-//                .into(imageView);
-
         setToolbar();
         setDrawerLayout();
 
@@ -177,6 +170,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     @Override
     public void showMainUi() {
         mFloatingActionButton.setVisibility(View.VISIBLE);
+        mToolbarTitle.setText(getResources().getString(R.string.all_fitnessch));
     }
 
     @Override
@@ -187,11 +181,19 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     @Override
     public void showCalendarUi() {
         mFloatingActionButton.setVisibility(View.VISIBLE);
+        mToolbarTitle.setText(getResources().getString(R.string.all_calendar));
     }
 
     @Override
     public void showProfileUi() {
         mFloatingActionButton.setVisibility(View.VISIBLE);
+        mToolbarTitle.setText(getResources().getString(R.string.all_profile));
+    }
+
+    @Override
+    public void showDateUi() {
+        mFloatingActionButton.setVisibility(View.VISIBLE);
+        mToolbarTitle.setText(getResources().getString(R.string.all_date_schedule_meal));
     }
 
     @Override
@@ -233,14 +235,13 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         switch (menuItem.getItemId()) {
             case R.id.nav_main:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
-                mPresenter.refreshAddNewUi();
-                mPresenter.refreshAddNewArticleUi();
-                mPresenter.refreshAddNewMealArticleUi();
+                mPresenter.refreshAllUi();
                 mPresenter.transToMain();
                 break;
 
             case R.id.nav_calendar:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
+                mPresenter.refreshAllUi();
                 mPresenter.transToCalendar();
                 break;
 
@@ -252,6 +253,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
             case R.id.nav_profile:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
+                mPresenter.refreshAllUi();
                 mPresenter.transToProfile();
                 break;
 
@@ -289,10 +291,8 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
             mPresenter.refreshCalendarFocus();
         } else if (addNewArticlePage != null && addNewArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToAddNew();
-//            mPresenter.refreshAddNewArticleUi();
         } else if (addNewMealArticlePage != null && addNewMealArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToAddNew();
-//            mPresenter.refreshAddNewMealArticleUi();
         } else if (dateArticlePage != null && dateArticlePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToCalendar();
             mPresenter.refreshDateArticleUi();
@@ -318,8 +318,6 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
                     //TODO: clear data
                     mPresenter.transToMain();
                     mPresenter.refreshAddNewUi();
-                    mPresenter.refreshAddNewArticleUi();
-                    mPresenter.refreshAddNewMealArticleUi();
                 }
             });
             alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {

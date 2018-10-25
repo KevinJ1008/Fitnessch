@@ -18,6 +18,8 @@ public interface FitnesschContract {
 
         void showProfileUi();
 
+        void showDateUi();
+
         void refreshLikedUi();
 
     }
@@ -50,15 +52,13 @@ public interface FitnesschContract {
 
         void refreshAddNewUi();
 
-        void refreshAddNewArticleUi();
-
         void refreshDateArticleUi();
 
         void refreshCalendarFocus();
 
-        void refreshAddNewMealArticleUi();
-
         void refreshDetailUi();
+
+        void refreshAllUi();
 
 //        void transToChatRoom(Message message, User user);
 

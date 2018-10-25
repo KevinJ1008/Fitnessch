@@ -71,5 +71,10 @@ public class AddNewScheduleChildPresenter implements AddNewScheduleChildContract
 
     }
 
+    @Override
+    public void refreshScheduleUi() {
+        mAddNewScheduleChildView.refreshUi();
+    }
+
 
 }
