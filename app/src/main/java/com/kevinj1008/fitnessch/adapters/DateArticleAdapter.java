@@ -63,7 +63,7 @@ public class DateArticleAdapter extends RecyclerView.Adapter {
                 public void run() {
                     int lineCount = ((DateArticleDefaultItemViewHolder) holder).mDefaultContent.getLineCount();
                     if (lineCount == 1) {
-                        ((DateArticleDefaultItemViewHolder) holder).mDefaultContent.setGravity(Gravity.CENTER_HORIZONTAL);
+                        ((DateArticleDefaultItemViewHolder) holder).mDefaultContent.setGravity(Gravity.CENTER);
                     } else {
                         ((DateArticleDefaultItemViewHolder) holder).mDefaultContent.setGravity(Gravity.NO_GRAVITY);
                     }
@@ -86,7 +86,7 @@ public class DateArticleAdapter extends RecyclerView.Adapter {
                     int lineCount = ((DateArticleItemViewHolder) holder).mContent.getLineCount();
                     Log.d(Constants.TAG, "Get line Count " + lineCount);
                     if (lineCount == 1) {
-                        ((DateArticleItemViewHolder) holder).mContent.setGravity(Gravity.CENTER_HORIZONTAL);
+                        ((DateArticleItemViewHolder) holder).mContent.setGravity(Gravity.CENTER);
                     } else {
                         ((DateArticleItemViewHolder) holder).mContent.setGravity(Gravity.NO_GRAVITY);
                     }

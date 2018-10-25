@@ -5,6 +5,7 @@
     <string name="all_main">主頁</string>
     <string name="all_calendar">歷史課表</string>
     <string name="all_date_schedule_meal">單日課表與菜單</string>
+    <string name="all_add_new_schedule_meal">新增課表與菜單</string>
     <string name="all_profile">個人檔案</string>
     <string name="all_nav_title">Functions</string>
     <string name="all_schedule_title">健身課表</string>

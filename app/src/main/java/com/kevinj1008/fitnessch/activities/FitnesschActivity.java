@@ -55,7 +55,6 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     private TextView mToolbarTitle;
     private FloatingActionButton mFloatingActionButton;
     private SharedPreferencesManager mSharedPreferencesManager;
-//    private ImageView mBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +175,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     @Override
     public void showAddNewUi() {
         mFloatingActionButton.setVisibility(View.INVISIBLE);
+        mToolbarTitle.setText(R.string.all_add_new_schedule_meal);
     }
 
     @Override
@@ -194,6 +194,12 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     public void showDateUi() {
         mFloatingActionButton.setVisibility(View.VISIBLE);
         mToolbarTitle.setText(getResources().getString(R.string.all_date_schedule_meal));
+    }
+
+    @Override
+    public void showDetailUi() {
+        mFloatingActionButton.setVisibility(View.VISIBLE);
+        mToolbarTitle.setText(getResources().getString(R.string.all_fitnessch));
     }
 
     @Override

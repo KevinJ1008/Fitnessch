@@ -475,6 +475,8 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         transaction.commit();
 
         mDetailPresenter = new DetailPresenter(mDetailFragment, article);
+
+//        mFitnesschView.showDetailUi();
     }
 
     @Override

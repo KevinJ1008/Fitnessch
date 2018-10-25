@@ -67,13 +67,7 @@ public class DetailAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-//        if (position == 1) {
-//            if (mSchedules.size() > 0) {
-//                ((DetailScheduleTitleViewHolder) holder).mScheduleSeparator.setVisibility(View.INVISIBLE);
-//            } else {
-//                ((DetailMealTitleViewHolder) holder).mMealSeparator.setVisibility(View.INVISIBLE);
-//            }
-//        }
+
         if (holder instanceof DetailMainItemViewHolder) {
             Picasso.get()
                     .load(mArticle.getAuthorImage())

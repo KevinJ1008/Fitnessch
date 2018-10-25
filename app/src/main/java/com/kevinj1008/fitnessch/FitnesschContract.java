@@ -20,6 +20,8 @@ public interface FitnesschContract {
 
         void showDateUi();
 
+        void showDetailUi();
+
         void refreshLikedUi();
 
     }
