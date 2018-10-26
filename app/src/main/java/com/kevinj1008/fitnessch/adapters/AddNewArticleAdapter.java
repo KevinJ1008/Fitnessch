@@ -49,7 +49,7 @@ public class AddNewArticleAdapter extends RecyclerView.Adapter {
                 ((ScheduleArticleTitleItemViewHolder) holder).mArticleSeparator.setVisibility(View.VISIBLE);
             }
             ((ScheduleArticleTitleItemViewHolder) holder).mScheduleTitle.setText(mSchedules.get(position).getScheduleTitle());
-        } else if (holder instanceof ScheduleArticleContentItemViewHolder){
+        } else if (holder instanceof ScheduleArticleContentItemViewHolder) {
             ((ScheduleArticleContentItemViewHolder) holder).mScheduleWeight.setText(mSchedules.get(position).getScheduleWeight());
             ((ScheduleArticleContentItemViewHolder) holder).mScheduleReps.setText(mSchedules.get(position).getScheduleReps());
         }

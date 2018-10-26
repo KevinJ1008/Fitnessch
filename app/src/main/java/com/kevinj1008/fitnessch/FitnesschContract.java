@@ -34,7 +34,7 @@ public interface FitnesschContract {
 
         void transToAddNew();
 
-        void transToRMCalculator();
+        void transToRmCalculator();
 
         void transToProfile();
 

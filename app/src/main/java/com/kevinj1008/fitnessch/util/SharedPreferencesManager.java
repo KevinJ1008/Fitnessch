@@ -7,91 +7,67 @@ public class SharedPreferencesManager {
 
     private SharedPreferences mSharedPreferences;
     private Context mContext;
-    private int MODE_PRIVATE = 0;
+    private static final int  MODE_PRIVATE = 0;
     private static final String PREF_NAME = "User_Profile";
     private SharedPreferences.Editor mEditor;
 
-    public SharedPreferencesManager (Context context) {
+    public SharedPreferencesManager(Context context) {
         mContext = context;
         mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
     }
 
-    public void saveUserIdToken(Context context, String token) {
-        mContext = context;
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("access_token", token);
-        editor.apply();
+    public void saveUserIdToken(String token) {
+        mEditor.putString("access_token", token);
+        mEditor.apply();
     }
 
     public String getUserIdToken() {
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         return mSharedPreferences.getString("access_token", "");
     }
 
-    public void saveUserId(Context context, String id) {
-        mContext = context;
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("id", id);
-        editor.apply();
+    public void saveUserId(String id) {
+        mEditor.putString("id", id);
+        mEditor.apply();
     }
 
     public String getUserId() {
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         return mSharedPreferences.getString("id", "");
     }
 
-    public void saveUserEmail(Context context, String email) {
-        mContext = context;
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("mail", email);
-        editor.apply();
+    public void saveUserEmail(String email) {
+        mEditor.putString("mail", email);
+        mEditor.apply();
     }
 
     public String getUserEmail() {
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         return mSharedPreferences.getString("mail", "");
     }
 
-    public void saveUserName(Context context, String name) {
-        mContext = context;
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("name", name);
-        editor.apply();
+    public void saveUserName(String name) {
+        mEditor.putString("name", name);
+        mEditor.apply();
     }
 
     public String getUserName() {
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         return mSharedPreferences.getString("name", "");
     }
 
-    public void saveUserPhoto(Context context, String photo) {
-        mContext = context;
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("photo", photo);
-        editor.apply();
+    public void saveUserPhoto(String photo) {
+        mEditor.putString("photo", photo);
+        mEditor.apply();
     }
 
     public String getUserPhoto() {
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         return mSharedPreferences.getString("photo", "");
     }
 
-    public void saveUserDbUid(Context context, String dbUid) {
-        mContext = context;
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("db_uid", dbUid);
-        editor.apply();
+    public void saveUserDbUid(String dbUid) {
+        mEditor.putString("db_uid", dbUid);
+        mEditor.apply();
     }
 
     public String getUserDbUid() {
-        mSharedPreferences = mContext.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         return mSharedPreferences.getString("db_uid", "");
     }
 

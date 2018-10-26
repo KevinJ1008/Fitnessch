@@ -3,14 +3,13 @@ package com.kevinj1008.fitnessch.activities;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.util.DelayedProgressDialog;

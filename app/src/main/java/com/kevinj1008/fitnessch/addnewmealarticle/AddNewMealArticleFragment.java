@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.addnewmealarticle;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,23 +18,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.activities.FitnesschActivity;
-import com.kevinj1008.fitnessch.adapters.AddNewArticleAdapter;
 import com.kevinj1008.fitnessch.adapters.AddNewMealArticleAdapter;
-import com.kevinj1008.fitnessch.addnewarticle.AddNewArticleContract;
 import com.kevinj1008.fitnessch.objects.Meal;
-import com.kevinj1008.fitnessch.objects.Schedule;
 
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+
 
 public class AddNewMealArticleFragment extends Fragment implements AddNewMealArticleContract.View {
 
@@ -79,10 +76,6 @@ public class AddNewMealArticleFragment extends Fragment implements AddNewMealArt
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_addnew_mealarticle, container, false);
 
-        RecyclerView recyclerView = root.findViewById(R.id.recyclerview_add_new_meal_article);
-//        Button sendBtn = root.findViewById(R.id.add_new_meal_article_btn);
-//        ImageView sendBtn = root.findViewById(R.id.add_new_meal_article_btn);
-        ConstraintLayout sendMealArticleBtn = root.findViewById(R.id.add_new_meal_article_btn_background);
         mTitleEditText = root.findViewById(R.id.add_new_meal_article_title_edittext);
         mContentEditText = root.findViewById(R.id.add_new_meal_article_content_edittext);
         ConstraintLayout constraintLayout = root.findViewById(R.id.fragment_addnew_meal_article);
@@ -90,13 +83,15 @@ public class AddNewMealArticleFragment extends Fragment implements AddNewMealArt
         mTitleEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(15)});
         mTitleEditText.addTextChangedListener(textWatcher);
 
-//        sendBtn.setOnClickListener(clickListener);
         constraintLayout.setOnClickListener(clickListener);
+
+        ConstraintLayout sendMealArticleBtn = root.findViewById(R.id.add_new_meal_article_btn_background);
         sendMealArticleBtn.setOnClickListener(clickListener);
 
         mTitleEditText.setOnFocusChangeListener(focusChangeListener);
         mContentEditText.setOnFocusChangeListener(focusChangeListener);
 
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerview_add_new_meal_article);
         recyclerView.setLayoutManager(new LinearLayoutManager(Fitnessch.getAppContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

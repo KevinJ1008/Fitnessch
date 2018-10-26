@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.profile;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -26,7 +28,6 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ProfilePresenter implements ProfileContract.Presenter {
 
@@ -67,23 +68,7 @@ public class ProfilePresenter implements ProfileContract.Presenter {
 
     @Override
     public void transToScheduleChild() {
-//        mProfileView.showScheduleChildUi();
 
-//        FragmentTransaction transaction = mChildFragmentManager.beginTransaction();
-
-//        if (mScheduleChildFragment == null) mScheduleChildFragment = ScheduleChildFragment.newInstance();
-////        if (mMealChildFragment != null) transaction.hide(mMealChildFragment);
-//        if (!mScheduleChildFragment.isAdded()) {
-//            transaction.add(R.id.profile_view_pager, mScheduleChildFragment);
-//        } else {
-//            transaction.show(mScheduleChildFragment);
-//        }
-//
-//        if (mScheduleChildPresenter == null) {
-//            mScheduleChildPresenter = new ScheduleChildPresenter(mScheduleChildFragment);
-//        }
-//
-//        transaction.commit();
     }
 
     @Override
@@ -98,14 +83,14 @@ public class ProfilePresenter implements ProfileContract.Presenter {
 
     @Override
     public void sendProfileInfo(User user) {
-        String self = mSharedPreferencesManager.getUserDbUid();
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> info = new HashMap<>();
 
         info.put("height", user.getHeight());
         info.put("weight", user.getWeight());
         info.put("info", user.getInfo());
+
+        String self = mSharedPreferencesManager.getUserDbUid();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("users").document(self).update(info).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

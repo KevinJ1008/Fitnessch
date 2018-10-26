@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.addnewmealchild;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -17,7 +19,6 @@ import com.kevinj1008.fitnessch.util.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AddNewMealChildPresenter implements AddNewMealChildContract.Presenter {
 
@@ -59,11 +60,11 @@ public class AddNewMealChildPresenter implements AddNewMealChildContract.Present
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(Constants.TAG, "Fail to get title data " + e.getMessage());
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(Constants.TAG, "Fail to get title data " + e.getMessage());
+                    }
+                });
     }
 
     @Override

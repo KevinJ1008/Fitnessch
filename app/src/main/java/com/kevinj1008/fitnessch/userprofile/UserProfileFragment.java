@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.userprofile;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,7 +27,6 @@ import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UserProfileFragment extends Fragment implements UserProfileContract.View {
 

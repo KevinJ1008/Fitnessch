@@ -1,7 +1,8 @@
 package com.kevinj1008.fitnessch.datearticle;
 
-import android.util.Log;
+import static com.google.common.base.Preconditions.checkNotNull;
 
+import android.util.Log;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -15,7 +16,6 @@ import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 
 import javax.annotation.Nullable;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class DateArticlePresenter implements DateArticleContract.Presenter {
 

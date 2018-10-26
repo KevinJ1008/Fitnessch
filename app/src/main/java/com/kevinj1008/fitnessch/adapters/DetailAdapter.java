@@ -141,6 +141,7 @@ public class DetailAdapter extends RecyclerView.Adapter {
                 } else if (mMeals.size() > 0) {
                     return Constants.VIEWTYPE_DETAIL_MEAL_CONTENT;
                 }
+                break;
 
             case "TITLE" :
                 if (mSchedules.size() > 0) {
@@ -148,12 +149,14 @@ public class DetailAdapter extends RecyclerView.Adapter {
                 } else if (mMeals.size() > 0) {
                     return Constants.VIEWTYPE_DETAIL_MEAL_TITLE;
                 }
+                break;
 
             default:
                 Log.d(Constants.TAG, "Detail Page View Type ");
                 return Constants.VIEWTYPE_DETAIL_MAIN;
-        }
 
+        }
+        return 0;
     }
 
     @Override

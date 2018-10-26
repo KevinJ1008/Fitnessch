@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.addnewarticle;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +32,6 @@ import com.kevinj1008.fitnessch.objects.Schedule;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AddNewArticleFragment extends Fragment implements AddNewArticleContract.View {
 
@@ -76,24 +77,21 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_addnewarticle, container, false);
 
-        RecyclerView recyclerView = root.findViewById(R.id.recyclerview_add_new_article);
-//        Button sendBtn = root.findViewById(R.id.add_new_article_btn);
-        ConstraintLayout sendArticleBtn = root.findViewById(R.id.add_new_article_btn_background);
-//        ImageView sendBtn = root.findViewById(R.id.add_new_article_btn);
         mTitleEditText = root.findViewById(R.id.add_new_article_title_edittext);
         mContentEditText = root.findViewById(R.id.add_new_article_content_edittext);
         ConstraintLayout constraintLayout = root.findViewById(R.id.fragment_addnewarticle);
+        constraintLayout.setOnClickListener(clickListener);
 
         mTitleEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(15)});
         mTitleEditText.addTextChangedListener(textWatcher);
 
-//        sendBtn.setOnClickListener(clickListener);
-        constraintLayout.setOnClickListener(clickListener);
+        ConstraintLayout sendArticleBtn = root.findViewById(R.id.add_new_article_btn_background);
         sendArticleBtn.setOnClickListener(clickListener);
 
         mTitleEditText.setOnFocusChangeListener(focusChangeListener);
         mContentEditText.setOnFocusChangeListener(focusChangeListener);
 
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerview_add_new_article);
         recyclerView.setLayoutManager(new LinearLayoutManager(Fitnessch.getAppContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -146,7 +144,7 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                if (!"".equals(title) && !title.startsWith(" ") && !"".equals(content) &&!content.startsWith(" ")) {
+                if (!"".equals(title) && !title.startsWith(" ") && !"".equals(content) && !content.startsWith(" ")) {
                     mPresenter.sendSchedule(title, content);
                     mTitleEditText.getText().clear();
                     mContentEditText.getText().clear();

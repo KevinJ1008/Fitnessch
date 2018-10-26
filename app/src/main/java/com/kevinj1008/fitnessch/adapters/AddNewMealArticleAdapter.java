@@ -51,7 +51,7 @@ public class AddNewMealArticleAdapter extends RecyclerView.Adapter {
                 ((MealArticleTitleItemViewHolder) holder).mArticleSeparator.setVisibility(View.VISIBLE);
             }
             ((MealArticleTitleItemViewHolder) holder).mMealTitle.setText(mMeals.get(position).getMealTitle());
-        } else if (holder instanceof MealArticleContentItemViewHolder){
+        } else if (holder instanceof MealArticleContentItemViewHolder) {
             ((MealArticleContentItemViewHolder) holder).mIngredient.setText(mMeals.get(position).getMealIngredient());
             ((MealArticleContentItemViewHolder) holder).mCal.setText(mMeals.get(position).getMealCal());
         }

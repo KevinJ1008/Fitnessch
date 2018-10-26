@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.activities;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,19 +17,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.FitnesschContract;
 import com.kevinj1008.fitnessch.FitnesschPresenter;
 import com.kevinj1008.fitnessch.R;
@@ -37,14 +35,11 @@ import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.util.Constants;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 import com.squareup.picasso.Picasso;
-
-
+import io.fabric.sdk.android.Fabric;
 import java.util.List;
 
-import io.fabric.sdk.android.Fabric;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class FitnesschActivity extends BaseActivity implements FitnesschContract.View,
         NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -287,8 +282,8 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else if ((addNewPage != null && addNewPage.getVisibility() == View.VISIBLE) ||
-                (mainPage != null && mainPage.getVisibility() == View.VISIBLE)) {
+        } else if ((addNewPage != null && addNewPage.getVisibility() == View.VISIBLE)
+                || (mainPage != null && mainPage.getVisibility() == View.VISIBLE)) {
             backButtonHandler();
         } else if (profilePage != null && profilePage.getVisibility() == View.VISIBLE) {
             mPresenter.transToMain();
@@ -351,7 +346,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(FitnesschActivity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(FitnesschActivity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 

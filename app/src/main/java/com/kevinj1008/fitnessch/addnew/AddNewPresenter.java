@@ -1,15 +1,13 @@
 package com.kevinj1008.fitnessch.addnew;
 
-import android.support.v4.app.FragmentManager;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import android.support.v4.app.FragmentManager;
 import com.kevinj1008.fitnessch.addnewmealchild.AddNewMealChildFragment;
 import com.kevinj1008.fitnessch.addnewmealchild.AddNewMealChildPresenter;
 import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildFragment;
 import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildPresenter;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AddNewPresenter implements AddNewContract.Presenter {
 

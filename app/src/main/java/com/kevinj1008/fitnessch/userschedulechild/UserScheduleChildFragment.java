@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.userschedulechild;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,7 +20,6 @@ import com.kevinj1008.fitnessch.adapters.UserScheduleChildAdapter;
 import com.kevinj1008.fitnessch.api.beans.ScheduleArticles;
 import com.kevinj1008.fitnessch.objects.Article;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UserScheduleChildFragment extends Fragment implements UserScheduleChildContract.View {
 

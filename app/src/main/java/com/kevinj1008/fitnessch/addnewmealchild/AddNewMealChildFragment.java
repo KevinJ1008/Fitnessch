@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.addnewmealchild;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,7 +21,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kevinj1008.fitnessch.Fitnessch;
@@ -30,13 +31,11 @@ import com.kevinj1008.fitnessch.objects.Meal;
 import com.kevinj1008.fitnessch.objects.Title;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+
 
 public class AddNewMealChildFragment extends Fragment implements AddNewMealChildContract.View {
 
@@ -75,14 +74,12 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
         View root = inflater.inflate(R.layout.childfragment_addnewmeal, container, false);
 
         mAddNewBtn = root.findViewById(R.id.addnew_meal_btn);
-//        mMealTitle = root.findViewById(R.id.addnew_meal_title_edittext);
         mMealIngredient = root.findViewById(R.id.addnew_meal_ingredient_edittext);
         mMealCal = root.findViewById(R.id.addnew_meal_cal_edittext);
         mMealCompleteBtn = root.findViewById(R.id.addnew_meal_complete_btn);
         mAddBtn = root.findViewById(R.id.addnew_meal_btn_iamge);
         mNextBtn = root.findViewById(R.id.addnew_meal_next_btn);
         mSearchText = root.findViewById(R.id.addnew_meal_auto_search);
-        ConstraintLayout constraintLayout = root.findViewById(R.id.childfragment_addnewmeal);
 
         InputFilter typeFilter = new InputFilter() {
             @Override
@@ -94,16 +91,15 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
             }
         };
 
-//        mMealTitle.setFilters(new InputFilter[]{typeFilter});
         mSearchText.setFilters(new InputFilter[]{typeFilter});
         mMealIngredient.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5), typeFilter});
         mMealCal.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
 
-//        mMealTitle.setOnFocusChangeListener(focusChangeListener);
         mMealIngredient.setOnFocusChangeListener(focusChangeListener);
         mMealCal.setOnFocusChangeListener(focusChangeListener);
         mSearchText.setOnFocusChangeListener(focusChangeListener);
 
+        ConstraintLayout constraintLayout = root.findViewById(R.id.childfragment_addnewmeal);
         constraintLayout.setOnClickListener(clickListener);
         mAddNewBtn.setOnClickListener(clickListener);
         mMealCompleteBtn.setOnClickListener(clickListener);
@@ -151,7 +147,7 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                 if (!"".equals(title) && !"".equals(ingredient) && !"".equals(cal) && !cal.startsWith("0")) {
-                    if (!title.contains(" ") && !ingredient.contains(" ") &!cal.contains(" ")) {
+                    if (!title.contains(" ") && !ingredient.contains(" ") && !cal.contains(" ")) {
                         Meal meal = new Meal();
                         meal.setMealTitle(title);
                         meal.setMealIngredient(ingredient);

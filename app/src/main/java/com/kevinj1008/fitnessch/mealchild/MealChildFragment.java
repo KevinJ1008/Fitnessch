@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.mealchild;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,7 +20,6 @@ import com.kevinj1008.fitnessch.adapters.MealChildAdapter;
 import com.kevinj1008.fitnessch.api.beans.MealArticles;
 import com.kevinj1008.fitnessch.objects.Article;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MealChildFragment extends Fragment implements MealChildContract.View {
 

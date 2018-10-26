@@ -1,10 +1,12 @@
 package com.kevinj1008.fitnessch.main;
 
-import android.os.Handler;
-import android.support.v4.app.Fragment;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +21,7 @@ import com.kevinj1008.fitnessch.adapters.MainAdapter;
 import com.kevinj1008.fitnessch.api.beans.GetArticles;
 import com.kevinj1008.fitnessch.objects.Article;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+
 
 public class MainFragment extends Fragment implements MainContract.View {
 

@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.detail;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,10 +20,8 @@ import com.kevinj1008.fitnessch.adapters.DetailAdapter;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.objects.Meal;
 import com.kevinj1008.fitnessch.objects.Schedule;
-
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class DetailFragment extends Fragment implements DetailContract.View {
 

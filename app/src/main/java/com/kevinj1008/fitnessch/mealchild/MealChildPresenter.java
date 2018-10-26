@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.mealchild;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +21,6 @@ import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 
 import javax.annotation.Nullable;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MealChildPresenter implements MealChildContract.Presenter {
 
@@ -85,12 +86,12 @@ public class MealChildPresenter implements MealChildContract.Presenter {
 
                                 //TODO: Add author ID and photo to object
                                 articles.setId(id);
-                                    articles.setName(author);
-                                        articles.setTitle(title);
-                                            articles.setContent(content);
-                                            articles.setCreatedTime(createTime);
-                                        articles.setTag(tag);
-                                    articles.setAuthorId(authorId);
+                                articles.setName(author);
+                                articles.setTitle(title);
+                                articles.setContent(content);
+                                articles.setCreatedTime(createTime);
+                                articles.setTag(tag);
+                                articles.setAuthorId(authorId);
                                 articles.setAuthorImage(authorPhoto);
 
                                 mMealChildView.showArticles(articles);

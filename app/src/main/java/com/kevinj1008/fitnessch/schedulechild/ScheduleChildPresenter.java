@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.schedulechild;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,15 +20,13 @@ import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 
 import javax.annotation.Nullable;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
-public class ScheduleChildPresenter implements ScheduleChildContract.Presenter{
+public class ScheduleChildPresenter implements ScheduleChildContract.Presenter {
 
     private ScheduleChildContract.View mScheduleChildView;
     private int mLastVisibleItemPosition;
     private int mFirstVisibleItemPosition;
     private SharedPreferencesManager mSharedPreferencesManager;
-//    private int mPaging = Constants.FIRST_PAGING;
     private boolean mLoading = false;
 
     public ScheduleChildPresenter(ScheduleChildContract.View scheduleChildView) {
@@ -84,12 +84,12 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter{
 
                                 //TODO: Add author ID and photo to object
                                 articles.setId(id);
-                                    articles.setName(author);
-                                        articles.setTitle(title);
-                                            articles.setContent(content);
-                                            articles.setCreatedTime(createTime);
-                                        articles.setTag(tag);
-                                    articles.setAuthorId(authorId);
+                                articles.setName(author);
+                                articles.setTitle(title);
+                                articles.setContent(content);
+                                articles.setCreatedTime(createTime);
+                                articles.setTag(tag);
+                                articles.setAuthorId(authorId);
                                 articles.setAuthorImage(authorPhoto);
 
                                 mScheduleChildView.showArticles(articles);

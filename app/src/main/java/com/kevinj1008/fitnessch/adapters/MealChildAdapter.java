@@ -111,6 +111,7 @@ public class MealChildAdapter extends RecyclerView.Adapter {
 
             ((ConstraintLayout) itemView.findViewById(R.id.meal_child_article_container)).setOnClickListener(clickListener);
         }
+
         private View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {

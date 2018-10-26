@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.addnewmealarticle;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,9 +16,7 @@ import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.addnew.AddNewContract;
 import com.kevinj1008.fitnessch.addnewarticle.AddNewArticleContract;
 import com.kevinj1008.fitnessch.addnewmealchild.AddNewMealChildContract;
-import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildContract;
 import com.kevinj1008.fitnessch.objects.Meal;
-import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.util.Constants;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 
@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+
 
 public class AddNewMealArticlePresenter implements AddNewMealArticleContract.Presenter {
 
@@ -64,12 +64,10 @@ public class AddNewMealArticlePresenter implements AddNewMealArticleContract.Pre
 
     @Override
     public void sendMeal(String title, String content) {
-        //TODO: Change author name hard code to user
         String author = mSharedPreferencesManager.getUserName();
         String authorId = mSharedPreferencesManager.getUserDbUid();
         String authorPhoto = mSharedPreferencesManager.getUserPhoto();
-        //
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
         int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -86,8 +84,7 @@ public class AddNewMealArticlePresenter implements AddNewMealArticleContract.Pre
         article.put("create_month", month);
         article.put("create_day", day);
 
-        //TODO: Change "article" to "articles"
-
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("articles").add(article).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {

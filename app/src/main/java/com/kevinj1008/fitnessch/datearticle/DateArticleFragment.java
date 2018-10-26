@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.datearticle;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,7 +20,6 @@ import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.adapters.DateArticleAdapter;
 import com.kevinj1008.fitnessch.objects.Article;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class DateArticleFragment extends Fragment implements DateArticleContract.View {
 

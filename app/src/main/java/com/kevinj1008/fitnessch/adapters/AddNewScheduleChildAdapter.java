@@ -58,7 +58,7 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
                 ((ScheduleTitleItemViewHolder) holder).mSeparator.setVisibility(View.VISIBLE);
             }
             ((ScheduleTitleItemViewHolder) holder).mScheduleTitle.setText(mSchedules.get(position).getScheduleTitle());
-        } else if (holder instanceof ScheduleContentItemViewHolder){
+        } else if (holder instanceof ScheduleContentItemViewHolder) {
             ((ScheduleContentItemViewHolder) holder).mScheduleWeight.setText(mSchedules.get(position).getScheduleWeight());
             ((ScheduleContentItemViewHolder) holder).mScheduleReps.setText(mSchedules.get(position).getScheduleReps());
         }
@@ -73,10 +73,10 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         String type = mSchedules.get(position).getType();
-         if ("CONTENT".equals(type)) {
-             return Constants.VIEWTYPE_ADDNEW_SCHEDULE_CONTENT;
+        if ("CONTENT".equals(type)) {
+            return Constants.VIEWTYPE_ADDNEW_SCHEDULE_CONTENT;
         } else {
-             return Constants.VIEWTYPE_ADDNEW_SCHEDULE_TITLE;
+            return Constants.VIEWTYPE_ADDNEW_SCHEDULE_TITLE;
         }
     }
 
@@ -156,7 +156,6 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
     }
 
     public void updateData(Schedule schedules) {
-//        mSchedules = new ArrayList<>();
         mSchedules.clear();
 
         String title = schedules.getScheduleTitle();
@@ -178,7 +177,7 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
         Iterator iterator = mStringListMap.keySet().iterator();
         while (iterator.hasNext()) {
             String key = (String)iterator.next();
-            for (int i = 0 ; i < mStringListMap.get(key).size() ; ++i) {
+            for (int i = 0; i < mStringListMap.get(key).size(); ++i) {
                 mSchedules.add(mStringListMap.get(key).get(i));
             }
         }
@@ -199,7 +198,7 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
         Iterator iterator = mStringListMap.keySet().iterator();
         while (iterator.hasNext()) {
             String key = (String)iterator.next();
-            for (int i = 0 ; i < mStringListMap.get(key).size() ; ++i) {
+            for (int i = 0; i < mStringListMap.get(key).size(); ++i) {
                 mSchedules.add(mStringListMap.get(key).get(i));
             }
         }
@@ -207,10 +206,8 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
     }
 
     public void clearData() {
-//        int size = mSchedules.size();
         mSchedules.clear();
         mStringListMap.clear();
-//        notifyItemRangeRemoved(0, size);
         notifyDataSetChanged();
     }
 

@@ -1,7 +1,8 @@
 package com.kevinj1008.fitnessch.addnewschedulechild;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -10,10 +11,8 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,16 +32,13 @@ import com.kevinj1008.fitnessch.activities.FitnesschActivity;
 import com.kevinj1008.fitnessch.adapters.AddNewScheduleChildAdapter;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.objects.Title;
-import com.kevinj1008.fitnessch.util.Constants;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+
 
 public class AddNewScheduleChildFragment extends Fragment implements AddNewScheduleChildContract.View {
 
@@ -106,8 +102,6 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
         mRestText = root.findViewById(R.id.addnew_rest_btn_text);
         mRestBtn = root.findViewById(R.id.addnew_rest_btn);
         mAddNewBtn = root.findViewById(R.id.addnew_schedule_btn);
-//        mScheduleTitle = root.findViewById(R.id.addnew_schedule_edittext);
-//        mScheduleTitle.setVisibility(View.INVISIBLE);
         mScheduleWeight = root.findViewById(R.id.addnew_weight_edittext);
         mScheduleReps = root.findViewById(R.id.addnew_reps_edittext);
         mScheduleCompleteBtn = root.findViewById(R.id.addnew_schedule_complete_btn);
@@ -115,8 +109,6 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
         mAddBtn = root.findViewById(R.id.addnew_btn);
         mNextBtn = root.findViewById(R.id.addnew_schedule_next_btn);
         mSearchText = root.findViewById(R.id.addnew_schedule_auto_search);
-        ConstraintLayout constraintLayout = root.findViewById(R.id.childfragment_addnewschedule);
-
 
         InputFilter typeFilter = new InputFilter() {
             @Override
@@ -128,20 +120,15 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
             }
         };
 
-//        mScheduleTitle.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10), typeFilter});
         mSearchText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10), typeFilter});
         mScheduleWeight.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
         mScheduleReps.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
 
-//        mScheduleTitle.setOnFocusChangeListener(focusChangeListener);
         mScheduleWeight.setOnFocusChangeListener(focusChangeListener);
         mScheduleReps.setOnFocusChangeListener(focusChangeListener);
         mSearchText.setOnFocusChangeListener(focusChangeListener);
 
-
-//        mScheduleWeight.addTextChangedListener(textWatcher);
-//        mScheduleReps.addTextChangedListener(textWatcher);
-
+        ConstraintLayout constraintLayout = root.findViewById(R.id.childfragment_addnewschedule);
         constraintLayout.setOnClickListener(clickListener);
         mStartBtn.setOnClickListener(clickListener);
         mStartBtn.setOnLongClickListener(longClickListener);

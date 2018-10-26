@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.userschedulechild;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -10,12 +12,10 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kevinj1008.fitnessch.objects.Article;
-import com.kevinj1008.fitnessch.objects.User;
 import com.kevinj1008.fitnessch.util.Constants;
 
 import javax.annotation.Nullable;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UserScheduleChildPresenter implements UserScheduleChildContract.Presenter {
 

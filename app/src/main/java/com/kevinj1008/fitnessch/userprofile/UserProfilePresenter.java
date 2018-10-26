@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.userprofile;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -9,12 +11,10 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.kevinj1008.fitnessch.Fitnessch;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.objects.User;
 import com.kevinj1008.fitnessch.util.Constants;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UserProfilePresenter implements UserProfileContract.Presenter {
 
@@ -72,59 +72,59 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
                         }
                         String source = snapshot != null && snapshot.getMetadata().hasPendingWrites() ? "Local" : "Server";
                         if (source.equals("Server")) {
-                        for (DocumentChange documentChange  : snapshot.getDocumentChanges()) {
-                            String name = "未知";
-                            try {
-                                name = documentChange.getDocument().getData().get("name").toString();
-                            } catch (Exception e1) {
-                                e1.printStackTrace();
-                            }
+                            for (DocumentChange documentChange  : snapshot.getDocumentChanges()) {
+                                String name = "未知";
+                                try {
+                                    name = documentChange.getDocument().getData().get("name").toString();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
 
-                            String userId = "123";
-                            try {
-                                userId = documentChange.getDocument().getData().get("db_uid").toString();
-                            } catch (Exception e1) {
-                                e1.printStackTrace();
-                            }
+                                String userId = "123";
+                                try {
+                                    userId = documentChange.getDocument().getData().get("db_uid").toString();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
 
-                            String weight = "0";
-                            try {
-                                weight = documentChange.getDocument().getData().get("weight").toString();
-                            } catch (Exception e1) {
-                                e1.printStackTrace();
-                            }
+                                String weight = "0";
+                                try {
+                                    weight = documentChange.getDocument().getData().get("weight").toString();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
 
-                            String height = "0";
-                            try {
-                                height = documentChange.getDocument().getData().get("height").toString();
-                            } catch (Exception e1) {
-                                e1.printStackTrace();
-                            }
+                                String height = "0";
+                                try {
+                                    height = documentChange.getDocument().getData().get("height").toString();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
 
-                            String info = "...";
-                            try {
-                                info = documentChange.getDocument().getData().get("info").toString();
-                            } catch (Exception e1) {
-                                e1.printStackTrace();
-                            }
+                                String info = "...";
+                                try {
+                                    info = documentChange.getDocument().getData().get("info").toString();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
 
-                            String photo = "...";
-                            try {
-                                photo = documentChange.getDocument().getData().get("photo").toString();
-                            } catch (Exception e1) {
-                                e1.printStackTrace();
-                            }
+                                String photo = "...";
+                                try {
+                                    photo = documentChange.getDocument().getData().get("photo").toString();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
 
-                            User user = new User();
-                            user.setId(userId);
-                            user.setName(name);
-                            user.setHeight(height);
-                            user.setWeight(weight);
-                            user.setInfo(info);
-                            user.setPhoto(photo);
+                                User user = new User();
+                                user.setId(userId);
+                                user.setName(name);
+                                user.setHeight(height);
+                                user.setWeight(weight);
+                                user.setInfo(info);
+                                user.setPhoto(photo);
 
-                            mUserProfileView.showUserProfileInfo(user);
-                            }
+                                mUserProfileView.showUserProfileInfo(user);
+                                }
                         }
                     }
                 });

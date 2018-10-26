@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kevinj1008.fitnessch.R;
-import com.kevinj1008.fitnessch.schedulechild.ScheduleChildContract;
 import com.kevinj1008.fitnessch.api.beans.ScheduleArticles;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.schedulechild.ScheduleChildContract;
 import com.kevinj1008.fitnessch.util.Constants;
 
 import java.text.SimpleDateFormat;

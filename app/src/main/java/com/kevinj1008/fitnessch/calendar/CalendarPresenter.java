@@ -1,6 +1,7 @@
 package com.kevinj1008.fitnessch.calendar;
 
-import android.support.v4.app.FragmentManager;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.util.Log;
 
 import com.google.firebase.firestore.DocumentChange;
@@ -19,7 +20,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class CalendarPresenter implements CalendarContract.Presenter {
 

@@ -55,7 +55,7 @@ public class AddNewMealChildAdapter extends RecyclerView.Adapter {
                 ((MealTitleItemViewHolder) holder).mSeparator.setVisibility(View.VISIBLE);
             }
             ((MealTitleItemViewHolder) holder).mMealTitle.setText(mMeals.get(position).getMealTitle());
-        } else if (holder instanceof MealContentItemViewHolder){
+        } else if (holder instanceof MealContentItemViewHolder) {
             ((MealContentItemViewHolder) holder).mIngredient.setText(mMeals.get(position).getMealIngredient());
             ((MealContentItemViewHolder) holder).mCal.setText(mMeals.get(position).getMealCal());
         }
@@ -174,7 +174,7 @@ public class AddNewMealChildAdapter extends RecyclerView.Adapter {
         Iterator iterator = mStringListMap.keySet().iterator();
         while (iterator.hasNext()) {
             String key = (String)iterator.next();
-            for (int i = 0 ; i < mStringListMap.get(key).size() ; ++i) {
+            for (int i = 0; i < mStringListMap.get(key).size(); ++i) {
                 mMeals.add(mStringListMap.get(key).get(i));
             }
         }
@@ -194,7 +194,7 @@ public class AddNewMealChildAdapter extends RecyclerView.Adapter {
         Iterator iterator = mStringListMap.keySet().iterator();
         while (iterator.hasNext()) {
             String key = (String)iterator.next();
-            for (int i = 0 ; i < mStringListMap.get(key).size() ; ++i) {
+            for (int i = 0; i < mStringListMap.get(key).size(); ++i) {
                 mMeals.add(mStringListMap.get(key).get(i));
             }
         }

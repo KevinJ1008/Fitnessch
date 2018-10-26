@@ -78,7 +78,6 @@ public class MainAdapter extends RecyclerView.Adapter {
         private TextView mArticleCreatedTime;
         private TextView mArticleTitle;
         private TextView mArticleContent;
-//        private TextView mArticleTag;
         private ImageView mArticleTagIcon;
 
         public MainItemViewHolder(View itemView) {
@@ -89,7 +88,6 @@ public class MainAdapter extends RecyclerView.Adapter {
             mArticleCreatedTime = itemView.findViewById(R.id.main_create_time);
             mArticleTitle = itemView.findViewById(R.id.main_title);
             mArticleContent = itemView.findViewById(R.id.main_content);
-//            mArticleTag = itemView.findViewById(R.id.article_tag);
             mArticleTagIcon = itemView.findViewById(R.id.article_tag_icon);
 
             ((ConstraintLayout) itemView.findViewById(R.id.main_article_container)).setOnClickListener(clickListener);
@@ -105,17 +103,7 @@ public class MainAdapter extends RecyclerView.Adapter {
 
 
     public void updateData(Article bean) {
-//        Log.d(Constants.TAG, "MainAdapter update data");
-//        for (Article article : bean.getArticles()) {
-//        if (mArticles.size() == 1) {
-//            mArticles.add(0, bean);
-//        } else {
-            mArticles.add(0, bean);
-//        }
-
-//        }
-
-//        setNextPaging(bean.getPaging());
+        mArticles.add(0, bean);
         notifyDataSetChanged();
     }
 

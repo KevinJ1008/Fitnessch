@@ -1,8 +1,9 @@
 package com.kevinj1008.fitnessch.addnewschedulechild;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.support.annotation.NonNull;
 import android.util.Log;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -13,11 +14,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.kevinj1008.fitnessch.objects.Schedule;
 import com.kevinj1008.fitnessch.objects.Title;
 import com.kevinj1008.fitnessch.util.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AddNewScheduleChildPresenter implements AddNewScheduleChildContract.Presenter {
 
@@ -59,11 +58,11 @@ public class AddNewScheduleChildPresenter implements AddNewScheduleChildContract
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(Constants.TAG, "Fail to get title data " + e.getMessage());
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(Constants.TAG, "Fail to get title data " + e.getMessage());
+                    }
+                });
     }
 
     @Override

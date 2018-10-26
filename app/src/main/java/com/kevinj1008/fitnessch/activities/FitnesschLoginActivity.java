@@ -43,8 +43,6 @@ import com.kevinj1008.fitnessch.UserExistCallback;
 import com.kevinj1008.fitnessch.util.Constants;
 import com.kevinj1008.fitnessch.util.NetworkUtils;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
-
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -185,12 +183,12 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 
         //Save user google info to SharedPreference
         mSharedPreferencesManager = new SharedPreferencesManager(mContext);
-        mSharedPreferencesManager.saveUserIdToken(mContext, mGoogleIdToken);
-        mSharedPreferencesManager.saveUserId(mContext, mGoogleId);
-        mSharedPreferencesManager.saveUserName(mContext, mGoogleName);
-        mSharedPreferencesManager.saveUserPhoto(mContext, mGooglePhoto);
-        mSharedPreferencesManager.saveUserEmail(mContext, mGoogleMail);
-        mSharedPreferencesManager.saveUserDbUid(mContext, uid);
+        mSharedPreferencesManager.saveUserIdToken(mGoogleIdToken);
+        mSharedPreferencesManager.saveUserId(mGoogleId);
+        mSharedPreferencesManager.saveUserName(mGoogleName);
+        mSharedPreferencesManager.saveUserPhoto(mGooglePhoto);
+        mSharedPreferencesManager.saveUserEmail(mGoogleMail);
+        mSharedPreferencesManager.saveUserDbUid(uid);
 
     }
 
@@ -209,7 +207,8 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                             break;
                         }
                     }
-                } callback.onCallback(isExisting);
+                }
+                callback.onCallback(isExisting);
             }
         });
     }

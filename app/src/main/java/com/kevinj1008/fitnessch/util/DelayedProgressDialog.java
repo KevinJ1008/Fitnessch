@@ -61,8 +61,7 @@ public class DelayedProgressDialog extends DialogFragment {
 
     @Override
     public void show(FragmentManager fm, String tag) {
-        if (isAdded())
-            return;
+        if (isAdded()) return;
 
         this.fragmentManager = fm;
         this.tag = tag;
@@ -75,8 +74,7 @@ public class DelayedProgressDialog extends DialogFragment {
             @Override
             public void run() {
                 // only show if not already cancelled
-                if (mStopMillisecond > System.currentTimeMillis())
-                    showDialogAfterDelay();
+                if (mStopMillisecond > System.currentTimeMillis()) showDialogAfterDelay();
             }
         }, DELAY_MILLISECOND);
     }
@@ -95,8 +93,7 @@ public class DelayedProgressDialog extends DialogFragment {
     }
 
     public void cancel() {
-        if(showHandler == null)
-            return;
+        if (showHandler == null) return;
 
         mStopMillisecond = System.currentTimeMillis();
         showHandler.removeCallbacksAndMessages(null);
@@ -107,8 +104,9 @@ public class DelayedProgressDialog extends DialogFragment {
             } else {
                 cancelWhenNotShowing();
             }
-        } else
+        } else {
             dismiss();
+        }
     }
 
     private void cancelWhenShowing() {

@@ -1,5 +1,7 @@
 package com.kevinj1008.fitnessch.addnew;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.adapters.AddNewViewPagerAdapter;
 import com.kevinj1008.fitnessch.addnewmealchild.AddNewMealChildFragment;
@@ -17,7 +18,6 @@ import com.kevinj1008.fitnessch.addnewmealchild.AddNewMealChildPresenter;
 import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildFragment;
 import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildPresenter;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AddNewFragment extends Fragment implements AddNewContract.View {
     private AddNewContract.Presenter mPresenter;
