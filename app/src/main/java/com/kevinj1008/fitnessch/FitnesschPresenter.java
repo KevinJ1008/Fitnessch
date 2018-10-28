@@ -295,9 +295,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
         if (!mRmCalculatorFragment.isAdded()) {
             transaction.add(R.id.linearlayout_main_container, mRmCalculatorFragment, RMCALCULATOR);
         } else {
-            if (mAddNewArticleFragment != null) mAddNewArticlePresenter.refresh();
-            if (mAddNewMealArticleFragment != null) mAddNewMealArticlePresenter.refresh();
-            if (mAddNewFragment != null) mAddNewPresenter.refreshUi();
+
             transaction.show(mRmCalculatorFragment);
         }
 
@@ -318,12 +316,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mFragmentManager.popBackStack();
             mUserProfilePresenter.refresh();
         }
-        if (mProfileFragment == null) {
-            mProfileFragment = ProfileFragment.newInstance();
-            if (mAddNewArticleFragment != null) mAddNewArticlePresenter.refresh();
-            if (mAddNewMealArticleFragment != null) mAddNewMealArticlePresenter.refresh();
-            if (mAddNewFragment != null) mAddNewPresenter.refreshUi();
-        }
+        if (mProfileFragment == null) mProfileFragment = ProfileFragment.newInstance();
         if (mCalendarFragment != null) {
             transaction.setCustomAnimations(
                     R.anim.slide_right_in,
@@ -381,9 +374,7 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     R.anim.slide_right_out)
                     .add(R.id.linearlayout_main_container, mProfileFragment, PROFILE);
         } else {
-            if (mAddNewArticleFragment != null) mAddNewArticlePresenter.refresh();
-            if (mAddNewMealArticleFragment != null) mAddNewMealArticlePresenter.refresh();
-            if (mAddNewFragment != null) mAddNewPresenter.refreshUi();
+
             transaction.setCustomAnimations(
                     R.anim.slide_right_in,
                     R.anim.slide_left_out,
@@ -562,9 +553,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     R.anim.slide_bottom_in)
                     .add(R.id.linearlayout_main_container, mCalendarFragment, CALENDAR);
         } else {
-            if (mAddNewArticleFragment != null) mAddNewArticlePresenter.refresh();
-            if (mAddNewMealArticleFragment != null) mAddNewMealArticlePresenter.refresh();
-            if (mAddNewFragment != null) mAddNewPresenter.refreshUi();
             transaction.setCustomAnimations(
                             R.anim.slide_right_in,
                             R.anim.slide_left_out,
@@ -862,9 +850,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
     @Override
     public void refreshAddNewUi() {
-//        if (mAddNewFragment != null) mAddNewFragment.refreshUi();
-//        if (mAddNewMealArticleFragment != null) mAddNewMealArticleFragment.refreshUi();
-//        if (mAddNewArticleFragment != null) mAddNewArticleFragment.refreshUi();
         if (mAddNewPresenter != null) mAddNewPresenter.refreshUi();
         if (mAddNewMealArticlePresenter != null) mAddNewMealArticlePresenter.refresh();
         if (mAddNewArticlePresenter != null) mAddNewArticlePresenter.refresh();
@@ -872,7 +857,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
     @Override
     public void refreshDateArticleUi() {
-//        if (mDateArticleFragment != null) mDateArticleFragment.refreshUi();
         if (mDateArticlePresenter != null) mDateArticlePresenter.refreshDateUi();
     }
 
