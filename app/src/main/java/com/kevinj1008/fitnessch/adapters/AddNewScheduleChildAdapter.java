@@ -29,7 +29,6 @@ public class AddNewScheduleChildAdapter extends RecyclerView.Adapter {
     private List<Schedule> mSchedules;
     private Context mContext;
     private Map<String, List<Schedule>> mStringListMap;
-    private AddNewScheduleChildContract.Presenter mPresenter;
 
     public AddNewScheduleChildAdapter(List<Schedule> schedule, Context context) {
         this.mSchedules = schedule;

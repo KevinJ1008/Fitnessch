@@ -23,7 +23,6 @@ public class AddNewArticleAdapter extends RecyclerView.Adapter {
     private AddNewArticleContract.Presenter mPresenter;
 
     public AddNewArticleAdapter(AddNewArticleContract.Presenter presenter) {
-//        this.mSchedules = schedule;
         mStringListMap = new HashMap<>();
         mPresenter = presenter;
     }

@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kevinj1008.fitnessch.Fitnessch;
+import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.objects.Meal;
 import com.kevinj1008.fitnessch.objects.Schedule;
@@ -57,7 +58,8 @@ public class DetailPresenter implements DetailContract.Presenter {
     @Override
     public void loadSchedule() {
         String articleTag = mArticle.getTag();
-        if (articleTag.equals("課表")) {
+        String schedule = Fitnessch.getAppContext().getResources().getString(R.string.all_schedule_tag);
+        if (articleTag.equals(schedule)) {
             final String articleId = mArticle.getId();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("articles")
@@ -110,7 +112,8 @@ public class DetailPresenter implements DetailContract.Presenter {
     @Override
     public void loadMeal() {
         String articleTag = mArticle.getTag();
-        if (articleTag.equals("菜單")) {
+        String meal = Fitnessch.getAppContext().getResources().getString(R.string.all_meal_tag);
+        if (articleTag.equals(meal)) {
             final String articleId = mArticle.getId();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("articles")

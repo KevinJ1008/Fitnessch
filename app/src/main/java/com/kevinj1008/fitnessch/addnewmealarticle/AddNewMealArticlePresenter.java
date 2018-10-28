@@ -13,6 +13,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.kevinj1008.fitnessch.Fitnessch;
+import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.addnew.AddNewContract;
 import com.kevinj1008.fitnessch.addnewarticle.AddNewArticleContract;
 import com.kevinj1008.fitnessch.addnewmealchild.AddNewMealChildContract;
@@ -30,17 +31,13 @@ import java.util.Map;
 public class AddNewMealArticlePresenter implements AddNewMealArticleContract.Presenter {
 
     private AddNewMealArticleContract.View mAddNewMealArticleView;
-    private AddNewMealChildContract.View mAddNewMealChildView;
     private AddNewArticleContract.View mAddNewArticleView;
     private AddNewContract.View mAddNewView;
     private List<Meal> mMeals;
     private SharedPreferencesManager mSharedPreferencesManager;
-    private int mlastVisibleItemPosition;
-    private int mfirstVisibleItemPosition;
 
-    public AddNewMealArticlePresenter(AddNewMealArticleContract.View addNewMealArticleView,
-                                      AddNewContract.View addNewView, AddNewArticleContract.View addNewArticleView,
-                                      List<Meal> meals) {
+    public AddNewMealArticlePresenter(AddNewMealArticleContract.View addNewMealArticleView, AddNewContract.View addNewView,
+                                      AddNewArticleContract.View addNewArticleView, List<Meal> meals) {
         mAddNewMealArticleView = checkNotNull(addNewMealArticleView, "addNewMealArticleView cannot be null!");
         mAddNewView = checkNotNull(addNewView, "addNewView cannot be null!");
         if (addNewArticleView != null) {
@@ -67,13 +64,14 @@ public class AddNewMealArticlePresenter implements AddNewMealArticleContract.Pre
         String author = mSharedPreferencesManager.getUserName();
         String authorId = mSharedPreferencesManager.getUserDbUid();
         String authorPhoto = mSharedPreferencesManager.getUserPhoto();
+        String meal = Fitnessch.getAppContext().getResources().getString(R.string.all_meal_tag);
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
         int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
         Map<String, Object> article = new HashMap<>();
-        article.put("article_tag", "菜單");
+        article.put("article_tag", meal);
         article.put("author", author);
         article.put("user_id", authorId);
         article.put("author_photo", authorPhoto);

@@ -24,12 +24,10 @@ public class MealChildAdapter extends RecyclerView.Adapter {
     private MealChildContract.Presenter mPresenter;
     private ArrayList<Article> mArticles;
     private Context mContext;
-    private int mNextPaging;
 
     public MealChildAdapter(MealArticles bean, MealChildContract.Presenter presenter) {
         mPresenter = presenter;
         this.mArticles = bean.getArticles();
-        this.mNextPaging = bean.getPaging();
     }
 
     @NonNull

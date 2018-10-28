@@ -27,12 +27,10 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     private MainContract.Presenter mPresenter;
     private ArrayList<Article> mArticles;
-    private int mNextPaging;
 
     public MainAdapter(GetArticles bean, MainContract.Presenter presenter) {
         mPresenter = presenter;
         this.mArticles = bean.getArticles();
-        this.mNextPaging = bean.getPaging();
     }
 
 
@@ -51,10 +49,7 @@ public class MainAdapter extends RecyclerView.Adapter {
                 .placeholder(R.drawable.all_placeholder_avatar)
                 .transform(new CropCircleTransformation())
                 .into(((MainItemViewHolder) holder).mAuthorImage);
-
-        //
         ((MainItemViewHolder) holder).mAuthorName.setText(mArticles.get(position).getName());
-        //
         String date = new SimpleDateFormat("MM 月 dd 日 HH：mm")
                 .format(new Date(mArticles.get(position).getCreatedTime() * 1000L));
         ((MainItemViewHolder) holder).mArticleCreatedTime.setText(date);

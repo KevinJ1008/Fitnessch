@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 
 public class MainPresenter implements MainContract.Presenter {
 
-    private final MainContract.View mMainView;
+    private MainContract.View mMainView;
 
     private int mLastVisibleItemPosition;
     private int mFirstVisibleItemPosition;
@@ -66,7 +66,7 @@ public class MainPresenter implements MainContract.Presenter {
                                     e1.printStackTrace();
                                 }
 
-                                String author = "未知作者";
+                                String author = "作者";
                                 try {
                                     author = documentChange.getDocument().getData().get("author").toString();
                                 } catch (Exception e1) {
@@ -80,7 +80,6 @@ public class MainPresenter implements MainContract.Presenter {
                                     e1.printStackTrace();
                                 }
 
-                                //TODO: Add author photo
                                 String authorPhoto = null;
                                 try {
                                     authorPhoto = documentChange.getDocument().getData().get("author_photo").toString();
@@ -88,14 +87,14 @@ public class MainPresenter implements MainContract.Presenter {
                                     e1.printStackTrace();
                                 }
 
-                                String title = "未知標題";
+                                String title = "標題";
                                 try {
                                     title = documentChange.getDocument().getData().get("title").toString();
                                 } catch (Exception e1) {
                                     e1.printStackTrace();
                                 }
 
-                                String content = "未知內容";
+                                String content = "內容";
                                 try {
                                     content = documentChange.getDocument().getData().get("content").toString();
                                 } catch (Exception e1) {
@@ -110,7 +109,7 @@ public class MainPresenter implements MainContract.Presenter {
                                     e1.printStackTrace();
                                 }
 
-                                String tag = "未知標籤";
+                                String tag = "課表";
                                 try {
                                     tag = documentChange.getDocument().getData().get("article_tag").toString();
                                 } catch (Exception e1) {
@@ -118,8 +117,6 @@ public class MainPresenter implements MainContract.Presenter {
                                 }
 
                                 Article articles = new Article();
-
-                                //TODO: Add author ID and photo to object
                                 articles.setId(id);
                                 articles.setName(author);
                                 articles.setTitle(title);
@@ -131,7 +128,6 @@ public class MainPresenter implements MainContract.Presenter {
 
                                 mMainView.showArticles(articles);
                             }
-                            //TODO: GET Schedule
                         }
                     }
                 });

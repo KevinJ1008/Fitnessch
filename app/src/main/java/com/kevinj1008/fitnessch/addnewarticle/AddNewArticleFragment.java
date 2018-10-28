@@ -37,7 +37,6 @@ public class AddNewArticleFragment extends Fragment implements AddNewArticleCont
 
     private AddNewArticleContract.Presenter mPresenter;
     private AddNewArticleAdapter mAddNewArticleAdapter;
-    private List<Schedule> mSchedules;
     private EditText mTitleEditText;
     private EditText mContentEditText;
 

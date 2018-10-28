@@ -128,7 +128,6 @@ public class AddNewMealChildFragment extends Fragment implements AddNewMealChild
     public void refreshUi() {
         mAddNewMealChildAdapter.clearData();
 
-//        mMealTitle.getText().clear();
         mMealIngredient.getText().clear();
         mMealCal.getText().clear();
         mSearchText.getText().clear();

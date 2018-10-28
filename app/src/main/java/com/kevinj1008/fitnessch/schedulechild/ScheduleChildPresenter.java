@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kevinj1008.fitnessch.Fitnessch;
+import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.objects.Article;
 import com.kevinj1008.fitnessch.util.Constants;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
@@ -47,15 +48,13 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter {
 
     @Override
     public void loadArticles() {
-        //TODO: Make author to user ID
         String author = mSharedPreferencesManager.getUserDbUid();
-        //
-
+        String schedule = Fitnessch.getAppContext().getResources().getString(R.string.all_schedule_tag);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("articles")
                 .orderBy("create_time", Query.Direction.ASCENDING)
                 .whereEqualTo("user_id", author)
-                .whereEqualTo("article_tag", "課表")
+                .whereEqualTo("article_tag", schedule)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
@@ -70,10 +69,7 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter {
                                 String id = documentChange.getDocument().getId();
                                 String author = documentChange.getDocument().getData().get("author").toString();
                                 String authorId = documentChange.getDocument().getData().get("user_id").toString();
-
-                                //TODO: Add author photo
                                 String authorPhoto = documentChange.getDocument().getData().get("author_photo").toString();
-
                                 String title = documentChange.getDocument().getData().get("title").toString();
                                 String content = documentChange.getDocument().getData().get("content").toString();
                                 String time = String.valueOf(documentChange.getDocument().getTimestamp("create_time").getSeconds());
@@ -81,8 +77,6 @@ public class ScheduleChildPresenter implements ScheduleChildContract.Presenter {
                                 String tag = documentChange.getDocument().getData().get("article_tag").toString();
 
                                 Article articles = new Article();
-
-                                //TODO: Add author ID and photo to object
                                 articles.setId(id);
                                 articles.setName(author);
                                 articles.setTitle(title);

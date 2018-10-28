@@ -25,7 +25,6 @@ public class AddNewMealArticleAdapter extends RecyclerView.Adapter {
     private AddNewMealArticleContract.Presenter mPresenter;
 
     public AddNewMealArticleAdapter(AddNewMealArticleContract.Presenter presenter) {
-//        this.mSchedules = schedule;
         mStringListMap = new HashMap<>();
         mPresenter = presenter;
     }

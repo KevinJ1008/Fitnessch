@@ -44,7 +44,6 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
 
     private Chronometer mStartChronometer;
     private Chronometer mRestChronometer;
-    private TextView mStartText;
     private TextView mRestText;
     private ConstraintLayout mStartBtn;
     private ConstraintLayout mRestBtn;
@@ -61,7 +60,6 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     private long mStartEscapeTime = 0;
     private long mRestEscapeTime = 0;
     private List<Schedule> mSchedules = new ArrayList<>();
-    private int mPosition;
 
     private AddNewScheduleChildContract.Presenter mPresenter;
 
@@ -84,19 +82,12 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
         mPresenter.start();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-//        mAddNewScheduleChildAdapter.clearData();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.childfragment_addnewschedule, container, false);
 
         mStartChronometer = root.findViewById(R.id.addnew_timer);
-        mStartText = root.findViewById(R.id.addnew_start_btn_text);
         mStartBtn = root.findViewById(R.id.addnew_timer_btn);
         mRestChronometer = root.findViewById(R.id.addnew_rest_timer);
         mRestText = root.findViewById(R.id.addnew_rest_btn_text);
@@ -157,10 +148,8 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                     mStartChronometer.start();
                     mClockBtn.setVisibility(View.INVISIBLE);
                     Toast.makeText(Fitnessch.getAppContext(), "長按可歸零。", Toast.LENGTH_SHORT).show();
-//                    mStartText.setVisibility(View.INVISIBLE);
                 } else {
                     isStartButtonClicked = false;
-//                    mStartText.setVisibility(View.INVISIBLE);
                     mClockBtn.setVisibility(View.INVISIBLE);
                     mStartChronometer.setVisibility(View.VISIBLE);
                     mStartEscapeTime = mStartChronometer.getBase() - SystemClock.elapsedRealtime();
@@ -196,49 +185,41 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                         schedule.setScheduleTitle(scheduleTitle);
                         schedule.setScheduleWeight(scheduleWeight + " KG");
                         schedule.setScheduleReps("X " + scheduleReps);
-//                    mSchedules.add(schedule);
                         mAddNewScheduleChildAdapter.updateData(schedule);
 
                         mScheduleWeight.getText().clear();
                         mScheduleReps.getText().clear();
                     } else {
                         Toast.makeText(getContext(), "請勿輸入空白。", Toast.LENGTH_SHORT).show();
-//                        mScheduleTitle.clearFocus();
                         mScheduleWeight.clearFocus();
                         mScheduleReps.clearFocus();
                         mSearchText.clearFocus();
                     }
                 } else {
                     Toast.makeText(getContext(), "請輸入項目、重量及次數。", Toast.LENGTH_SHORT).show();
-//                    mScheduleTitle.clearFocus();
                     mScheduleWeight.clearFocus();
                     mScheduleReps.clearFocus();
                     mSearchText.clearFocus();
                 }
-//                mScheduleTitle.clearFocus();
                 mScheduleWeight.clearFocus();
                 mScheduleReps.clearFocus();
                 mSearchText.clearFocus();
             } else if (view.getId() == R.id.addnew_schedule_next_btn) {
                 if (mAddNewScheduleChildAdapter.getScheduleList().size() > 0) {
-//                    mScheduleTitle.getText().clear();
                     mScheduleWeight.getText().clear();
                     mScheduleReps.getText().clear();
                     mSearchText.getText().clear();
 
-//                    mScheduleTitle.clearFocus();
                     mScheduleWeight.clearFocus();
                     mScheduleReps.clearFocus();
                     mSearchText.clearFocus();
 
                     ((FitnesschActivity) getActivity()).transToAddNewArticle(mAddNewScheduleChildAdapter.getScheduleList());
                 } else if (mAddNewScheduleChildAdapter.getScheduleMap().size() > 0) {
-//                    mScheduleTitle.getText().clear();
                     mScheduleWeight.getText().clear();
                     mScheduleReps.getText().clear();
                     mSearchText.getText().clear();
 
-//                    mScheduleTitle.clearFocus();
                     mScheduleWeight.clearFocus();
                     mScheduleReps.clearFocus();
                     mSearchText.clearFocus();
@@ -250,7 +231,6 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
             } else if (view.getId() == R.id.childfragment_addnewschedule) {
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//                mScheduleTitle.clearFocus();
                 mScheduleWeight.clearFocus();
                 mScheduleReps.clearFocus();
                 mSearchText.clearFocus();
@@ -270,7 +250,6 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
                 mStartChronometer.setVisibility(View.INVISIBLE);
                 mClockBtn.setVisibility(View.VISIBLE);
                 Toast.makeText(Fitnessch.getAppContext(), "碼表已歸零。", Toast.LENGTH_SHORT).show();
-//                mStartText.setVisibility(View.VISIBLE);
                 return true;
             } else if (view.getId() == R.id.addnew_rest_btn) {
                 isRestButtonClicked = false;
@@ -309,32 +288,9 @@ public class AddNewScheduleChildFragment extends Fragment implements AddNewSched
     public void refreshUi() {
         mAddNewScheduleChildAdapter.clearData();
 
-//        mScheduleTitle.getText().clear();
         mScheduleReps.getText().clear();
         mScheduleWeight.getText().clear();
         mSearchText.getText().clear();
     }
-
-
-//    private TextWatcher textWatcher = new TextWatcher() {
-//        @Override
-//        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//        }
-//
-//        @Override
-//        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//        }
-//
-//        @Override
-//        public void afterTextChanged(Editable editable) {
-//            String editText = editable.toString();
-//            if (editText.startsWith("0")) {
-//                mScheduleWeight.setText("");
-//                mScheduleReps.setText("");
-//            }
-//        }
-//    };
 
 }

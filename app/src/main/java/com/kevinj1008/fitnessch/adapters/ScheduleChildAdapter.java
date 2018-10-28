@@ -24,12 +24,10 @@ public class ScheduleChildAdapter extends RecyclerView.Adapter {
     private ScheduleChildContract.Presenter mPresenter;
     private ArrayList<Article> mArticles;
     private Context mContext;
-    private int mNextPaging;
 
     public ScheduleChildAdapter(ScheduleArticles bean, ScheduleChildContract.Presenter presenter) {
         mPresenter = presenter;
         this.mArticles = bean.getArticles();
-        this.mNextPaging = bean.getPaging();
     }
 
     @NonNull

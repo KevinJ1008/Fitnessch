@@ -35,7 +35,6 @@ public class AddNewMealArticleFragment extends Fragment implements AddNewMealArt
 
     private AddNewMealArticleContract.Presenter mPresenter;
     private AddNewMealArticleAdapter mAddNewMealArticleAdapter;
-    private List<Meal> mMeals;
     private EditText mTitleEditText;
     private EditText mContentEditText;
 
@@ -144,7 +143,7 @@ public class AddNewMealArticleFragment extends Fragment implements AddNewMealArt
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                if (!title.equals("") && !content.equals("")) {
+                if (!"".equals(title) && !"".equals(content)) {
                     mPresenter.sendMeal(title, content);
                     mTitleEditText.getText().clear();
                     mContentEditText.getText().clear();

@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FieldValue;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.kevinj1008.fitnessch.Fitnessch;
+import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.addnew.AddNewContract;
 import com.kevinj1008.fitnessch.addnewmealarticle.AddNewMealArticleContract;
 import com.kevinj1008.fitnessch.addnewschedulechild.AddNewScheduleChildContract;
@@ -33,12 +34,9 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
 
     private AddNewArticleContract.View mAddNewArticleView;
     private AddNewMealArticleContract.View mAddNewMealArticleView;
-    private AddNewScheduleChildContract.View mAddNewScheduleChildView;
     private AddNewContract.View mAddNewView;
     private List<Schedule> mSchedules;
     private SharedPreferencesManager mSharedPreferencesManager;
-    private int mlastVisibleItemPosition;
-    private int mfirstVisibleItemPosition;
 
     public AddNewArticlePresenter(AddNewArticleContract.View addNewArticleView, AddNewContract.View addNewView, AddNewMealArticleContract.View addNewMealArticleView, List<Schedule> schedules) {
         mAddNewArticleView = checkNotNull(addNewArticleView, "addNewArticleView cannot be null!");
@@ -67,14 +65,14 @@ public class AddNewArticlePresenter implements AddNewArticleContract.Presenter {
         String author = mSharedPreferencesManager.getUserName();
         String authorId = mSharedPreferencesManager.getUserDbUid();
         String authorPhoto = mSharedPreferencesManager.getUserPhoto();
-        //
+        String schedule = Fitnessch.getAppContext().getResources().getString(R.string.all_schedule_tag);
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
         int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
         Map<String, Object> article = new HashMap<>();
-        article.put("article_tag", "課表");
+        article.put("article_tag", schedule);
         article.put("author", author);
         article.put("user_id", authorId);
         article.put("author_photo", authorPhoto);
