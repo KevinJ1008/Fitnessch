@@ -10,10 +10,6 @@ public interface ProfileContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showScheduleChildUi();
-
-        void showMealChildUi();
-
         void showProfileInfo(User user);
 
     }
@@ -21,12 +17,6 @@ public interface ProfileContract {
     interface Presenter extends BasePresenter {
 
         void result(int requestCode, int resultCode);
-
-        void transToScheduleChild();
-
-        void transToMealChild();
-
-        void refreshLikedArticles();
 
         void sendProfileInfo(User user);
 

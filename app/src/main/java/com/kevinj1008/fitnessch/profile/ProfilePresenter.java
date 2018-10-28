@@ -67,21 +67,6 @@ public class ProfilePresenter implements ProfileContract.Presenter {
     }
 
     @Override
-    public void transToScheduleChild() {
-
-    }
-
-    @Override
-    public void transToMealChild() {
-
-    }
-
-    @Override
-    public void refreshLikedArticles() {
-
-    }
-
-    @Override
     public void sendProfileInfo(User user) {
         Map<String, Object> info = new HashMap<>();
 

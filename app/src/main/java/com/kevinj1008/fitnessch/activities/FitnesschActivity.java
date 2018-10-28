@@ -249,6 +249,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 //            case R.id.nav_rm_calculator:
 //                mDrawerLayout.closeDrawer(GravityCompat.START);
 //                Toast.makeText(Fitnessch.getAppContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
+//            mPresenter.refreshAllUi();
 ////                mPresenter.transToRMCalculator();
 //                break;
 

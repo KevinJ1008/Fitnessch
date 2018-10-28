@@ -155,8 +155,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        mPresenter.setupPresenter(, mScheduleChildPresenter);
-//        mPresenter.start();
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -164,16 +163,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         mViewPagerAdapter.addFragment(mScheduleChildFragment, getString(R.string.all_schedule_title));
         mViewPagerAdapter.addFragment(mMealChildFragment, getString(R.string.all_meal_title));
         viewPager.setAdapter(mViewPagerAdapter);
-    }
-
-    @Override
-    public void showScheduleChildUi() {
-
-    }
-
-    @Override
-    public void showMealChildUi() {
-
     }
 
     @Override
@@ -211,7 +200,9 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 input.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                if (!height.equals("") && !weight.equals("") && !info.equals("")) {
+                if ("".equals(height) && "".equals(weight) && "".equals(info)) {
+                    Toast.makeText(getContext(), "請輸入個人資訊。", Toast.LENGTH_SHORT).show();
+                } else {
                     User user = new User();
                     user.setHeight(height);
                     user.setWeight(weight);
@@ -234,9 +225,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
                     mProfileInfo.setVisibility(View.VISIBLE);
                     mProfileEditBtn.setVisibility(View.VISIBLE);
                     mProfileConfirmBtn.setVisibility(View.INVISIBLE);
-
-                } else {
-                    Toast.makeText(getContext(), "請輸入個人資訊。", Toast.LENGTH_SHORT).show();
                 }
             } else if (view.getId() == R.id.profile_page) {
                 InputMethodManager input = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
