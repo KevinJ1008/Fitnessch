@@ -80,16 +80,6 @@ public class CalendarPresenter implements CalendarContract.Presenter {
     }
 
     @Override
-    public void showArticles(Article bean) {
-
-    }
-
-    @Override
-    public void openDetail(Article article) {
-
-    }
-
-    @Override
     public void reloadArticle() {
         mCalendarView.showFocusDate();
     }

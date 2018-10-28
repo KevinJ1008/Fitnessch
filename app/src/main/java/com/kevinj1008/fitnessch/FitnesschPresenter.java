@@ -42,7 +42,8 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({
-            MAIN, ADDNEW, PROFILE, DETAIL, CALENDAR
+            MAIN, ADDNEW, PROFILE, DETAIL, CALENDAR, ADDNEW_ARTICLE,
+            ADDNEW_MEAL_ARTICLE, DATEARTICLE, RMCALCULATOR, USERPROFILE
     })
     public @interface FragmentType {}
     public static final String MAIN     = "MAIN";
@@ -62,7 +63,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     private AddNewFragment mAddNewFragment;
     private AddNewArticleFragment mAddNewArticleFragment;
     private AddNewMealArticleFragment mAddNewMealArticleFragment;
-    private AddNewScheduleChildFragment mAddNewScheduleChildFragment;
     private DateArticleFragment mDateArticleFragment;
     private RmCalculatorFragment mRmCalculatorFragment;
     private UserProfileFragment mUserProfileFragment;

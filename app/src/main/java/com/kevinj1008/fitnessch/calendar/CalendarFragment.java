@@ -29,7 +29,6 @@ import java.util.List;
 public class CalendarFragment extends Fragment implements CalendarContract.View {
 
     private CalendarContract.Presenter mPresenter;
-    private CalendarDay mCalendarDay;
     private List<Article> mArticles;
     private MaterialCalendarView mMaterialCalendarView;
     private List<CalendarDay> mCalendarDays;
@@ -119,20 +118,19 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
         int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
         for (int i = 0; i < mArticles.size(); i++) {
             int day = mArticles.get(i).getCreateDay();
-            mCalendarDay = CalendarDay.from(year, month, day);
-            mCalendarDays.add(mCalendarDay);
-            mMaterialCalendarView.setDateSelected(mCalendarDay, true);
+            CalendarDay articleDay = CalendarDay.from(year, month, day);
+            mCalendarDays.add(articleDay);
+            mMaterialCalendarView.setDateSelected(articleDay, true);
         }
     }
 
     @Override
-    public void showDetailUi(Article article) {
-
-    }
-
-    @Override
     public void showFocusDate() {
-        if (!mCalendarDays.isEmpty()) {
+        if (mCalendarDays.isEmpty()) {
+            CalendarDay today = CalendarDay.today();
+            mMaterialCalendarView.setCurrentDate(today, true);
+            mPresenter.loadArticles();
+        } else {
             CalendarDay today = CalendarDay.today();
             mMaterialCalendarView.setDateSelected(today, true);
             for (int i = 0; i < mCalendarDays.size(); i++) {
@@ -142,10 +140,6 @@ public class CalendarFragment extends Fragment implements CalendarContract.View 
                 CalendarDay calendarDay = CalendarDay.from(year, month, day);
                 mMaterialCalendarView.setDateSelected(calendarDay, true);
             }
-        } else {
-            CalendarDay today = CalendarDay.today();
-            mMaterialCalendarView.setCurrentDate(today, true);
-            mPresenter.loadArticles();
         }
     }
 

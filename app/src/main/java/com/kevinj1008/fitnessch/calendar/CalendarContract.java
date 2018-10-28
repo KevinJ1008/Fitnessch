@@ -12,8 +12,6 @@ public interface CalendarContract {
 
         void showArticles(List<Article> articles);
 
-        void showDetailUi(Article article);
-
         void showFocusDate();
 
         void monthChangeArticle(List<Article> articles);
@@ -27,10 +25,6 @@ public interface CalendarContract {
         void result(int requestCode, int resultCode);
 
         void loadArticles();
-
-        void showArticles(Article bean);
-
-        void openDetail(Article article);
 
         void reloadArticle();
 
