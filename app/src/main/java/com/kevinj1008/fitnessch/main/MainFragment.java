@@ -106,6 +106,11 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
+    public void showUserProfile(Article article) {
+        ((FitnesschActivity) getActivity()).transToUserProfile(article);
+    }
+
+    @Override
     public void refreshUi() {
         mMainAdapter.initData();
     }

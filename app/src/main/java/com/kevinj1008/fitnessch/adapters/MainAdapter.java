@@ -15,6 +15,7 @@ import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.api.beans.GetArticles;
 import com.kevinj1008.fitnessch.main.MainContract;
 import com.kevinj1008.fitnessch.objects.Article;
+import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -27,10 +28,12 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     private MainContract.Presenter mPresenter;
     private ArrayList<Article> mArticles;
+    private SharedPreferencesManager mSharedPreferencesManager;
 
     public MainAdapter(GetArticles bean, MainContract.Presenter presenter) {
         mPresenter = presenter;
         this.mArticles = bean.getArticles();
+        mSharedPreferencesManager = new SharedPreferencesManager(Fitnessch.getAppContext());
     }
 
 
@@ -86,12 +89,22 @@ public class MainAdapter extends RecyclerView.Adapter {
             mArticleTagIcon = itemView.findViewById(R.id.article_tag_icon);
 
             ((ConstraintLayout) itemView.findViewById(R.id.main_article_container)).setOnClickListener(clickListener);
+
+            mAuthorImage.setOnClickListener(clickListener);
+
         }
 
         private View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.openDetail(mArticles.get(getAdapterPosition()));
+                if (view.getId() == R.id.main_article_container) {
+                    mPresenter.openDetail(mArticles.get(getAdapterPosition()));
+                } else if (view.getId() == R.id.main_author_image) {
+                    if (!mSharedPreferencesManager.getUserDbUid()
+                            .equals(mArticles.get(getAdapterPosition()).getAuthorId())) {
+                        mPresenter.openUser(mArticles.get(getAdapterPosition()));
+                    }
+                }
             }
         };
     }

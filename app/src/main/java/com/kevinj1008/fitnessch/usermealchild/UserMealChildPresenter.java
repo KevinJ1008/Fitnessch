@@ -35,7 +35,7 @@ public class UserMealChildPresenter implements UserMealChildContract.Presenter  
 
     @Override
     public void start() {
-        loadArticles();
+        loadArticles(mArticle);
     }
 
     @Override
@@ -44,8 +44,8 @@ public class UserMealChildPresenter implements UserMealChildContract.Presenter  
     }
 
     @Override
-    public void loadArticles() {
-        String uid = mArticle.getAuthorId();
+    public void loadArticles(Article article) {
+        String uid = article.getAuthorId();
         String meal = Fitnessch.getAppContext().getResources().getString(R.string.all_meal_tag);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("articles")

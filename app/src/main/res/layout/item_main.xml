@@ -27,6 +27,8 @@
             android:layout_height="@dimen/size_main_authorimage"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/all_placeholder_avatar" />

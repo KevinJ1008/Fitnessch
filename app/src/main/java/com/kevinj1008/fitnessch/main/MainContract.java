@@ -15,6 +15,8 @@ public interface MainContract {
 
         void showDetailUi(Article article);
 
+        void showUserProfile(Article article);
+
         void refreshUi();
 
     }
@@ -32,6 +34,8 @@ public interface MainContract {
         void onScrolled(RecyclerView.LayoutManager layoutManager);
 
         void openDetail(Article article);
+
+        void openUser(Article article);
 
 //        void updateInterestedIn(Article article, boolean isInterestedIn);
 

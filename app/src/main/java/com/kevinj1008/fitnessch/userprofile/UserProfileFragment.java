@@ -119,8 +119,17 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
     }
 
     @Override
-    public void showUserMealChildUi() {
+    public void showUserChildUi(Article article) {
+        mUserMealChildPresenter.loadArticles(article);
+        mUserScheduleChildPresenter.loadArticles(article);
+    }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+//        if (hidden) {
+//            mPresenter.refresh();
+//        }
     }
 
     @Override
@@ -138,11 +147,8 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
 
     @Override
     public void refreshUserUi() {
-        if (mUserMealChildFragment != null) {
-            mUserMealChildFragment.refreshUserUi();
-        } else if (mUserScheduleChildFragment != null) {
-            mUserScheduleChildFragment.refreshUserUi();
-        }
+        if (mUserMealChildFragment != null) mUserMealChildFragment.refreshUserUi();
+        if (mUserScheduleChildFragment != null) mUserScheduleChildFragment.refreshUserUi();
     }
 
 

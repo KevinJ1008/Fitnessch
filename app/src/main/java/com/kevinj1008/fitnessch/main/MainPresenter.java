@@ -181,6 +181,11 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void openUser(Article article) {
+        mMainView.showUserProfile(article);
+    }
+
+    @Override
     public void refresh() {
         mMainView.refreshUi();
     }

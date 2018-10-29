@@ -48,8 +48,10 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
     private TextView mToolbarTitle;
+    private ActionBarDrawerToggle mDrawerToggle;
     private FloatingActionButton mFloatingActionButton;
     private SharedPreferencesManager mSharedPreferencesManager;
+    private boolean isToolBarNavListenerReg = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,20 +109,22 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
      * Set Drawer
      */
     private void setDrawerLayout() {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawrlayout_main);
         mDrawerLayout.setFitsSystemWindows(true);
         mDrawerLayout.setClipToPadding(false);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        mDrawerToggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navview_drawer);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        navview header
+        // navview header
         ImageView userImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageview_drawer_userimage);
         String userImageUri = mSharedPreferencesManager.getUserPhoto();
         Uri photoUri = Uri.parse(userImageUri);
@@ -159,7 +163,31 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         return result;
     }
 
-
+    private void enableToggle(boolean enable) {
+        if (enable) {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            mDrawerToggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_backbutton);
+            if (!isToolBarNavListenerReg) {
+                mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onBackPressed();
+                    }
+                });
+                isToolBarNavListenerReg = true;
+            }
+        } else {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            mDrawerToggle.setDrawerIndicatorEnabled(true);
+            mDrawerToggle.setToolbarNavigationClickListener(null);
+            mDrawerLayout.addDrawerListener(mDrawerToggle);
+            mDrawerToggle.syncState();
+            isToolBarNavListenerReg = false;
+        }
+    }
 
     @Override
     public void showMainUi() {
@@ -193,8 +221,14 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
     @Override
     public void showDetailUi() {
-        mFloatingActionButton.setVisibility(View.VISIBLE);
+        mFloatingActionButton.setVisibility(View.INVISIBLE);
         mToolbarTitle.setText(getResources().getString(R.string.all_fitnessch));
+    }
+
+    @Override
+    public void showUserProfileUi() {
+        mFloatingActionButton.setVisibility(View.INVISIBLE);
+        enableToggle(true);
     }
 
     @Override
@@ -279,6 +313,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         ConstraintLayout dateArticlePage = findViewById(R.id.date_article_page);
         ConstraintLayout rmCalculatorPage = findViewById(R.id.rm_calculator_page);
         ConstraintLayout detailPage = findViewById(R.id.detail_page);
+        ConstraintLayout userProfile = findViewById(R.id.user_profile_page);
         FrameLayout mainPage = findViewById(R.id.main_page);
 
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -300,6 +335,10 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
             mPresenter.refreshDateArticleUi();
         } else if (rmCalculatorPage != null && rmCalculatorPage.getVisibility() == View.VISIBLE) {
             mPresenter.transToMain();
+        } else if (userProfile != null && userProfile.getVisibility() == View.VISIBLE) {
+            enableToggle(false);
+            mPresenter.transToMain();
+            mPresenter.refreshUserUi();
         } else {
             if (detailPage != null && detailPage.getVisibility() == View.VISIBLE) {
                 mPresenter.refreshDetailUi();

@@ -34,7 +34,7 @@ public class UserScheduleChildPresenter implements UserScheduleChildContract.Pre
 
     @Override
     public void start() {
-        loadArticles();
+        loadArticles(mArticle);
     }
 
     @Override
@@ -43,8 +43,8 @@ public class UserScheduleChildPresenter implements UserScheduleChildContract.Pre
     }
 
     @Override
-    public void loadArticles() {
-        String uid = mArticle.getAuthorId();
+    public void loadArticles(Article article) {
+        String uid = article.getAuthorId();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("articles")
                 .orderBy("create_time", Query.Direction.ASCENDING)

@@ -34,7 +34,7 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
     @Override
     public void start() {
         loadUserProfileInfo(mArticle);
-        transToUserScheduleChild();
+        transToUserScheduleChild(mArticle);
     }
 
     @Override
@@ -43,13 +43,8 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
     }
 
     @Override
-    public void transToUserScheduleChild() {
-        mUserProfileView.showUserScheduleChildUi(mArticle);
-    }
-
-    @Override
-    public void transToUserMealChild() {
-
+    public void transToUserScheduleChild(Article article) {
+        mUserProfileView.showUserScheduleChildUi(article);
     }
 
     @Override
@@ -128,6 +123,11 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void reloadUserData(Article article) {
+        mUserProfileView.showUserChildUi(article);
     }
 
     @Override

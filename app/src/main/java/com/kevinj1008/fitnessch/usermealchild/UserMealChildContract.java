@@ -22,7 +22,7 @@ public interface UserMealChildContract {
 
         void result(int requestCode, int resultCode);
 
-        void loadArticles();
+        void loadArticles(Article article);
 
         void showArticles(Article bean);
 

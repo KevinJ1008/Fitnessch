@@ -11,7 +11,7 @@ public interface UserProfileContract {
 
         void showUserScheduleChildUi(Article article);
 
-        void showUserMealChildUi();
+        void showUserChildUi(Article article);
 
         void showUserProfileInfo(User user);
 
@@ -23,13 +23,13 @@ public interface UserProfileContract {
 
         void result(int requestCode, int resultCode);
 
-        void transToUserScheduleChild();
-
-        void transToUserMealChild();
+        void transToUserScheduleChild(Article article);
 
         void refreshLikedArticles();
 
         void loadUserProfileInfo(Article article);
+
+        void reloadUserData(Article article);
 
         void refresh();
 

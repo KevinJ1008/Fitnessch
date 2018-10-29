@@ -22,6 +22,8 @@ public interface FitnesschContract {
 
         void showDetailUi();
 
+        void showUserProfileUi();
+
         void refreshLikedUi();
 
     }
@@ -59,6 +61,8 @@ public interface FitnesschContract {
         void refreshCalendarFocus();
 
         void refreshDetailUi();
+
+        void refreshUserUi();
 
         void refreshAllUi();
 
