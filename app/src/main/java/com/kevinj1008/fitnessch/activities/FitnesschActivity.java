@@ -222,6 +222,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     @Override
     public void showDetailUi() {
         mFloatingActionButton.setVisibility(View.INVISIBLE);
+//        enableToggle(true);
         mToolbarTitle.setText(getResources().getString(R.string.all_fitnessch));
     }
 

@@ -104,10 +104,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mDetailPresenter.refreshDetailUi();
         }
 
-//        if (mFragmentManager.findFragmentByTag(USERPROFILE) != null) {
-//            mFragmentManager.popBackStack();
-//            mUserProfilePresenter.refresh();
-//        }
         if (mMainFragment == null) mMainFragment = MainFragment.newInstance();
         if (mCalendarFragment != null) {
             transaction.setCustomAnimations(
@@ -158,7 +154,14 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     .hide(mDateArticleFragment);
         }
         if (mRmCalculatorFragment != null) transaction.hide(mRmCalculatorFragment);
-        if (mUserProfileFragment != null) transaction.hide(mUserProfileFragment);
+        if (mUserProfileFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mUserProfileFragment);
+        }
         if (!mMainFragment.isAdded()) {
             transaction.setCustomAnimations(
                     R.anim.slide_bottom_in,
@@ -193,10 +196,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mDetailPresenter.refreshDetailUi();
         }
 
-//        if (mFragmentManager.findFragmentByTag(USERPROFILE) != null) {
-//            mFragmentManager.popBackStack();
-//            mUserProfilePresenter.refresh();
-//        }
         if (mAddNewFragment == null) mAddNewFragment = AddNewFragment.newInstance();
         if (mCalendarFragment != null) {
             transaction.setCustomAnimations(
@@ -247,7 +246,14 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     .hide(mDateArticleFragment);
         }
         if (mRmCalculatorFragment != null) transaction.hide(mRmCalculatorFragment);
-        if (mUserProfileFragment != null) transaction.hide(mUserProfileFragment);
+        if (mUserProfileFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mUserProfileFragment);
+        }
         if (!mAddNewFragment.isAdded()) {
             transaction.setCustomAnimations(
                     R.anim.slide_right_in,
@@ -282,11 +288,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mDetailPresenter.refreshDetailUi();
         }
 
-//        if (mFragmentManager.findFragmentByTag(USERPROFILE) != null) {
-//            mFragmentManager.popBackStack();
-//            mUserProfilePresenter.refresh();
-//        }
-
         if (mRmCalculatorFragment == null) mRmCalculatorFragment = RmCalculatorFragment.newInstance();
         if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
         if (mMainFragment != null) transaction.hide(mMainFragment);
@@ -315,10 +316,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mDetailPresenter.refreshDetailUi();
         }
 
-//        if (mFragmentManager.findFragmentByTag(USERPROFILE) != null) {
-//            mFragmentManager.popBackStack();
-//            mUserProfilePresenter.refresh();
-//        }
         if (mProfileFragment == null) mProfileFragment = ProfileFragment.newInstance();
         if (mCalendarFragment != null) {
             transaction.setCustomAnimations(
@@ -369,7 +366,14 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     .hide(mDateArticleFragment);
         }
         if (mRmCalculatorFragment != null) transaction.hide(mRmCalculatorFragment);
-        if (mUserProfileFragment != null) transaction.hide(mUserProfileFragment);
+        if (mUserProfileFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mUserProfileFragment);
+        }
         if (!mProfileFragment.isAdded()) {
             transaction.setCustomAnimations(
                     R.anim.slide_right_in,
@@ -399,11 +403,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
     @Override
     public void transToDetail(Article article) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-
-//        if (mFragmentManager.findFragmentByTag(USERPROFILE) != null) {
-//            mFragmentManager.popBackStack();
-//            mUserProfilePresenter.refresh();
-//        }
 
         if (mMainFragment != null && !mMainFragment.isHidden()) {
             transaction.setCustomAnimations(
@@ -462,8 +461,18 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     .addToBackStack(DATEARTICLE);
         }
         if (mUserProfileFragment != null && !mUserProfileFragment.isHidden()) {
-            transaction.hide(mUserProfileFragment);
-            transaction.addToBackStack(USERPROFILE);
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_bottom_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mUserProfileFragment);
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_bottom_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .addToBackStack(USERPROFILE);
         }
         mDetailFragment = DetailFragment.newInstance();
         transaction.setCustomAnimations(
@@ -492,11 +501,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mFragmentManager.popBackStack();
             mDetailPresenter.refreshDetailUi();
         }
-
-//        if (mFragmentManager.findFragmentByTag(USERPROFILE) != null) {
-//            mFragmentManager.popBackStack();
-//            mUserProfilePresenter.refresh();
-//        }
 
         if (mCalendarFragment == null) {
             mCalendarFragment = CalendarFragment.newInstance();
@@ -553,7 +557,14 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     .hide(mDateArticleFragment);
         }
         if (mRmCalculatorFragment != null) transaction.hide(mRmCalculatorFragment);
-        if (mUserProfileFragment != null) transaction.hide(mUserProfileFragment);
+        if (mUserProfileFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mUserProfileFragment);
+        }
         if (!mCalendarFragment.isAdded()) {
             transaction.setCustomAnimations(
                     R.anim.slide_right_in,
@@ -587,11 +598,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mFragmentManager.popBackStack();
             mDetailPresenter.refreshDetailUi();
         }
-
-//        if (mFragmentManager.findFragmentByTag(USERPROFILE) != null) {
-//            mFragmentManager.popBackStack();
-//            mUserProfilePresenter.refresh();
-//        }
 
         if (mAddNewArticleFragment == null) mAddNewArticleFragment = AddNewArticleFragment.newInstance();
         if (mProfileFragment != null) {
@@ -663,10 +669,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mDetailPresenter.refreshDetailUi();
         }
 
-//        if (mFragmentManager.findFragmentByTag(USERPROFILE) != null) {
-//            mFragmentManager.popBackStack();
-//            mUserProfilePresenter.refresh();
-//        }
 
         if (mAddNewMealArticleFragment == null) mAddNewMealArticleFragment = AddNewMealArticleFragment.newInstance();
         if (mProfileFragment != null) {
@@ -738,11 +740,6 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
             mDetailPresenter.refreshDetailUi();
         }
 
-//        if (mFragmentManager.findFragmentByTag(USERPROFILE) != null) {
-//            mFragmentManager.popBackStack();
-//            mUserProfilePresenter.refresh();
-//        }
-
         if (mDateArticleFragment == null) mDateArticleFragment = DateArticleFragment.newInstance();
         if (mProfileFragment != null) {
             transaction.setCustomAnimations(
@@ -779,7 +776,14 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     .hide(mCalendarFragment);
         }
         if (mRmCalculatorFragment != null) transaction.hide(mRmCalculatorFragment);
-        if (mUserProfileFragment != null) transaction.hide(mUserProfileFragment);
+        if (mUserProfileFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mUserProfileFragment);
+        }
 
         if (!mDateArticleFragment.isAdded()) {
             transaction.setCustomAnimations(
@@ -818,60 +822,80 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
         if (mUserProfileFragment == null) mUserProfileFragment = UserProfileFragment.newInstance();
 
-        if (mMainFragment != null) transaction.hide(mMainFragment);
-        if (mCalendarFragment != null) transaction.hide(mCalendarFragment);
-        if (mProfileFragment != null) transaction.hide(mProfileFragment);
-        if (mAddNewFragment != null) transaction.hide(mAddNewFragment);
-        if (mAddNewArticleFragment != null) transaction.hide(mAddNewArticleFragment);
-        if (mAddNewMealArticleFragment != null) transaction.hide(mAddNewMealArticleFragment);
-        if (mDateArticleFragment != null) transaction.hide(mDateArticleFragment);
+        if (mMainFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mMainFragment);
+        }
+        if (mCalendarFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mCalendarFragment);
+        }
+        if (mProfileFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mProfileFragment);
+        }
+        if (mAddNewFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mAddNewFragment);
+        }
+        if (mAddNewArticleFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mAddNewArticleFragment);
+        }
+        if (mAddNewMealArticleFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mAddNewMealArticleFragment);
+        }
+        if (mDateArticleFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mDateArticleFragment);
+        }
 
         if (!mUserProfileFragment.isAdded()) {
-            transaction.add(R.id.linearlayout_main_container, mUserProfileFragment, USERPROFILE);
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .add(R.id.linearlayout_main_container, mUserProfileFragment, USERPROFILE);
         } else {
-            transaction.show(mUserProfileFragment);
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .show(mUserProfileFragment);
             mUserProfilePresenter.loadUserProfileInfo(article);
             mUserProfilePresenter.reloadUserData(article);
         }
-
-
-//        if (mMainFragment != null && !mMainFragment.isHidden()) {
-//            transaction.hide(mMainFragment);
-//            transaction.addToBackStack(MAIN);
-//        }
-//        if (mCalendarFragment != null && !mCalendarFragment.isHidden()) {
-//            transaction.hide(mCalendarFragment);
-//            transaction.addToBackStack(CALENDAR);
-//        }
-//        if (mProfileFragment != null && !mProfileFragment.isHidden()) {
-//            transaction.hide(mProfileFragment);
-//            transaction.addToBackStack(PROFILE);
-//        }
-//        if (mDateArticleFragment != null && !mDateArticleFragment.isHidden()) {
-//            transaction.hide(mDateArticleFragment);
-//            transaction.addToBackStack(DATEARTICLE);
-//        }
-//        if (mDetailFragment != null && !mDetailFragment.isHidden()) {
-//            transaction.setCustomAnimations(
-//                    R.anim.slide_right_in,
-//                    R.anim.slide_left_out,
-//                    R.anim.slide_left_in,
-//                    R.anim.slide_right_out)
-//                    .hide(mDetailFragment);
-//            transaction.setCustomAnimations(
-//                    R.anim.slide_right_in,
-//                    R.anim.slide_left_out,
-//                    R.anim.slide_left_in,
-//                    R.anim.slide_right_out)
-//                    .addToBackStack(DETAIL);
-//        }
-//        UserProfileFragment userProfileFragment = UserProfileFragment.newInstance();
-//        transaction.setCustomAnimations(
-//                R.anim.slide_right_in,
-//                R.anim.slide_left_out,
-//                R.anim.slide_left_in,
-//                R.anim.slide_right_out)
-//                .add(R.id.linearlayout_main_container, userProfileFragment, USERPROFILE);
 
         if (mUserProfilePresenter == null) {
             mUserProfilePresenter = new UserProfilePresenter(mUserProfileFragment, mUserProfileFragment.getFragmentManager(), article);

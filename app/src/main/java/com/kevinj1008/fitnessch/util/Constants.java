@@ -33,4 +33,10 @@ public class Constants {
     public static final int VIEWTYPE_DATE_ARTICLE_DEFAULT = 20;
     public static final int VIEWTYPE_DATE_ARTICLE = 21;
 
+    public static final int VIEWTYPE_USER_PROFILE_SCHEDULE_DEFAULT = 22;
+    public static final int VIEWTYPE_USER_PROFILE_SCHEDULE_CHILD = 23;
+
+    public static final int VIEWTYPE_USER_PROFILE_MEAL_DEFAULT = 24;
+    public static final int VIEWTYPE_USER_PROFILE_MEAL_CHILD = 25;
+
 }

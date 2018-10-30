@@ -37,6 +37,7 @@
     <string name="add_new_meal_ingredient">食材：</string>
     <string name="add_new_meal_title">菜單：</string>
     <string name="date_article_title">單日課表與菜單</string>
+    <string name="profile_article_date">MM 月 dd 日</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

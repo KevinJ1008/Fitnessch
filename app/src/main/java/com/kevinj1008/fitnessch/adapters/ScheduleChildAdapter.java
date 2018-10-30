@@ -49,13 +49,13 @@ public class ScheduleChildAdapter extends RecyclerView.Adapter {
         if (holder instanceof ScheduleDefaultItemViewHolder) {
             ((ScheduleDefaultItemViewHolder) holder).mDefaultScheduleChildTitle.setText(mArticles.get(position).getTitle());
             ((ScheduleDefaultItemViewHolder) holder).mDefaultScheduleChildContent.setText(mArticles.get(position).getContent());
-            String date = new SimpleDateFormat("MM 月 dd 日")
+            String date = new SimpleDateFormat(mContext.getResources().getString(R.string.profile_article_date))
                     .format(new Date(mArticles.get(position).getCreatedTime() * 1000L));
             ((ScheduleDefaultItemViewHolder) holder).mDefaultScheduleChildCreateTime.setText(date);
         } else {
             ((ScheduleItemViewHolder) holder).mScheduleChildTitle.setText(mArticles.get(position).getTitle());
             ((ScheduleItemViewHolder) holder).mScheduleChildContent.setText(mArticles.get(position).getContent());
-            String date = new SimpleDateFormat("MM 月 dd 日")
+            String date = new SimpleDateFormat(mContext.getResources().getString(R.string.profile_article_date))
                     .format(new Date(mArticles.get(position).getCreatedTime() * 1000L));
             ((ScheduleItemViewHolder) holder).mScheduleChildCreateTime.setText(date);
         }

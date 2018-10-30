@@ -48,13 +48,13 @@ public class MealChildAdapter extends RecyclerView.Adapter {
         if (holder instanceof MealDefaultItemViewHolder) {
             ((MealDefaultItemViewHolder) holder).mDefaultMealChildTitle.setText(mArticles.get(position).getTitle());
             ((MealDefaultItemViewHolder) holder).mDefaultMealChildContent.setText(mArticles.get(position).getContent());
-            String date = new SimpleDateFormat("MM 月 dd 日")
+            String date = new SimpleDateFormat(mContext.getResources().getString(R.string.profile_article_date))
                     .format(new Date(mArticles.get(position).getCreatedTime() * 1000L));
             ((MealDefaultItemViewHolder) holder).mDefaultMealChildCreateTime.setText(date);
         } else {
             ((MealItemViewHolder) holder).mMealChildTitle.setText(mArticles.get(position).getTitle());
             ((MealItemViewHolder) holder).mMealChildContent.setText(mArticles.get(position).getContent());
-            String date = new SimpleDateFormat("MM 月 dd 日")
+            String date = new SimpleDateFormat(mContext.getResources().getString(R.string.profile_article_date))
                     .format(new Date(mArticles.get(position).getCreatedTime() * 1000L));
             ((MealItemViewHolder) holder).mMealChildCreateTime.setText(date);
         }
