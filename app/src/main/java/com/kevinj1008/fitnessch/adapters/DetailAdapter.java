@@ -71,6 +71,7 @@ public class DetailAdapter extends RecyclerView.Adapter {
         if (holder instanceof DetailMainItemViewHolder) {
             Picasso.get()
                     .load(mArticle.getAuthorImage())
+                    .placeholder(R.drawable.all_placeholder_avatar)
                     .transform(new CropCircleTransformation())
                     .fit()
                     .into(((DetailMainItemViewHolder) holder).mAuthorImage);
