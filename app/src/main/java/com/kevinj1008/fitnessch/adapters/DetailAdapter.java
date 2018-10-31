@@ -195,7 +195,7 @@ public class DetailAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.detail_article_author_image) {
-//                mPresenter.openUser(mArticle);
+                mPresenter.openUser(mArticle);
             }
         }
     }

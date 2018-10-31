@@ -163,7 +163,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         return result;
     }
 
-    private void enableToggle(boolean enable) {
+    private void enableDrawerBackKey(boolean enable) {
         if (enable) {
             mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             mDrawerToggle.setDrawerIndicatorEnabled(false);
@@ -222,14 +222,14 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
     @Override
     public void showDetailUi() {
         mFloatingActionButton.setVisibility(View.INVISIBLE);
-//        enableToggle(true);
+//        enableDrawerBackKey(true);
         mToolbarTitle.setText(getResources().getString(R.string.all_fitnessch));
     }
 
     @Override
     public void showUserProfileUi() {
         mFloatingActionButton.setVisibility(View.INVISIBLE);
-        enableToggle(true);
+        enableDrawerBackKey(true);
     }
 
     @Override
@@ -337,7 +337,7 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
         } else if (rmCalculatorPage != null && rmCalculatorPage.getVisibility() == View.VISIBLE) {
             mPresenter.transToMain();
         } else if (userProfile != null && userProfile.getVisibility() == View.VISIBLE) {
-            enableToggle(false);
+            enableDrawerBackKey(false);
             mPresenter.transToMain();
             mPresenter.refreshUserUi();
         } else {

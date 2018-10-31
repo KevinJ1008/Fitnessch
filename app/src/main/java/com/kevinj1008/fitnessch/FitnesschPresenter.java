@@ -272,7 +272,8 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
 
         if (mAddNewPresenter == null) {
-            mAddNewPresenter = new AddNewPresenter(mAddNewFragment, mAddNewFragment.getFragmentManager());
+            mAddNewPresenter = new AddNewPresenter(mAddNewFragment,
+                    mAddNewFragment.getFragmentManager());
         }
         transaction.commit();
 
@@ -393,7 +394,8 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
 
 
         if (mProfilePresenter == null) {
-            mProfilePresenter = new ProfilePresenter(mProfileFragment, mProfileFragment.getFragmentManager());
+            mProfilePresenter = new ProfilePresenter(mProfileFragment,
+                    mProfileFragment.getFragmentManager());
         }
         transaction.commit();
 
@@ -878,6 +880,14 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     R.anim.slide_right_out)
                     .hide(mDateArticleFragment);
         }
+        if (mDetailFragment != null) {
+            transaction.setCustomAnimations(
+                    R.anim.slide_right_in,
+                    R.anim.slide_left_out,
+                    R.anim.slide_left_in,
+                    R.anim.slide_right_out)
+                    .hide(mDetailFragment);
+        }
 
         if (!mUserProfileFragment.isAdded()) {
             transaction.setCustomAnimations(
@@ -893,12 +903,16 @@ public class FitnesschPresenter implements FitnesschContract.Presenter {
                     R.anim.slide_left_in,
                     R.anim.slide_right_out)
                     .show(mUserProfileFragment);
-            mUserProfilePresenter.loadUserProfileInfo(article);
-            mUserProfilePresenter.reloadUserData(article);
+            if (mUserProfilePresenter != null) {
+                mUserProfilePresenter.refresh();
+                mUserProfilePresenter.loadUserProfileInfo(article);
+                mUserProfilePresenter.reloadUserData(article);
+            }
         }
 
         if (mUserProfilePresenter == null) {
-            mUserProfilePresenter = new UserProfilePresenter(mUserProfileFragment, mUserProfileFragment.getFragmentManager(), article);
+            mUserProfilePresenter = new UserProfilePresenter(mUserProfileFragment,
+                    mUserProfileFragment.getFragmentManager(), article);
         }
         transaction.commit();
 
