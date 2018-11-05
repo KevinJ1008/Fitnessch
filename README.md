@@ -102,8 +102,8 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
   * Fragment + Animation
   * RecyclerView
   * ViewPager
-  * Tablayout
-  * SwipeRefresh
+  * TabLayout
+  * SwipeRefreshLayout
   * FloatingActionButton
   * MaterialCalendarView (Third-party Liabrary)
   * DrawerToggle
