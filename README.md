@@ -92,7 +92,7 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 
 * Core Functions
 
-  * Google Login
+  * Google Login (Firebase Authentication)
   * Key Word Search
   * Calendar View Query
   * Cloud Firestore API
