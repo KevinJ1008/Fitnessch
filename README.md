@@ -87,7 +87,7 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 
 * Design Patterns
 
-  * Objecr Oreinted Programming
+  * Object Oreinted Programming
   * Model-View-Presenter (MVP)
 
 * Core Functions
@@ -112,6 +112,7 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 * Storage
 
   * Firebase Cloud Firestore
+  * SharedPreference
   
 * Analysis
 
