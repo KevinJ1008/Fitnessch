@@ -3,7 +3,6 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 
 歡迎喜愛健身或是正想開始健身的朋友們下載下來開始管理且分享自己的計劃吧！
 
-馬上下載：
 
 [<img src="https://github.com/steverichey/google-play-badge-svg/blob/master/img/en_get.svg" width="25%" height="25%">](https://play.google.com/store/apps/details?id=com.kevinj1008.fitnessch)
 
@@ -24,9 +23,8 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 
   * 運用月曆來顯示使用者該日期是否有新增過文章
   * 點擊日期可進入單日文章頁
-  * 未新增過文章的日期不會進入單日文章頁
   * 左右滑動可更換月份，並顯示當月份有新增文章的日期
-  * 未建立文章的月份點擊任一日期會自動跳轉到當前月份
+  * 未建立文章的月份，點擊任一日期會自動跳轉到當前月份
   
 * [單日課表與菜單頁]
 
@@ -44,13 +42,13 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 
   * 利用 Tab 分開顯示課表與菜單
   * 可編輯個人身高、體重與資訊
-  * 及時連動 Firebase 資料庫
+  * 即時連動 Firebase 資料庫
   * 點擊文章卡片可進入內文頁
   
 * [其他使用者檔案]
 
   * 利用 Tab 分開顯示課表與菜單
-  * 及時連動 Firebase 資料庫
+  * 即時連動 Firebase 資料庫
   * 點擊文章卡片可進入內文頁
   * Navigation Drawer 變更為倒退鍵，直到退回主頁面
   
@@ -62,7 +60,7 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
   * 限制重量與次數不超過三位數
   * 限制空白輸入
   * 提供課表項目與菜單關鍵字搜尋
-  * 新增課表頁提供計時器，讓使用者在訓練中可察看自己一組花費多少時間
+  * 新增課表頁提供計時器，讓使用者在訓練中可查看自己一組花費多少時間
   * 計時器可隨時暫停和長按歸零
   * 新增的項目或菜單會依照同標題去排序
   * 長按新增之課表或菜單可刪除
@@ -71,7 +69,7 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 
   * 文章標題限制 15 字
   * 限制空白輸入
-  * 及時新增到 Firebase 資料庫
+  * 即時新增到 Firebase 資料庫
   
 * [Navigation Drawer]
 
@@ -87,7 +85,7 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 
 * Design Patterns
 
-  * Object Oreinted Programming
+  * Object-Oriented Programming
   * Model-View-Presenter (MVP)
 
 * Core Functions
