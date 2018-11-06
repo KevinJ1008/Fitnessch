@@ -126,6 +126,7 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 
 * Android Studio 3.0+
 * Android SDK 23+
+* Gradle 3.1.3+
 
 # Version
 
