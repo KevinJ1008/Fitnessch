@@ -2,7 +2,6 @@ package com.kevinj1008.fitnessch.util;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -24,20 +23,10 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     }
 
     private void networkCheckDialog(Context context) {
-
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context, R.style.AlertDialogCustom);
         alertDialog.setTitle("請檢查網路連線。");
         alertDialog.setPositiveButton("OK", null);
         final AlertDialog dialog = alertDialog.create();
-//        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                NetworkUtils networkUtils = new NetworkUtils(Fitnessch.getAppContext());
-//                if (networkUtils.isNetworkAvailable()) {
-//                    dialogInterface.cancel();
-//                }
-//            }
-//        });
         dialog.show();
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
