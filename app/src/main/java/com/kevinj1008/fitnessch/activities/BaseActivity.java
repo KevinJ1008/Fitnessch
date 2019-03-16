@@ -1,6 +1,7 @@
 package com.kevinj1008.fitnessch.activities;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,11 +14,13 @@ import android.view.WindowManager;
 
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.util.DelayedProgressDialog;
+import com.kevinj1008.fitnessch.util.NetworkChangeReceiver;
 
 
 public class BaseActivity extends AppCompatActivity {
     protected Context mContext;
     private DelayedProgressDialog mProgressBar;
+    private NetworkChangeReceiver mNetworkChangeReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,16 @@ public class BaseActivity extends AppCompatActivity {
 
         setStatusBar();
 
+        IntentFilter intentFilter = new IntentFilter();
+        mNetworkChangeReceiver = new NetworkChangeReceiver();
+        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(mNetworkChangeReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mNetworkChangeReceiver);
     }
 
     /**

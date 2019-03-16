@@ -1,6 +1,7 @@
 package com.kevinj1008.fitnessch.activities;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -41,6 +42,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.UserExistCallback;
 import com.kevinj1008.fitnessch.util.Constants;
+import com.kevinj1008.fitnessch.util.NetworkChangeReceiver;
 import com.kevinj1008.fitnessch.util.NetworkUtils;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 import java.util.HashMap;
@@ -64,6 +66,8 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
     private String mGooglePhoto;
     private Uri mGooglePhotoUri;
     private ConstraintLayout mGoogleLogInBtn;
+
+    private NetworkChangeReceiver mNetworkChangeReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
