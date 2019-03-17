@@ -3,6 +3,8 @@ package com.kevinj1008.fitnessch.util;
 public class Constants {
 
     public static final String TAG = "WunBin-Fitnessch";
+    public static final String FITNESSCH_STORE_URL =
+            "https://play.google.com/store/apps/details?id=com.kevinj1008.fitnessch";
 
     public static final int ADDNEW_MODE = 1;
     public static final int NORMAL_MODE = 2;

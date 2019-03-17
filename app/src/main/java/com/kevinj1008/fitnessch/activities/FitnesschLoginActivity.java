@@ -1,5 +1,6 @@
 package com.kevinj1008.fitnessch.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import android.view.View;
@@ -39,17 +41,21 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.UserExistCallback;
 import com.kevinj1008.fitnessch.util.Constants;
+import com.kevinj1008.fitnessch.util.ForceUpdateChecker;
 import com.kevinj1008.fitnessch.util.NetworkChangeReceiver;
 import com.kevinj1008.fitnessch.util.NetworkUtils;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.kevinj1008.fitnessch.util.ForceUpdateChecker.KEY_UPDATE_REQUIRED;
+
 public class FitnesschLoginActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener, ForceUpdateChecker.OnUpdateNeededListener {
 
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mFirebaseAuth;
@@ -67,14 +73,14 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
     private Uri mGooglePhotoUri;
     private ConstraintLayout mGoogleLogInBtn;
 
-    private NetworkChangeReceiver mNetworkChangeReceiver;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         setLoginStatusBar();
+
+        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
 
         mNetworkUtils = new NetworkUtils(mContext);
 
@@ -86,7 +92,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (mFirebaseUser != null) {
+        if (mFirebaseUser != null && !isForceUpdate()) {
             if (mNetworkUtils.isNetworkAvailable()) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -303,4 +309,36 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 
     }
 
+    @Override
+    public void onUpdateNeeded(String updateUrl) {
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("有新版本！")
+                .setMessage("請到 Google Play 下載最新版本，以利最佳體驗。")
+                .setPositiveButton("更新",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                redirectStore(Constants.FITNESSCH_STORE_URL);
+                            }
+                        })
+                .setNegativeButton("晚點",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).create();
+        dialog.show();
+    }
+
+    private void redirectStore(String fitnesschStoreUrl) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fitnesschStoreUrl));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private Boolean isForceUpdate() {
+        FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.getInstance();
+        return remoteConfig.getBoolean(KEY_UPDATE_REQUIRED);
+    }
 }

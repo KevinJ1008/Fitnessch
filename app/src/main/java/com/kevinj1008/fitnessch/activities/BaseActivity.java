@@ -18,6 +18,7 @@ import com.kevinj1008.fitnessch.util.NetworkChangeReceiver;
 
 
 public class BaseActivity extends AppCompatActivity {
+
     protected Context mContext;
     private DelayedProgressDialog mProgressBar;
     private NetworkChangeReceiver mNetworkChangeReceiver;
@@ -34,6 +35,7 @@ public class BaseActivity extends AppCompatActivity {
         mNetworkChangeReceiver = new NetworkChangeReceiver();
         intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         registerReceiver(mNetworkChangeReceiver, intentFilter);
+
     }
 
     @Override
