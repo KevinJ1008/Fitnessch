@@ -22,10 +22,6 @@ public class ForceUpdateChecker {
         void onUpdateNeeded(String updateUrl);
     }
 
-    public ForceUpdateChecker() {
-        // empty constructor
-    }
-
     public static Builder with(@NonNull Context context) {
         return new Builder(context);
     }

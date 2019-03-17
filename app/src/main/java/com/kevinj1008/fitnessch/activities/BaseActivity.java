@@ -14,7 +14,7 @@ import android.view.WindowManager;
 
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.util.DelayedProgressDialog;
-import com.kevinj1008.fitnessch.util.NetworkChangeReceiver;
+import com.kevinj1008.fitnessch.receiver.NetworkChangeReceiver;
 
 
 public class BaseActivity extends AppCompatActivity {

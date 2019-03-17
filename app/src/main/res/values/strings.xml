@@ -42,6 +42,24 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="com.crashlytics.useFirebaseAppId">true</string>
+    <string name="title_network_check_dialog">請檢查網路連線。</string>
+    <string name="title_force_update_dialog">有新版本！</string>
+    <string name="message_force_update_dialog">請到 Google Play 下載最新版本，以利最佳體驗。</string>
+    <string name="positive_button_force_update_dialog">更新</string>
+    <string name="negative_button_force_update_dialog">晚點</string>
+    <string name="login_network_fail_toast">登入失敗，請檢查網路連線。</string>
+    <string name="default_personal_height">0</string>
+    <string name="default_personal_weight">0</string>
+    <string name="default_personal_info">在這裡輸入個人資訊。</string>
+    <string name="login_fail_toast">登入失敗。</string>
+    <string name="login_auth_fail_toast">認證失敗</string>
+    <string name="login_success_toast">登入成功。</string>
+    <string name="title_back_button_dialog">確定要離開此頁面？</string>
+    <string name="positive_button_back_button_dialog">是</string>
+    <string name="negative_button_back_button_dialog">否</string>
+    <string name="title_leave_app_dialog">確定離開 Fitnessch？</string>
+    <string name="positive_button_leave_app_dialog">是</string>
+    <string name="negative_button_leave_app_dialog">否</string>
 
     <string-array name="calendar_title_month">
         <item>1 月</item>
