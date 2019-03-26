@@ -2,6 +2,8 @@ package com.kevinj1008.fitnessch;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -36,7 +38,7 @@ public class Fitnessch extends Application {
         // set in-app defaults
         Map<String, Object> remoteConfigDefaults = new HashMap();
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_REQUIRED, false);
-        remoteConfigDefaults.put(ForceUpdateChecker.KEY_CURRENT_VERSION, "1.0.0");
+        remoteConfigDefaults.put(ForceUpdateChecker.KEY_CURRENT_VERSION, getVersionName(Fitnessch.getAppContext()));
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_URL, Constants.FITNESSCH_STORE_URL);
 
         firebaseRemoteConfig.setDefaults(remoteConfigDefaults);
@@ -50,6 +52,15 @@ public class Fitnessch extends Application {
                         }
                     }
                 });
+    }
+
+    private static String getVersionName(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            return "1.0.0";
+        }
     }
 
 }

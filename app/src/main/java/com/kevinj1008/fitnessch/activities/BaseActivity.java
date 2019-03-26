@@ -1,10 +1,12 @@
 package com.kevinj1008.fitnessch.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.constraint.ConstraintLayout;
 
 import android.support.v7.app.AppCompatActivity;
@@ -22,12 +24,17 @@ public class BaseActivity extends AppCompatActivity {
     protected Context mContext;
     private DelayedProgressDialog mProgressBar;
     private NetworkChangeReceiver mNetworkChangeReceiver;
+    private final String IS_RELAUNCH = "is_relaunch";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.mContext = this;
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(IS_RELAUNCH)) {
+            if (savedInstanceState.getBoolean(IS_RELAUNCH, false)) restartApplication();
+        }
 
         setStatusBar();
 
@@ -39,9 +46,30 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(IS_RELAUNCH, true);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mNetworkChangeReceiver);
+    }
+
+    /**
+    * Restart application when activity recycle by system.
+     */
+    private void restartApplication() {
+        // Intent to start launcher activity and closing all previous ones
+        Intent restartIntent = new Intent(getApplicationContext(), FitnesschLoginActivity.class);
+        restartIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(restartIntent);
+
+        // Kill Current Process
+        Process.killProcess(Process.myPid());
+        System.exit(0);
     }
 
     /**
@@ -49,19 +77,12 @@ public class BaseActivity extends AppCompatActivity {
      * @notice this method have to be used before setContentView.
      */
     private void setStatusBar() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //4.4
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { //5.0
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);//calculateStatusColor(Color.WHITE, (int) alphaValue)
-        }
     }
 
     /**
@@ -69,11 +90,6 @@ public class BaseActivity extends AppCompatActivity {
      * @notice this method have to be used before setContentView.
      */
     public void setLoginStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //4.4
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { //5.0
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -82,7 +98,6 @@ public class BaseActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
             window.setNavigationBarColor(Color.TRANSPARENT);
             window.setStatusBarColor(Color.TRANSPARENT);//calculateStatusColor(Color.WHITE, (int) alphaValue)
-        }
     }
 
 

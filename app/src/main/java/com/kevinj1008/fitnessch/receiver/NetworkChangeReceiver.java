@@ -28,6 +28,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
         alertDialog.setTitle(R.string.title_network_check_dialog);
         alertDialog.setPositiveButton("OK", null);
         final AlertDialog dialog = alertDialog.create();
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
