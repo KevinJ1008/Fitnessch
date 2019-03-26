@@ -122,6 +122,12 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
   * Mockito
   * Espresso
   
+* Other
+
+  * NetworkChecker - When Network state change, send Boradcast, and determine to use App or not
+  * Activity recycle issue - When Activity recycle by system, restart Application to avoid crash issue
+  * Firebase Remote Config - Use Remote Config to force update in the future
+  
 # Requirement
 
 * Android Studio 3.0+
@@ -129,6 +135,12 @@ Fitnessch 是一個記錄健身課表與飲食菜單的 APP，不同以往自己
 * Gradle 3.1.3+
 
 # Version
+
+* 1.0.3 - 2019/03/26
+
+  * Hot Fix - 修正程式閃退問題。
+  * 優化未有網路連線時提示使用者。
+  * 新增版本判斷，將來可執行強更。
 
 * 1.0.2 - 2018/10/31
   
