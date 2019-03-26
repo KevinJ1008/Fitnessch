@@ -353,8 +353,8 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(FitnesschActivity.this);
         if (addNewPage != null && addNewPage.getVisibility() == View.VISIBLE) {
-            alertDialog.setTitle("確定要離開此頁面？");
-            alertDialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            alertDialog.setTitle(R.string.title_back_button_dialog);
+            alertDialog.setPositiveButton(R.string.positive_button_back_button_dialog, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     //TODO: clear data
@@ -362,21 +362,21 @@ public class FitnesschActivity extends BaseActivity implements FitnesschContract
                     mPresenter.refreshAddNewUi();
                 }
             });
-            alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+            alertDialog.setNegativeButton(R.string.negative_button_back_button_dialog, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.cancel();
                 }
             });
         } else {
-            alertDialog.setTitle("確定離開 Fitnessch？");
-            alertDialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            alertDialog.setTitle(R.string.title_leave_app_dialog);
+            alertDialog.setPositiveButton(R.string.positive_button_leave_app_dialog, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     finish();
                 }
             });
-            alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+            alertDialog.setNegativeButton(R.string.negative_button_leave_app_dialog, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.cancel();

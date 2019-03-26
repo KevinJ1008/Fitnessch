@@ -6,6 +6,13 @@ import android.net.NetworkInfo;
 
 public class NetworkUtils {
 
+    public static final int TYPE_WIFI = 1;
+    public static final int TYPE_MOBILE = 2;
+    public static final int TYPE_NOT_CONNECTED = 0;
+    public static final int NETWORK_STATUS_NOT_CONNECTED = 3;
+    public static final int NETWORK_STATUS_WIFI = 4;
+    public static final int NETWORK_STATUS_MOBILE = 5;
+
     private Context mContext;
 
     /**
@@ -34,5 +41,32 @@ public class NetworkUtils {
 
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 
+    }
+
+    private static int getConnectivityStatus(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        if (activeNetwork != null) {
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                return TYPE_WIFI;
+            } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                return TYPE_MOBILE;
+            }
+        }
+        return TYPE_NOT_CONNECTED;
+    }
+
+    public static int getConnectivityStatusString(Context context) {
+        int connectivityStatus = NetworkUtils.getConnectivityStatus(context);
+        int statusCode = 0;
+        if (connectivityStatus == NetworkUtils.TYPE_WIFI) {
+            statusCode = NETWORK_STATUS_WIFI;
+        } else if (connectivityStatus == NetworkUtils.TYPE_MOBILE) {
+            statusCode = NETWORK_STATUS_MOBILE;
+        } else if (connectivityStatus == NetworkUtils.TYPE_NOT_CONNECTED) {
+            statusCode = NETWORK_STATUS_NOT_CONNECTED;
+        }
+        return statusCode;
     }
 }

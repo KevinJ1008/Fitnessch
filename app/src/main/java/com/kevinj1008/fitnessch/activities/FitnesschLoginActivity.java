@@ -1,19 +1,17 @@
 package com.kevinj1008.fitnessch.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import android.widget.Toast;
 
@@ -38,16 +36,20 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.kevinj1008.fitnessch.R;
 import com.kevinj1008.fitnessch.UserExistCallback;
 import com.kevinj1008.fitnessch.util.Constants;
+import com.kevinj1008.fitnessch.util.ForceUpdateChecker;
 import com.kevinj1008.fitnessch.util.NetworkUtils;
 import com.kevinj1008.fitnessch.util.SharedPreferencesManager;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.kevinj1008.fitnessch.util.ForceUpdateChecker.KEY_UPDATE_REQUIRED;
+
 public class FitnesschLoginActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener, ForceUpdateChecker.OnUpdateNeededListener {
 
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mFirebaseAuth;
@@ -72,6 +74,8 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 
         setLoginStatusBar();
 
+        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
+
         mNetworkUtils = new NetworkUtils(mContext);
 
         mGoogleLogInBtn = findViewById(R.id.google_login_btn);
@@ -82,7 +86,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (mFirebaseUser != null) {
+        if (mFirebaseUser != null && !isForceUpdate()) {
             if (mNetworkUtils.isNetworkAvailable()) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -93,7 +97,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                     }
                 }, 1000);
             } else {
-                Toast.makeText(FitnesschLoginActivity.this, "登入失敗，請檢查網路連線。", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FitnesschLoginActivity.this, R.string.login_network_fail_toast, Toast.LENGTH_SHORT).show();
             }
         } else {
             mGoogleLogInBtn.setVisibility(View.VISIBLE);
@@ -123,7 +127,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                 if (mNetworkUtils.isNetworkAvailable()) {
                     googleSignIn();
                 } else {
-                    Toast.makeText(FitnesschLoginActivity.this, "登入失敗，請檢查網路連線。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FitnesschLoginActivity.this, R.string.login_network_fail_toast, Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -162,9 +166,9 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                     user.put("id_token", mGoogleIdToken);
                     user.put("joined_time", FieldValue.serverTimestamp());
                     user.put("db_uid", uid);
-                    user.put("height", "0");
-                    user.put("weight", "0");
-                    user.put("info", "在這裡輸入個人資訊。");
+                    user.put("height", getString(R.string.default_personal_height));
+                    user.put("weight", getString(R.string.default_personal_weight));
+                    user.put("info", getString(R.string.default_personal_info));
 
                     db.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -236,7 +240,7 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                 firebaseAuthWithGoogle(credential);
             } else {
                 Log.d(Constants.TAG, "Login Unsuccessful. ");
-                Toast.makeText(this, "登入失敗。", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.login_fail_toast, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -251,10 +255,10 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
                         if (!task.isSuccessful()) {
                             Log.d(Constants.TAG, "Sign in with credential " + task.getException().getMessage());
                             task.getException().printStackTrace();
-                            Toast.makeText(FitnesschLoginActivity.this, "認證失敗", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FitnesschLoginActivity.this, R.string.login_auth_fail_toast, Toast.LENGTH_SHORT).show();
                         } else {
                             createUserInFirestore();
-                            Toast.makeText(FitnesschLoginActivity.this, "登入成功。", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FitnesschLoginActivity.this, R.string.login_success_toast, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(FitnesschLoginActivity.this, FitnesschActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
@@ -299,4 +303,36 @@ public class FitnesschLoginActivity extends BaseActivity implements GoogleApiCli
 
     }
 
+    @Override
+    public void onUpdateNeeded(String updateUrl) {
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.title_force_update_dialog)
+                .setMessage(R.string.message_force_update_dialog)
+                .setPositiveButton(R.string.positive_button_force_update_dialog,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                redirectStore(Constants.FITNESSCH_STORE_URL);
+                            }
+                        })
+                .setNegativeButton(R.string.negative_button_force_update_dialog,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).create();
+        dialog.show();
+    }
+
+    private void redirectStore(String fitnesschStoreUrl) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fitnesschStoreUrl));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private Boolean isForceUpdate() {
+        FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.getInstance();
+        return remoteConfig.getBoolean(KEY_UPDATE_REQUIRED);
+    }
 }
