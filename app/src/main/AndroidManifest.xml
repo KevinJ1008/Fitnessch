@@ -21,8 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FitnesschActivity"/>
-        <activity android:name=".activities.BaseActivity"/>
+        <activity android:name=".activities.FitnesschActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.BaseActivity" />
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="933e65789ac2948fa00deff7f2d8ac3da14fc643"
